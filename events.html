@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & Calendar 2026 — Wonder Heights International School</title>
+  <meta name="description" content="Wonder Heights International School 2026 academic calendar, upcoming events, Ghana public holidays and school term dates.">
+  <link rel="icon" type="image/png" href="logo_WHIS.png">
+  <link rel="apple-touch-icon" href="logo_WHIS.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--navy:#002855;--navy2:#003a7a;--gold:#c9920a;--gold2:#f0b429;--cream:#fdf8f0;--dark:#0a0f1e;--text:#1a1a2e;--muted:#64748b;--border:#e5e7eb;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f8fafc;overflow-x:hidden;transition:background .3s,color .3s;}
+    body.dark{background:var(--dark);color:#e2e8f0;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    a{text-decoration:none;}
+    /* LOADER */
+    #loader{position:fixed;inset:0;z-index:99999;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.9rem;transition:opacity .5s;}
+    #loader.gone{opacity:0;pointer-events:none;}
+    #loader img{width:86px;height:86px;object-fit:contain;animation:lpa 1.8s ease-in-out infinite;}
+    @keyframes lpa{0%,100%{transform:scale(1);}50%{transform:scale(1.07);filter:drop-shadow(0 0 16px rgba(240,180,41,.65));}}
+    #loader .ln{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:#fff;}
+    #loader .ls{font-size:.7rem;font-weight:600;color:var(--gold2);text-transform:uppercase;letter-spacing:.18em;}
+    .ld-bar-wrap{width:160px;height:3px;background:rgba(255,255,255,.15);border-radius:50px;overflow:hidden;}
+    .ld-bar{height:100%;width:0;background:var(--gold2);border-radius:50px;animation:ldb 1.5s cubic-bezier(.4,0,.2,1) forwards;}
+    @keyframes ldb{to{width:100%;}}
+    /* TOPBAR */
+    .topbar{background:var(--navy);color:#cbd5e1;font-size:.78rem;padding:.45rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+    .topbar a{color:#cbd5e1;} .topbar a:hover{color:var(--gold2);}
+    .top-left,.top-right{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+    .gold{color:var(--gold2);margin-right:.3rem;}
+    .theme-btn{background:none;border:none;cursor:pointer;color:var(--gold2);font-size:1rem;padding:.2rem;transition:transform .3s;}
+    .theme-btn:hover{transform:rotate(20deg);}
+    /* NAV */
+    nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 20px rgba(0,40,85,.08);transition:background .3s;}
+    body.dark nav{background:#0f172a;}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:72px;}
+    .nav-logo{display:flex;align-items:center;gap:.7rem;}
+    .nav-logo img{height:44px;width:44px;object-fit:contain;}
+    .logo-main{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:block;}
+    body.dark .logo-main{color:var(--gold2);}
+    .logo-sub{font-size:.62rem;font-weight:500;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.2rem;}
+    .nav-btn{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--text);padding:.5rem .8rem;border-radius:6px;display:flex;align-items:center;gap:.3rem;transition:color .2s,background .2s;}
+    body.dark .nav-btn{color:#e2e8f0;}
+    .nav-btn:hover,.nav-btn.active{color:var(--navy);background:#f0f4ff;}
+    body.dark .nav-btn:hover{color:var(--gold2);background:rgba(255,255,255,.05);}
+    .chevron{font-size:.65rem;transition:transform .2s;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-item{position:relative;}
+    .dropdown{position:absolute;top:calc(100% + 4px);left:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--gold2);border-radius:0 0 10px 10px;min-width:220px;box-shadow:0 12px 40px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .22s;z-index:200;}
+    body.dark .dropdown{background:#1e293b;border-color:#334155;}
+    .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+    .dropdown a{display:flex;align-items:center;gap:.6rem;padding:.6rem 1.1rem;font-size:.85rem;color:var(--text);transition:background .15s;}
+    body.dark .dropdown a{color:#e2e8f0;}
+    .dropdown a:hover{background:#f0f4ff;color:var(--navy);}
+    body.dark .dropdown a:hover{background:rgba(255,255,255,.06);color:var(--gold2);}
+    .dropdown a i{width:16px;color:var(--gold);font-size:.8rem;}
+    .enroll-cta{background:var(--navy);color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600;font-size:.85rem;box-shadow:0 4px 14px rgba(0,40,85,.3);white-space:nowrap;}
+    .enroll-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.3rem;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:all .3s;}
+    body.dark .hamburger span{background:#e2e8f0;}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,40,85,.97);z-index:2000;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;}
+    .mobile-menu a:hover{color:var(--gold2);}
+    .mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
+    .mobile-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
+    /* PAGE HERO */
+    .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,rgba(201,146,10,.4) 100%);padding:5.5rem 1.5rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background:url('logo_WHIS.png') center/260px no-repeat;opacity:.04;pointer-events:none;}
+    .ph-inner{position:relative;z-index:2;}
+    .breadcrumb{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:1rem;}
+    .breadcrumb a{color:var(--gold2);}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:var(--gold2);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;backdrop-filter:blur(8px);}
+    .page-hero h1{font-size:clamp(2rem,5vw,3.4rem);color:#fff;margin-bottom:.9rem;}
+    .page-hero p{color:rgba(255,255,255,.8);max-width:560px;margin:0 auto;font-size:1rem;line-height:1.7;}
+    /* LAYOUT */
+    .section{padding:5rem 1.5rem;}
+    .container{max-width:1280px;margin:0 auto;}
+    .section-label{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;}
+    .section-label::before,.section-label::after{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+    .section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:1rem;}
+    body.dark .section-title{color:#fff;}
+    .section-sub{font-size:1rem;color:var(--muted);line-height:1.7;}
+    body.dark .section-sub{color:#94a3b8;}
+    .reveal{opacity:0;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.up{transform:translateY(50px);} .reveal.left{transform:translateX(-60px);} .reveal.right{transform:translateX(60px);}
+    .reveal.visible{opacity:1;transform:none;}
+    /* TAG PILLS */
+    .tag-pill{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .75rem;border-radius:50px;font-size:.72rem;font-weight:700;}
+    .tag-academic{background:#dbeafe;color:#1d4ed8;}
+    .tag-sports{background:#dcfce7;color:#15803d;}
+    .tag-holiday{background:#fef9c3;color:#a16207;}
+    .tag-event{background:#fce7f3;color:#be185d;}
+    body.dark .tag-academic{background:rgba(59,130,246,.2);color:#93c5fd;}
+    body.dark .tag-sports{background:rgba(34,197,94,.2);color:#86efac;}
+    body.dark .tag-holiday{background:rgba(234,179,8,.2);color:#fde047;}
+    body.dark .tag-event{background:rgba(236,72,153,.2);color:#f9a8d4;}
+    /* STAT STRIP */
+    .stat-strip{background:var(--navy);padding:1.2rem 1.5rem;}
+    .stat-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;}
+    .stat-item{padding:0 1rem;border-right:1px solid rgba(255,255,255,.12);}
+    .stat-item:last-child{border-right:none;}
+    .stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;color:var(--gold2);}
+    .stat-lbl{font-size:.72rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.07em;}
+    /* FILTER BAR */
+    .filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;}
+    .filter-btn{background:none;border:2px solid var(--border);color:var(--muted);padding:.45rem 1.1rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.4rem;}
+    body.dark .filter-btn{border-color:#334155;color:#94a3b8;}
+    .filter-btn.active,.filter-btn:hover{background:var(--navy);border-color:var(--navy);color:#fff;}
+    .filter-btn .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+    /* TWO COL */
+    .ev-layout{display:grid;grid-template-columns:320px 1fr;gap:2.5rem;align-items:start;}
+    /* CALENDAR */
+    .cal-widget{background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(0,40,85,.11);overflow:hidden;position:sticky;top:88px;}
+    body.dark .cal-widget{background:#1e293b;}
+    .cal-head{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:1.3rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+    .cal-head h3{font-size:1rem;font-weight:700;}
+    .cal-nav-btn{background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .cal-nav-btn:hover{background:var(--gold2);color:var(--navy);}
+    .cal-body{padding:1.1rem 1.3rem 1.3rem;}
+    .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem;}
+    body.dark .cal-weekdays{color:#64748b;}
+    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+    .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.8rem;border-radius:8px;cursor:pointer;position:relative;transition:all .15s;color:var(--text);}
+    body.dark .cal-day{color:#e2e8f0;}
+    .cal-day:hover{background:#f0f4ff;}
+    body.dark .cal-day:hover{background:rgba(255,255,255,.07);}
+    .cal-day.today{background:var(--navy);color:#fff;font-weight:700;}
+    .cal-day.has-event::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--gold2);border-radius:50%;}
+    .cal-day.other-month{opacity:.3;}
+    .cal-day.selected{background:var(--gold2);color:var(--navy);font-weight:700;}
+    .cal-foot{padding:.8rem 1.3rem;border-top:1px solid #f1f5f9;display:flex;gap:1.2rem;font-size:.72rem;color:var(--muted);flex-wrap:wrap;}
+    body.dark .cal-foot{border-color:#334155;}
+    .cal-foot span{display:flex;align-items:center;gap:.35rem;}
+    .leg-dot{width:8px;height:8px;background:var(--gold2);border-radius:50%;display:inline-block;}
+    .leg-today{width:20px;height:20px;background:var(--navy);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700;}
+    /* MONTH SUMMARY */
+    .month-summary{margin-top:1rem;background:#fff;border-radius:14px;padding:1rem 1.3rem;box-shadow:0 4px 16px rgba(0,40,85,.07);display:none;}
+    body.dark .month-summary{background:#1e293b;}
+    .ms-label{font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.7rem;}
+    .ms-row{display:flex;align-items:center;gap:.6rem;font-size:.82rem;padding:.25rem 0;}
+    .ms-day{width:28px;height:28px;background:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gold2);font-weight:700;font-size:.75rem;flex-shrink:0;}
+    .ms-title{color:var(--text);font-weight:500;flex:1;}
+    body.dark .ms-title{color:#e2e8f0;}
+    /* EVENT CARDS */
+    .ev-panel h2{font-size:1.3rem;color:var(--navy);margin-bottom:1.4rem;}
+    body.dark .ev-panel h2{color:#fff;}
+    .show-all-btn{background:var(--navy);color:#fff;border:none;padding:.45rem 1.1rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;float:right;margin-top:-.3rem;}
+    .show-all-btn:hover{background:var(--gold2);color:var(--navy);}
+    .ev-list{display:flex;flex-direction:column;gap:1rem;}
+    .ev-card{background:#fff;border-radius:16px;padding:1.3rem 1.5rem;box-shadow:0 4px 20px rgba(0,40,85,.07);display:flex;gap:1.2rem;align-items:flex-start;transition:transform .2s,box-shadow .2s;border-left:4px solid transparent;}
+    body.dark .ev-card{background:#1e293b;}
+    .ev-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,40,85,.13);}
+    .ev-card.tag-academic{border-left-color:#3b82f6;}
+    .ev-card.tag-sports{border-left-color:#22c55e;}
+    .ev-card.tag-holiday{border-left-color:#eab308;}
+    .ev-card.tag-event{border-left-color:#ec4899;}
+    .ev-date-box{flex-shrink:0;width:60px;height:70px;background:var(--navy);border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;}
+    .ev-day{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:800;line-height:1;color:var(--gold2);}
+    .ev-month{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;opacity:.85;}
+    .ev-body h4{font-family:'DM Sans',sans-serif;font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.3;}
+    body.dark .ev-body h4{color:#fff;}
+    .ev-meta{display:flex;gap:1rem;font-size:.79rem;color:var(--muted);flex-wrap:wrap;margin-bottom:.4rem;}
+    .ev-meta span{display:flex;align-items:center;gap:.3rem;}
+    .ev-meta i{color:var(--gold2);font-size:.74rem;}
+    .no-events{text-align:center;padding:3rem 1rem;color:var(--muted);}
+    .no-events i{font-size:2.5rem;opacity:.2;display:block;margin-bottom:.8rem;}
+    /* TERM TABLE */
+    .term-wrap{overflow-x:auto;}
+    .term-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+    .term-table th{background:var(--navy);color:var(--gold2);padding:.9rem 1.2rem;text-align:left;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+    .term-table td{padding:.85rem 1.2rem;border-bottom:1px solid #f1f5f9;color:var(--text);}
+    body.dark .term-table td{color:#e2e8f0;border-color:#334155;}
+    .term-table tr:nth-child(even) td{background:#f8faff;}
+    body.dark .term-table tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+    .term-table tr:hover td{background:#f0f4ff;}
+    body.dark .term-table tr:hover td{background:rgba(255,255,255,.05);}
+    /* GHANA HOLIDAYS GRID */
+    .gh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .gh-card{background:#fff;border-radius:14px;padding:1.2rem 1.4rem;box-shadow:0 4px 16px rgba(0,40,85,.07);display:flex;gap:1rem;align-items:flex-start;transition:transform .2s;}
+    body.dark .gh-card{background:#1e293b;}
+    .gh-card:hover{transform:translateY(-3px);}
+    .gh-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:1rem;flex-shrink:0;}
+    .gh-card h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;}
+    body.dark .gh-card h4{color:#fff;}
+    .gh-date{font-size:.78rem;color:var(--muted);margin-bottom:.3rem;}
+    .gh-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
+    body.dark .gh-date,.body.dark .gh-desc{color:#94a3b8;}
+    /* CTA */
+    .cta-banner{background:var(--navy);padding:4rem 1.5rem;text-align:center;}
+    .cta-banner h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:1rem;}
+    .cta-banner p{color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 2rem;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold2);color:var(--navy);font-weight:700;padding:.85rem 2rem;border-radius:50px;font-size:.95rem;transition:all .25s;box-shadow:0 4px 20px rgba(240,180,41,.4);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn-primary:hover{background:#fff;transform:translateY(-3px);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.4rem;border:2px solid rgba(255,255,255,.5);color:#fff;font-weight:600;padding:.8rem 2rem;border-radius:50px;font-size:.9rem;transition:all .25s;background:none;font-family:'DM Sans',sans-serif;}
+    .btn-ghost:hover{background:rgba(255,255,255,.1);}
+    /* FOOTER */
+    footer{background:#050f22;color:#94a3b8;}
+    .footer-main{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;padding:4rem 1.5rem 3rem;max-width:1280px;margin:0 auto;}
+    .footer-logo{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+    .footer-logo img{height:46px;}
+    .footer-logo span{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;line-height:1.2;}
+    footer p{font-size:.88rem;line-height:1.7;}
+    .footer-socials{display:flex;gap:.8rem;margin-top:1.4rem;}
+    .social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.9rem;transition:all .2s;}
+    .social-btn:hover{background:var(--gold2);border-color:var(--gold2);color:var(--navy);transform:translateY(-2px);}
+    .footer-col h4{color:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.2rem;}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .footer-col li a{color:#94a3b8;font-size:.88rem;transition:color .2s;}
+    .footer-col li a:hover{color:var(--gold2);padding-left:4px;}
+    .fci{display:flex;gap:.7rem;margin-bottom:.8rem;font-size:.88rem;align-items:flex-start;}
+    .fci i{color:var(--gold2);margin-top:.15rem;flex-shrink:0;}
+    .footer-bottom{text-align:center;padding:1.5rem;font-size:.82rem;border-top:1px solid rgba(255,255,255,.06);}
+    .footer-bottom span{color:var(--gold2);}
+    .float-contact{position:fixed;bottom:2rem;right:2rem;z-index:500;display:flex;flex-direction:column;gap:.7rem;}
+    .float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:all .25s;}
+    .float-btn.whatsapp{background:#25d366;color:#fff;} .float-btn.phone{background:var(--navy);color:#fff;}
+    .float-btn:hover{transform:scale(1.1) translateY(-2px);}
+    @media(max-width:1024px){.ev-layout{grid-template-columns:1fr;}.cal-widget{position:static;}}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.stat-grid{grid-template-columns:repeat(2,1fr);}.stat-item:nth-child(2){border-right:none;}.gh-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <img src="logo_WHIS.png" alt="Logo">
+    <div class="ln">Wonder Heights</div>
+    <div class="ls">International School</div>
+    <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
+  </div>
+  <script>(function(){function h(){var l=document.getElementById('loader');if(l){l.classList.add('gone');setTimeout(function(){if(l.parentNode)l.parentNode.removeChild(l);},550);}}setTimeout(h,800);window.addEventListener('load',function(){setTimeout(h,200);});})();</script>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i>admin@wonderheights.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-clock gold"></i>Mon–Fri: 7:30am – 4:00pm</span>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="Logo">
+        <div><span class="logo-main">Wonder Heights</span><span class="logo-sub">International School</span></div>
+      </a>
+    <div class="nav-links" id="navLinks">
+        <!-- About Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          </div>
+        </div>
+        <!-- Academics Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#programs"><i class="fas fa-child"></i> Early Childhood</a>
+            <a href="#programs"><i class="fas fa-shapes"></i> Preschool</a>
+            <a href="#programs"><i class="fas fa-book-open"></i> Primary</a>
+            <a href="#programs"><i class="fas fa-graduation-cap"></i> JHS</a>
+            <a href="#programs"><i class="fas fa-heart"></i> Therapy</a>
+          </div>
+        </div>
+        <!-- Admission Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#enroll"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="#calendar" class="nav-btn">Events</a>
+        <a href="#gallery" class="nav-btn">Gallery</a>
+        <a href="#contact" class="nav-btn">Contact</a>
+        <a href="#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
+          <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
+        </a>
+      </div>
+
+      <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="#programs" onclick="closeMobileMenu()">Academics</a>
+    <a href="#calendar" onclick="closeMobileMenu()">Events</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="ph-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Events &amp; Calendar</div>
+      <div class="page-badge"><i class="fas fa-calendar-alt"></i>&nbsp; Academic Year 2025 / 2026</div>
+      <h1>Events &amp; School Calendar</h1>
+      <p>All school events, term dates, Ghana public holidays, and activities in one place. Click any date on the calendar to see what's on.</p>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-grid">
+      <div class="stat-item"><div class="stat-num" id="totalCount">32</div><div class="stat-lbl">Total Events</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">School Terms</div></div>
+      <div class="stat-item"><div class="stat-num">16</div><div class="stat-lbl">Ghana Holidays</div></div>
+      <div class="stat-item"><div class="stat-num" id="daysNext">—</div><div class="stat-lbl">Days to Next Event</div></div>
+    </div>
+  </div>
+
+  <!-- CALENDAR + EVENTS -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container">
+      <div class="ev-layout">
+
+        <!-- CALENDAR -->
+        <div>
+          <div class="cal-widget reveal left">
+            <div class="cal-head">
+              <button class="cal-nav-btn" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+              <h3 id="calMonthYear"></h3>
+              <button class="cal-nav-btn" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="cal-body">
+              <div class="cal-weekdays"><div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div></div>
+              <div class="cal-days" id="calDays"></div>
+            </div>
+            <div class="cal-foot">
+              <span><span class="leg-dot"></span> Has Event</span>
+              <span><span class="leg-today">•</span> Today</span>
+            </div>
+          </div>
+          <!-- Month summary -->
+          <div class="month-summary" id="monthSummary">
+            <div class="ms-label">Events This Month</div>
+            <div id="msList"></div>
+          </div>
+        </div>
+
+        <!-- EVENTS PANEL -->
+        <div class="ev-panel reveal right">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.3rem;flex-wrap:wrap;gap:.8rem;">
+            <h2 id="panelTitle">Upcoming Events</h2>
+            <button class="show-all-btn" onclick="showAll()"><i class="fas fa-list"></i> Show All</button>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-f="all"      onclick="setFilter('all',this)"><i class="fas fa-border-all"></i> All</button>
+            <button class="filter-btn" data-f="academic"        onclick="setFilter('academic',this)"><span class="dot" style="background:#3b82f6;"></span> Academic</button>
+            <button class="filter-btn" data-f="holiday"         onclick="setFilter('holiday',this)"><span class="dot" style="background:#eab308;"></span> Holidays</button>
+            <button class="filter-btn" data-f="sports"          onclick="setFilter('sports',this)"><span class="dot" style="background:#22c55e;"></span> Sports</button>
+            <button class="filter-btn" data-f="event"           onclick="setFilter('event',this)"><span class="dot" style="background:#ec4899;"></span> Events</button>
+          </div>
+          <div class="ev-list" id="evList"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TERM DATES TABLE -->
+  <section class="section" style="background:#fff;">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2.5rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">2025 / 2026 Academic Year</div>
+        <h2 class="section-title">School Term Dates</h2>
+        <p class="section-sub" style="max-width:540px;margin:0 auto;">Key dates for all three terms at Wonder Heights International School.</p>
+      </div>
+      <div class="term-wrap reveal up">
+        <table class="term-table">
+          <thead><tr><th>Term</th><th>Opens</th><th>Mid-Term Break</th><th>Exams</th><th>Closes</th><th>Weeks</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:var(--navy);">Term 1</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">First Trimester</span></td>
+              <td>1 Sep 2025</td><td>13–17 Oct 2025</td><td>24–28 Nov 2025</td><td>5 Dec 2025</td>
+              <td><span class="tag-pill tag-academic">13 wks</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--navy);">Term 2</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">Second Trimester</span></td>
+              <td>12 Jan 2026</td><td>10–14 Mar 2026</td><td>23–27 Mar 2026</td><td>31 Mar 2026</td>
+              <td><span class="tag-pill tag-academic">11 wks</span></td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--navy);">Term 3</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">Third Trimester</span></td>
+              <td>22 Apr 2026</td><td>25–29 May 2026</td><td>22–26 Jun 2026</td><td>30 Jun 2026</td>
+              <td><span class="tag-pill tag-academic">10 wks</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GHANA PUBLIC HOLIDAYS -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2.5rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">Republic of Ghana</div>
+        <h2 class="section-title">Ghana Public Holidays 2026</h2>
+        <p class="section-sub" style="max-width:540px;margin:0 auto;">Official statutory public holidays declared for the Republic of Ghana in 2026.</p>
+      </div>
+      <div class="gh-grid">
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-glass-cheers"></i></div><div><h4>New Year's Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Thursday, 1 January 2026</div><div class="gh-desc">Celebration of the start of the new calendar year.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-landmark"></i></div><div><h4>Constitution Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 9 January 2026</div><div class="gh-desc">Commemorates Ghana's 1993 Constitution coming into force. Moved from 7 Jan.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-flag"></i></div><div><h4>Independence Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 6 March 2026</div><div class="gh-desc">Ghana's independence from British rule declared on 6 March 1957 by Kwame Nkrumah.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">National Day</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-moon"></i></div><div><h4>Eid ul-Fitr</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 20 March 2026</div><div class="gh-desc">End of Ramadan — the Islamic holy month of fasting.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-mosque"></i></div><div><h4>Shaqq Day Holiday</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Monday, 23 March 2026</div><div class="gh-desc">Public holiday observed the day after Eid al-Fitr.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-cross"></i></div><div><h4>Good Friday</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 3 April 2026</div><div class="gh-desc">Christian commemoration of the crucifixion of Jesus Christ.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-church"></i></div><div><h4>Easter Monday</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Monday, 6 April 2026</div><div class="gh-desc">Celebration of the Resurrection of Jesus Christ — the most important Christian holiday.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-hard-hat"></i></div><div><h4>Workers' Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 1 May 2026</div><div class="gh-desc">International Workers' Day, honouring the contributions of the labour movement.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-hands-helping"></i></div><div><h4>African Union Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Monday, 25 May 2026</div><div class="gh-desc">Commemorative Day celebrating African unity. Observed but not a full public holiday.</div><div style="margin-top:.5rem;"><span class="tag-pill" style="background:#fce7f3;color:#be185d;">Commemorative</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-star-and-crescent"></i></div><div><h4>Eid al-Adha</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Thursday, 28 May 2026</div><div class="gh-desc">The Feast of Sacrifice — most important feast in the Muslim calendar, commemorating Ibrahim's devotion to Allah.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-globe-africa"></i></div><div><h4>Republic Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Wednesday, 1 July 2026</div><div class="gh-desc">Marks 1 July 1960 when Kwame Nkrumah proclaimed Ghana a republic.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-crown"></i></div><div><h4>Founders' Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Tuesday, 4 August 2026</div><div class="gh-desc">Honours the Big Six and other founders who led Ghana's struggle for independence.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-user-tie"></i></div><div><h4>Kwame Nkrumah Memorial Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Monday, 21 September 2026</div><div class="gh-desc">Honours the birthday of Osagyefo Dr. Kwame Nkrumah, Ghana's first President and pan-Africanist leader.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-tractor"></i></div><div><h4>Farmer's Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 4 December 2026</div><div class="gh-desc">Recognises the contributions of farmers and fishermen to Ghana's economy. Observed on the first Friday of December.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-star"></i></div><div><h4>Christmas Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Friday, 25 December 2026</div><div class="gh-desc">Christian celebration of the birth of Jesus Christ.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+        <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-gift"></i></div><div><h4>Boxing Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Saturday, 26 December 2026</div><div class="gh-desc">The day after Christmas, traditionally associated with giving to the less fortunate.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal up">
+    <div class="container">
+      <h2>Questions About the School Calendar?</h2>
+      <p>Contact our office for details about upcoming events or to book a school visit.</p>
+      <div class="cta-btns">
+        <a href="index.html#contact" class="btn-primary"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="index.html#enroll" class="btn-ghost"><i class="fas fa-user-plus"></i> Enroll Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo"><img src="logo_WHIS.png" alt="Logo"><span>Wonder Heights<br>International School</span></div>
+        <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051?text=Hello" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#programs">Academics</a></li><li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li><li><a href="index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Academics</h4><ul>
+        <li><a href="index.html#programs">Early Childhood</a></li><li><a href="index.html#programs">Day Care</a></li>
+        <li><a href="index.html#programs">Primary School</a></li><li><a href="index.html#programs">Junior High (JHS)</a></li>
+        <li><a href="index.html#programs">Therapy</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact Info</h4>
+        <div class="fci"><i class="fas fa-map-marker-alt"></i><span>Afienya, Greater Accra, Ghana</span></div>
+        <div class="fci"><i class="fas fa-phone-alt"></i><span><a href="tel:+233201016051" style="color:#94a3b8;">020 101 6051</a> / <a href="tel:+233545797990" style="color:#94a3b8;">054 579 7990</a></span></div>
+        <div class="fci"><i class="fas fa-envelope"></i><span><a href="mailto:admin@wonderheights.com" style="color:#94a3b8;">admin@wonderheights.com</a></span></div>
+        <div class="fci"><i class="fas fa-clock"></i><span>Mon–Fri: 7:30am – 4:00pm</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025–2026 Wonder Heights International School. All rights reserved. Built with <span>♥</span> for exceptional education.</div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://wa.me/233201016051?text=Hello%2C%20I%27m%20interested%20in%20Wonder%20Heights%20International%20School" class="float-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+233201016051" class="float-btn phone"><i class="fas fa-phone-alt"></i></a>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════════════════════
+  //  ✏️  EDIT EVENTS HERE — calendar dots & list update automatically
+  // ═══════════════════════════════════════════════════════════════
+  const EVENTS = [
+    // GHANA PUBLIC HOLIDAYS 2026
+    { date:'2026-01-01', title:"New Year's Day",                   detail:'Public Holiday',              icon:'glass-cheers',     tag:'holiday' },
+    { date:'2026-01-09', title:'Constitution Day',                  detail:'Public Holiday',              icon:'landmark',         tag:'holiday' },
+    { date:'2026-03-06', title:'Independence Day',                  detail:'National Public Holiday',     icon:'flag',             tag:'holiday' },
+    { date:'2026-03-20', title:'Eid ul-Fitr',                       detail:'Public Holiday',              icon:'moon',             tag:'holiday' },
+    { date:'2026-03-23', title:'Shaqq Day Holiday',                 detail:'Public Holiday',              icon:'mosque',           tag:'holiday' },
+    { date:'2026-04-03', title:'Good Friday',                       detail:'Public Holiday',              icon:'cross',            tag:'holiday' },
+    { date:'2026-04-06', title:'Easter Monday',                     detail:'Public Holiday',              icon:'church',           tag:'holiday' },
+    { date:'2026-05-01', title:"Workers' Day",                      detail:"International Workers' Day",  icon:'hard-hat',         tag:'holiday' },
+    { date:'2026-05-25', title:'African Union Day',                  detail:'Commemorative Day',          icon:'hands-helping',    tag:'holiday' },
+    { date:'2026-05-28', title:'Eid al-Adha (Eidul-Adha)',           detail:'Public Holiday',             icon:'star-and-crescent',tag:'holiday' },
+    { date:'2026-07-01', title:'Republic Day',                       detail:'Public Holiday',             icon:'globe-africa',     tag:'holiday' },
+    { date:'2026-08-04', title:"Founders' Day",                      detail:'Public Holiday',             icon:'crown',            tag:'holiday' },
+    { date:'2026-09-21', title:'Kwame Nkrumah Memorial Day',         detail:'Public Holiday',             icon:'user-tie',         tag:'holiday' },
+    { date:'2026-12-04', title:"Farmer's Day",                       detail:'Public Holiday',             icon:'tractor',          tag:'holiday' },
+    { date:'2026-12-25', title:'Christmas Day',                      detail:'Public Holiday',             icon:'star',             tag:'holiday' },
+    { date:'2026-12-26', title:'Boxing Day',                         detail:'Public Holiday',             icon:'gift',             tag:'holiday' },
+    // TERM 2 — SECOND TRIMESTER
+    { date:'2026-01-12', title:'Term 2 Begins',                      detail:'7:30am — School opens',      icon:'clock',            tag:'academic' },
+    { date:'2026-03-10', title:'Mid-Term Break Begins',              detail:'School closed',               icon:'map-marker-alt',   tag:'holiday'  },
+    { date:'2026-03-14', title:'Mid-Term Break Ends · School Resumes',detail:'7:30am',                    icon:'clock',            tag:'academic' },
+    { date:'2026-03-23', title:'End of Term 2 Exams Begin',          detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
+    { date:'2026-03-27', title:'Term 2 Exams End',                   detail:'Last day of Term 2 exams',    icon:'graduation-cap',   tag:'academic' },
+    { date:'2026-03-31', title:'Term 2 Closes',                      detail:'School closes for holiday',   icon:'map-marker-alt',   tag:'academic' },
+    // TERM 3 — THIRD TRIMESTER
+    { date:'2026-04-22', title:'Term 3 Begins',                      detail:'7:30am — School resumes',     icon:'clock',            tag:'academic' },
+    { date:'2026-05-10', title:'Inter-House Sports Day',             detail:'8:00am – 3:00pm · Sports Ground',icon:'running',       tag:'sports'   },
+    { date:'2026-05-17', title:"Parents' Open Day",                   detail:"9:00am – 1:00pm · School Hall", icon:'clock',          tag:'event'    },
+    { date:'2026-05-25', title:'Mid-Term Break Begins',              detail:'School closed',               icon:'map-marker-alt',   tag:'holiday'  },
+    { date:'2026-05-29', title:'Mid-Term Break Ends',                detail:'School resumes 7:30am',       icon:'clock',            tag:'academic' },
+    { date:'2026-06-22', title:'End of Term 3 Exams Begin',          detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
+    { date:'2026-06-26', title:'Term 3 Exams End',                   detail:'Last day of exams',           icon:'graduation-cap',   tag:'academic' },
+    { date:'2026-06-30', title:'End-of-Year Graduation & Prize-Giving',detail:'10:00am · School Auditorium',icon:'award',           tag:'event'    },
+    // TERM 1 NEXT YEAR
+    { date:'2026-09-01', title:'New Academic Year Begins',           detail:'7:30am — Term 1 opens',       icon:'clock',            tag:'academic' },
+    { date:'2026-12-20', title:'End of Term 1 Exams',                detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
+  ];
+
+  // ═══════════════════════════════════════════
+  //  ENGINE — do not edit below this line
+  // ═══════════════════════════════════════════
+  const MONTHS     = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const SHORT_M    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const TAG_LABELS = { academic:'Academic', sports:'Sports', holiday:'Holiday', event:'Event' };
+  const TAG_ICONS  = { academic:'graduation-cap', sports:'running', holiday:'flag', event:'calendar-check' };
+
+  // Build calendar dot map from events array
+  function buildMap(){
+    const m={};
+    EVENTS.forEach(ev=>{
+      const [y,mo]=ev.date.split('-').map(Number);
+      const k=`${y}-${String(mo).padStart(2,'0')}`;
+      if(!m[k])m[k]=[];
+      m[k].push(parseInt(ev.date.split('-')[2]));
+    });
+    return m;
+  }
+  const CAL_MAP = buildMap();
+  let calDate = new Date(), activeFilter = 'all', selectedDate = null;
+
+  function updateStats(){
+    document.getElementById('totalCount').textContent = EVENTS.length;
+    const today=new Date(); today.setHours(0,0,0,0);
+    const nxt=EVENTS.map(e=>new Date(e.date)).filter(d=>d>=today).sort((a,b)=>a-b)[0];
+    if(nxt){const diff=Math.round((nxt-today)/(86400000));document.getElementById('daysNext').textContent=diff===0?'Today!':diff;}
+  }
+
+  function renderCalendar(){
+    const y=calDate.getFullYear(), mo=calDate.getMonth();
+    const key=`${y}-${String(mo+1).padStart(2,'0')}`;
+    const dots=CAL_MAP[key]||[];
+    document.getElementById('calMonthYear').textContent=`${MONTHS[mo]} ${y}`;
+    const first=new Date(y,mo,1).getDay(), total=new Date(y,mo+1,0).getDate(), today=new Date();
+    let html='';
+    for(let i=0;i<first;i++) html+='<div class="cal-day other-month"></div>';
+    for(let d=1;d<=total;d++){
+      const ds=`${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      let cls='cal-day';
+      if(d===today.getDate()&&mo===today.getMonth()&&y===today.getFullYear())cls+=' today';
+      if(dots.includes(d))cls+=' has-event';
+      if(selectedDate===ds)cls+=' selected';
+      html+=`<div class="${cls}" onclick="selectDate('${ds}')">${d}</div>`;
+    }
+    document.getElementById('calDays').innerHTML=html;
+    // Month summary
+    const mEvts=EVENTS.filter(e=>{const[ey,em]=e.date.split('-').map(Number);return ey===y&&em===(mo+1);}).sort((a,b)=>new Date(a.date)-new Date(b.date));
+    const msBox=document.getElementById('monthSummary');
+    if(mEvts.length){
+      msBox.style.display='block';
+      document.getElementById('msList').innerHTML=mEvts.map(ev=>{
+        const d=parseInt(ev.date.split('-')[2]);
+        return `<div class="ms-row"><div class="ms-day">${d}</div><span class="ms-title">${ev.title}</span><span class="tag-pill tag-${ev.tag}" style="flex-shrink:0;">${TAG_LABELS[ev.tag]}</span></div>`;
+      }).join('');
+    } else { msBox.style.display='none'; }
+  }
+
+  function selectDate(ds){
+    selectedDate=ds; renderCalendar();
+    const evts=EVENTS.filter(e=>e.date===ds);
+    const d=new Date(ds); const lbl=d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    renderList(evts, lbl, evts.length?null:'No events on this date.');
+  }
+
+  function showAll(){
+    selectedDate=null; activeFilter='all';
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.f==='all'));
+    renderCalendar(); filterAndRender();
+  }
+
+  function setFilter(f,btn){
+    activeFilter=f; selectedDate=null;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); renderCalendar(); filterAndRender();
+  }
+
+  function filterAndRender(){
+    const today=new Date(); today.setHours(0,0,0,0);
+    let evts=EVENTS.filter(e=>new Date(e.date)>=today).sort((a,b)=>new Date(a.date)-new Date(b.date));
+    if(activeFilter!=='all') evts=evts.filter(e=>e.tag===activeFilter);
+    const title=activeFilter==='all'?'Upcoming Events':`Upcoming ${TAG_LABELS[activeFilter]} Events`;
+    renderList(evts, title, evts.length?null:'No upcoming events in this category.');
+  }
+
+  function renderList(evts, title, emptyMsg){
+    document.getElementById('panelTitle').textContent=title;
+    const el=document.getElementById('evList');
+    if(!evts.length){el.innerHTML=`<div class="no-events"><i class="fas fa-calendar-times"></i><p style="font-size:.95rem;">${emptyMsg||'No events found.'}</p></div>`;return;}
+    el.innerHTML=evts.map(ev=>{
+      const[y,mo,d]=ev.date.split('-').map(Number);
+      const wday=new Date(ev.date).toLocaleDateString('en-GB',{weekday:'short'});
+      return `<div class="ev-card tag-${ev.tag}">
+        <div class="ev-date-box"><div class="ev-day">${String(d).padStart(2,'0')}</div><div class="ev-month">${SHORT_M[mo-1]}</div></div>
+        <div class="ev-body">
+          <h4>${ev.title}</h4>
+          <div class="ev-meta">
+            <span><i class="fas fa-calendar-alt"></i>${wday}, ${String(d).padStart(2,'0')} ${SHORT_M[mo-1]} ${y}</span>
+            <span><i class="fas fa-${ev.icon}"></i>${ev.detail}</span>
+          </div>
+          <span class="tag-pill tag-${ev.tag}"><i class="fas fa-${TAG_ICONS[ev.tag]}"></i> ${TAG_LABELS[ev.tag]}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  document.getElementById('prevMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar();};
+  document.getElementById('nextMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar();};
+
+  // THEME
+  const themeIcon=document.getElementById('themeIcon');
+  function toggleTheme(){document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');if(themeIcon)themeIcon.className=d?'fas fa-sun':'fas fa-moon';localStorage.setItem('whis-theme',d?'dark':'light');}
+  if(localStorage.getItem('whis-theme')==='dark'){document.body.classList.add('dark');if(themeIcon)themeIcon.className='fas fa-sun';}
+
+  // REVEAL
+  const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+  // INIT
+  renderCalendar();
+  filterAndRender();
+  updateStats();
+  </script>
+</body>
+</html>

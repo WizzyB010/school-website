@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wonder Heights International School | Cultivating Tomorrow's Global Leaders</title>
+  <meta name="description" content="Wonder Heights International School in Afienya, Greater Accra. Excellence in early childhood, primary, and JHS education. Enroll today.">
+
+  <!-- Google Fonts -->
+     <link rel="icon" type="image/png" href="logo_WHIS.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --navy:   #002855;
+      --navy2:  #003a7a;
+      --gold:   #c9920a;
+      --gold2:  #f0b429;
+      --cream:  #fdf8f0;
+      --dark:   #0a0f1e;
+      --darkcard: #111827;
+      --text:   #1a1a2e;
+      --muted:  #64748b;
+      --white:  #ffffff;
+      --border: #e5e7eb;
+      --success:#16a34a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: #f8fafc;
+      overflow-x: hidden;
+    }
+    body.dark {
+      background: var(--dark);
+      color: #e2e8f0;
+    }
+
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      padding: 0.45rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .topbar a { color: #cbd5e1; text-decoration: none; }
+    .topbar a:hover { color: var(--gold2); }
+    .topbar .top-left, .topbar .top-right { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .topbar .gold { color: var(--gold2); margin-right: 0.3rem; }
+    .lang-select {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 0.78rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+    }
+    .theme-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--gold2); font-size: 1rem;
+      padding: 0.2rem; transition: transform 0.3s;
+    }
+    .theme-btn:hover { transform: rotate(20deg); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: #fff;
+      box-shadow: 0 2px 20px rgba(0,40,85,0.08);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    body.dark nav { background: #0f172a; box-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,40,85,0.15); }
+
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 72px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 44px; width: 44px; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text .main { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+    body.dark .nav-logo-text .main { color: var(--gold2); }
+    .nav-logo-text .sub { font-size: 0.62rem; font-weight: 500; color: var(--gold); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; }
+    .nav-item { position: relative; }
+    .nav-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+      color: var(--text); padding: 0.5rem 0.8rem; border-radius: 6px;
+      display: flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    body.dark .nav-btn { color: #e2e8f0; }
+    .nav-btn:hover, .nav-btn.active { color: var(--navy); background: #f0f4ff; }
+    body.dark .nav-btn:hover, body.dark .nav-btn.active { color: var(--gold2); background: rgba(255,255,255,0.05); }
+    .nav-btn .chevron { font-size: 0.65rem; transition: transform 0.2s; }
+    .nav-item:hover .chevron { transform: rotate(180deg); }
+
+    .dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 10px 10px;
+      min-width: 220px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+      z-index: 200;
+    }
+    body.dark .dropdown { background: #1e293b; border-color: #334155; }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown a {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.6rem 1.1rem; font-size: 0.85rem; color: var(--text);
+      text-decoration: none; transition: background 0.15s, color 0.15s;
+    }
+    body.dark .dropdown a { color: #e2e8f0; }
+    .dropdown a:hover { background: #f0f4ff; color: var(--navy); }
+    body.dark .dropdown a:hover { background: rgba(255,255,255,0.06); color: var(--gold2); }
+    .dropdown a i { width: 16px; color: var(--gold); font-size: 0.8rem; }
+
+    .enroll-cta {
+      background: var(--navy); color: #fff !important;
+      padding: 0.55rem 1.3rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
+      box-shadow: 0 4px 14px rgba(0,40,85,0.3);
+      white-space: nowrap;
+    }
+    .enroll-cta:hover { background: var(--gold) !important; color: var(--navy) !important; transform: translateY(-2px) !important; box-shadow: 0 6px 20px rgba(201,146,10,0.4) !important; }
+
+    /* Hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.3rem; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; transition: all 0.3s; }
+    body.dark .hamburger span { background: #e2e8f0; }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,40,85,0.97); z-index: 2000;
+      flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a, .mobile-menu button.mob-link {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff;
+      text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer;
+    }
+    .mobile-menu a:hover { color: var(--gold2); }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 1.5rem; }
+    .mobile-enroll { margin-top: 1rem; background: var(--gold2); color: var(--navy) !important; padding: 0.8rem 2.5rem; border-radius: 50px; font-weight: 700; font-size: 1rem !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 92vh; min-height: 580px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; text-align: center;
+    }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1.6s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(0,40,85,0.82) 0%, rgba(0,20,50,0.65) 60%, rgba(201,146,10,0.25) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 860px; padding: 2rem 1.5rem;
+      color: #fff;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: var(--gold2); padding: 0.35rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1.5rem; backdrop-filter: blur(8px);
+    }
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 800; line-height: 1.08;
+      margin-bottom: 1.2rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-content h1 em { color: var(--gold2); font-style: normal; }
+    .hero-content p {
+      font-size: clamp(1rem, 2.2vw, 1.3rem); opacity: 0.9;
+      max-width: 640px; margin: 0 auto 2.5rem; line-height: 1.6;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold2); color: var(--navy); font-weight: 700;
+      padding: 0.85rem 2.2rem; border-radius: 50px; text-decoration: none;
+      font-size: 0.95rem; transition: all 0.25s; letter-spacing: 0.02em;
+      box-shadow: 0 4px 20px rgba(240,180,41,0.4);
+    }
+    .btn-primary:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(240,180,41,0.5); }
+    .btn-ghost {
+      border: 2px solid rgba(255,255,255,0.6); color: #fff;
+      padding: 0.85rem 2.2rem; border-radius: 50px; text-decoration: none;
+      font-size: 0.95rem; font-weight: 600; transition: all 0.25s; backdrop-filter: blur(6px);
+    }
+    .btn-ghost:hover { background: #fff; color: var(--navy); border-color: #fff; transform: translateY(-3px); }
+
+    /* Slide indicators */
+    .hero-dots { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 20; }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); border: none; cursor: pointer; transition: all 0.3s; }
+    .hero-dot.active { background: var(--gold2); width: 28px; border-radius: 4px; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; right: 3rem; z-index: 20;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: rgba(255,255,255,0.6); font-size: 0.7rem; letter-spacing: 0.1em;
+    }
+    .scroll-hint .line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine { 0%,100%{ opacity:0.3; } 50%{ opacity:1; } }
+
+    /* ── STATS TICKER ── */
+    .stats-bar {
+      background: var(--navy); color: #fff;
+      padding: 1.4rem 2rem;
+    }
+    .stats-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; text-align: center;
+    }
+    .stat-item { padding: 0 1rem; border-right: 1px solid rgba(255,255,255,0.15); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; color: var(--gold2); }
+    .stat-label { font-size: 0.78rem; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── SECTION HELPERS ── */
+    .section { padding: 6rem 1.5rem; }
+    .section-sm { padding: 4rem 1.5rem; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--gold); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .section-label::before, .section-label::after {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: var(--navy); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    body.dark .section-title { color: #fff; }
+    .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 580px; line-height: 1.7; }
+    body.dark .section-sub { color: #94a3b8; }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal { opacity: 0; transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.up { transform: translateY(50px); }
+    .reveal.left { transform: translateX(-60px); }
+    .reveal.right { transform: translateX(60px); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── ABOUT SECTION ── */
+    .about-section { background: #fff; }
+    body.dark .about-section { background: var(--darkcard); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-img-stack { position: relative; height: 480px; }
+    .about-img-main {
+      position: absolute; top: 0; left: 0; width: 75%; height: 85%;
+      object-fit: cover; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,40,85,0.2);
+    }
+    .about-img-secondary {
+      position: absolute; bottom: 0; right: 0; width: 55%; height: 55%;
+      object-fit: cover; border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,40,85,0.15);
+      border: 4px solid #fff;
+    }
+    body.dark .about-img-secondary { border-color: #1e293b; }
+    .about-badge-float {
+      position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%);
+      background: var(--navy); color: #fff; padding: 1rem 1.4rem;
+      border-radius: 12px; text-align: center; z-index: 5;
+      box-shadow: 0 8px 30px rgba(0,40,85,0.4);
+    }
+    .about-badge-float .num { font-family: 'Playfair Display',serif; font-size: 1.8rem; font-weight: 800; color: var(--gold2); }
+    .about-badge-float .lbl { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .about-stat {
+      text-align: center; padding: 1.2rem; background: #f8faff; border-radius: 12px;
+      border-bottom: 3px solid var(--gold2);
+    }
+    body.dark .about-stat { background: #1e293b; }
+    .about-stat .val { font-family: 'Playfair Display',serif; font-size: 1.9rem; font-weight: 800; color: var(--navy); }
+    body.dark .about-stat .val { color: var(--gold2); }
+    .about-stat .key { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { background: var(--navy); position: relative; overflow: hidden; }
+    .video-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,146,10,0.15) 0%, transparent 70%);
+    }
+    .video-wrapper {
+      max-width: 900px; margin: 0 auto;
+      position: relative;
+    }
+    .video-frame {
+      position: relative; padding-bottom: 56.25%; /* 16:9 */
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .video-frame iframe, .video-frame video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
+    }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #001a44, #002d6b);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; cursor: pointer;
+      transition: opacity 0.4s;
+    }
+    .video-placeholder.hidden { opacity: 0; pointer-events: none; }
+    .play-btn {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--gold2); display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; color: var(--navy);
+      box-shadow: 0 0 0 0 rgba(240,180,41,0.5);
+      animation: pulse 2s infinite;
+      transition: transform 0.2s;
+    }
+    .play-btn:hover { transform: scale(1.1); }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(240,180,41,0.5); }
+      70% { box-shadow: 0 0 0 20px rgba(240,180,41,0); }
+      100% { box-shadow: 0 0 0 0 rgba(240,180,41,0); }
+    }
+
+    /* ── PROGRAMS ── */
+    .programs-section { background: var(--cream); }
+    body.dark .programs-section { background: #0d1829; }
+    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+    .program-card {
+      position: relative; border-radius: 16px; overflow: hidden;
+      background: #fff; box-shadow: 0 4px 24px rgba(0,40,85,0.08);
+      transition: transform 0.3s, box-shadow 0.3s; cursor: default;
+    }
+    body.dark .program-card { background: #1e293b; }
+    .program-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,40,85,0.18); }
+    .program-img { width: 100%; height: 200px; object-fit: cover; }
+    .program-body { padding: 1.8rem; }
+    .program-icon {
+      width: 50px; height: 50px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold2); font-size: 1.2rem; margin-bottom: 1rem;
+      margin-top: -2rem; position: relative; z-index: 2;
+      box-shadow: 0 4px 16px rgba(0,40,85,0.3);
+    }
+    .program-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.6rem; }
+    body.dark .program-card h3 { color: #fff; }
+    .program-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    body.dark .program-card p { color: #94a3b8; }
+    .program-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; color: var(--gold); font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: gap 0.2s; }
+    .program-link:hover { gap: 0.7rem; }
+
+    /* ── WHY CHOOSE US ── */
+    .why-section { background: #fff; }
+    body.dark .why-section { background: var(--dark); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .why-items { display: flex; flex-direction: column; gap: 1.5rem; }
+    .why-item {
+      display: flex; align-items: flex-start; gap: 1.2rem;
+      padding: 1.4rem; border-radius: 12px; background: #f8faff;
+      border-left: 4px solid var(--gold);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    body.dark .why-item { background: #1e293b; }
+    .why-item:hover { transform: translateX(6px); box-shadow: 0 4px 20px rgba(0,40,85,0.1); }
+    .why-icon {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
+      color: var(--gold2); font-size: 1.1rem;
+    }
+    .why-item h4 { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+    body.dark .why-item h4 { color: #fff; }
+    .why-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+    body.dark .why-item p { color: #94a3b8; }
+    .why-img-col { position: relative; }
+    .why-img-main { width: 100%; height: 520px; object-fit: cover; border-radius: 20px; }
+    .why-overlay-card {
+      position: absolute; bottom: 2rem; left: -2rem;
+      background: var(--gold2); padding: 1.4rem 1.8rem;
+      border-radius: 12px; max-width: 240px;
+      box-shadow: 0 12px 40px rgba(201,146,10,0.35);
+    }
+    .why-overlay-card p { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+    .why-overlay-card span { font-size: 0.78rem; color: rgba(0,40,85,0.7); }
+
+    /* ── CALENDAR + EVENTS ── */
+    .calendar-section { background: var(--cream); }
+    body.dark .calendar-section { background: #0d1829; }
+    .cal-events-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.5rem; align-items: start; }
+
+    .calendar-card {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,40,85,0.1);
+      overflow: hidden;
+    }
+    body.dark .calendar-card { background: #1e293b; }
+    .cal-header {
+      background: var(--navy); color: #fff;
+      padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cal-header h3 { font-size: 1.1rem; }
+    .cal-nav-btn {
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 8px;
+      cursor: pointer; font-size: 0.9rem; transition: background 0.2s;
+    }
+    .cal-nav-btn:hover { background: var(--gold2); color: var(--navy); }
+    .cal-body { padding: 1.2rem; }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7,1fr);
+      gap: 2px; text-align: center;
+      font-size: 0.7rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+    }
+    .cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem; border-radius: 8px; cursor: pointer;
+      position: relative; transition: all 0.15s; color: var(--text);
+    }
+    body.dark .cal-day { color: #e2e8f0; }
+    .cal-day:hover { background: #f0f4ff; }
+    body.dark .cal-day:hover { background: rgba(255,255,255,0.06); }
+    .cal-day.today { background: var(--navy); color: #fff; font-weight: 700; }
+    .cal-day.has-event::after {
+      content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+      width: 5px; height: 5px; background: var(--gold2); border-radius: 50%;
+    }
+    .cal-day.today.has-event::after { background: var(--gold2); }
+    .cal-day.other-month { opacity: 0.3; }
+
+    .events-card {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,40,85,0.1);
+    }
+    body.dark .events-card { background: #1e293b; }
+    .events-header {
+      padding: 1.4rem 1.5rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    body.dark .events-header { border-color: #334155; }
+    .events-header h3 { font-size: 1.15rem; color: var(--navy); }
+    body.dark .events-header h3 { color: #fff; }
+    .view-all-link { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-decoration: none; }
+    .event-list { padding: 0.5rem 0; }
+    .event-item {
+      display: flex; gap: 1rem; padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.15s;
+    }
+    body.dark .event-item { border-color: #334155; }
+    .event-item:hover { background: #f8faff; }
+    body.dark .event-item:hover { background: rgba(255,255,255,0.03); }
+    .event-date {
+      flex-shrink: 0; width: 50px; height: 55px;
+      background: var(--navy); border-radius: 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .event-date .day { font-family: 'Playfair Display',serif; font-size: 1.4rem; font-weight: 800; line-height: 1; color: var(--gold2); }
+    .event-date .month { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+    .event-info h4 { font-family: 'DM Sans',sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+    body.dark .event-info h4 { color: #e2e8f0; }
+    .event-info p { font-size: 0.8rem; color: var(--muted); }
+    .event-tag {
+      display: inline-block; padding: 0.15rem 0.6rem;
+      border-radius: 50px; font-size: 0.7rem; font-weight: 600;
+      margin-top: 0.3rem;
+    }
+    .tag-academic { background: #dbeafe; color: #1d4ed8; }
+    .tag-sports { background: #dcfce7; color: #16a34a; }
+    .tag-holiday { background: #fef9c3; color: #a16207; }
+    .tag-event { background: #fce7f3; color: #9d174d; }
+
+    /* ── GALLERY ── */
+    .gallery-section { background: #fff; }
+    body.dark .gallery-section { background: var(--darkcard); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .gallery-item {
+      position: relative; border-radius: 12px; overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; min-height: 180px; }
+    .gallery-item:first-child img { min-height: 360px; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,40,85,0.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s;
+      color: #fff; font-size: 1.5rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* ── ENROLLMENT FORM ── */
+    .enroll-section { background: var(--navy); position: relative; overflow: hidden; }
+    .enroll-section::before {
+      content: ''; position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,180,41,0.12) 0%, transparent 70%);
+    }
+    .enroll-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; }
+    .enroll-info { color: #fff; }
+    .enroll-info .section-label { color: var(--gold2); }
+    .enroll-info .section-label::before, .enroll-info .section-label::after { background: var(--gold2); }
+    .enroll-info .section-title { color: #fff; margin-bottom: 1rem; }
+    .enroll-info p { color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 2rem; }
+    .enroll-features { display: flex; flex-direction: column; gap: 0.8rem; }
+    .enroll-feat { display: flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+    .enroll-feat i { color: var(--gold2); }
+
+    .form-card {
+      background: #fff; border-radius: 20px; padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .form-card h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .form-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem; border: 1.5px solid #e2e8f0;
+      border-radius: 10px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--text); background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--navy); box-shadow: 0 0 0 3px rgba(0,40,85,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%; padding: 1rem; background: var(--navy);
+      color: #fff; border: none; border-radius: 50px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.25s; letter-spacing: 0.02em;
+      box-shadow: 0 4px 20px rgba(0,40,85,0.3); margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,146,10,0.4); }
+    .form-submit:active { transform: translateY(0); }
+    .form-success {
+      display: none; padding: 1.2rem; background: #dcfce7;
+      border-radius: 12px; border: 1px solid #86efac;
+      text-align: center; color: var(--success); font-weight: 600; margin-top: 1rem;
+    }
+    .form-success.visible { display: block; }
+    .form-error-msg {
+      color: #dc2626; font-size: 0.75rem; margin-top: 0.2rem; display: none;
+    }
+    .form-error-msg.visible { display: block; }
+
+    /* ── TESTIMONIALS ── */
+    .testi-section { background: var(--cream); }
+    body.dark .testi-section { background: #0d1829; }
+    .testi-carousel { position: relative; overflow: hidden; }
+    .testi-track { display: flex; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .testi-slide { flex: 0 0 calc(33.33% - 1rem); margin-right: 1.5rem; }
+    .testi-card {
+      background: #fff; border-radius: 16px; padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,40,85,0.08);
+      height: 100%; display: flex; flex-direction: column;
+    }
+    body.dark .testi-card { background: #1e293b; }
+    .testi-stars { color: var(--gold2); margin-bottom: 1rem; letter-spacing: 2px; }
+    .testi-card blockquote { font-size: 0.92rem; color: var(--text); line-height: 1.7; flex: 1; font-style: italic; }
+    body.dark .testi-card blockquote { color: #e2e8f0; }
+    .testi-author { display: flex; align-items: center; gap: 0.8rem; margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid #f1f5f9; }
+    body.dark .testi-author { border-color: #334155; }
+    .testi-avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy2)); display: flex; align-items: center; justify-content: center; color: var(--gold2); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .testi-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+    body.dark .testi-name { color: #fff; }
+    .testi-role { font-size: 0.78rem; color: var(--muted); }
+    .testi-controls { display: flex; gap: 0.8rem; justify-content: center; margin-top: 2rem; }
+    .testi-btn { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--navy); background: none; cursor: pointer; color: var(--navy); font-size: 0.9rem; transition: all 0.2s; }
+    .testi-btn:hover { background: var(--navy); color: #fff; }
+    body.dark .testi-btn { border-color: var(--gold2); color: var(--gold2); }
+    body.dark .testi-btn:hover { background: var(--gold2); color: var(--navy); }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section { background: var(--gold2); }
+    .newsletter-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .newsletter-inner h2 { font-size: 1.8rem; color: var(--navy); }
+    .newsletter-inner p { color: rgba(0,40,85,0.7); margin-top: 0.3rem; }
+    .newsletter-form { display: flex; gap: 0.8rem; flex: 1; min-width: 300px; max-width: 480px; }
+    .newsletter-input {
+      flex: 1; padding: 0.85rem 1.2rem; border-radius: 50px;
+      border: 2px solid transparent; outline: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: rgba(255,255,255,0.9);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .newsletter-input:focus { background: #fff; border-color: var(--navy); }
+    .newsletter-btn {
+      background: var(--navy); color: #fff; border: none;
+      padding: 0.85rem 1.8rem; border-radius: 50px;
+      font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; transition: all 0.2s; white-space: nowrap;
+    }
+    .newsletter-btn:hover { background: #fff; color: var(--navy); transform: scale(1.03); }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip { background: #f8faff; border-top: 1px solid #e8edf5; }
+    body.dark .contact-strip { background: #0f1628; border-color: #1e293b; }
+    .contact-strip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .cs-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.5rem; border-radius: 12px; background: #fff;
+      box-shadow: 0 2px 12px rgba(0,40,85,0.05);
+    }
+    body.dark .cs-item { background: #1e293b; }
+    .cs-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--navy); display: flex; align-items: center; justify-content: center; color: var(--gold2); font-size: 1rem; flex-shrink: 0; }
+    .cs-item h4 { font-family: 'DM Sans',sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .cs-item p { font-size: 0.9rem; color: var(--text); font-weight: 500; margin-top: 0.1rem; }
+    body.dark .cs-item p { color: #e2e8f0; }
+
+    /* ── FOOTER ── */
+    footer { background: #050f22; color: #94a3b8; }
+    .footer-main {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 3rem; padding: 4rem 1.5rem 3rem; max-width: 1280px; margin: 0 auto;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .footer-logo img { height: 48px; }
+    .footer-logo span { font-family: 'Playfair Display',serif; font-size: 1.15rem; color: #fff; font-weight: 700; }
+    footer p { font-size: 0.88rem; line-height: 1.7; max-width: 280px; }
+    .footer-socials { display: flex; gap: 0.8rem; margin-top: 1.4rem; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: #94a3b8; font-size: 0.9rem;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .social-btn:hover { background: var(--gold2); border-color: var(--gold2); color: var(--navy); transform: translateY(-2px); }
+    .footer-col h4 { color: #fff; font-family: 'DM Sans',sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col li a { color: #94a3b8; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col li a:hover { color: var(--gold2); }
+    .footer-contact-item { display: flex; gap: 0.7rem; margin-bottom: 0.8rem; font-size: 0.88rem; }
+    .footer-contact-item i { color: var(--gold2); margin-top: 0.15rem; flex-shrink: 0; }
+    .footer-bottom {
+      text-align: center; padding: 1.5rem; font-size: 0.82rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-bottom span { color: var(--gold2); }
+
+    /* ── FLOATING CONTACT BTN ── */
+    .float-contact {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 0.7rem;
+    }
+    .float-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: all 0.25s; border: none; cursor: pointer;
+    }
+    .float-btn.whatsapp { background: #25d366; color: #fff; }
+    .float-btn.whatsapp:hover { transform: scale(1.1) translateY(-2px); }
+    .float-btn.phone { background: var(--navy); color: #fff; }
+    .float-btn.phone:hover { transform: scale(1.1) translateY(-2px); }
+    .float-label {
+      position: absolute; right: 60px; background: rgba(0,0,0,0.75);
+      color: #fff; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.75rem;
+      white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none;
+    }
+    .float-btn:hover .float-label { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .about-grid, .why-grid { grid-template-columns: 1fr; }
+      .about-img-stack { height: 340px; }
+      .about-img-main { width: 80%; height: 80%; }
+      .about-img-secondary { width: 50%; height: 50%; }
+      .why-img-col { display: none; }
+      .enroll-grid { grid-template-columns: 1fr; }
+      .programs-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .cal-events-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .hero { height: 85vh; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.15); }
+      .programs-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .gallery-item:first-child { grid-column: span 2; }
+      .testi-slide { flex: 0 0 calc(100% - 1rem); }
+      .footer-main { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
+      .contact-strip-grid { grid-template-columns: 1fr; }
+      .topbar .top-left { gap: 0.7rem; }
+      .scroll-hint { display: none; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-item { border-right: none !important; }
+      .newsletter-form { flex-direction: column; }
+      .about-stats { grid-template-columns: repeat(3,1fr); }
+    }
+
+    #whis-loader {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #002855;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  #whis-loader.hidden { opacity: 0; visibility: hidden; }
+
+  .loader-inner {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 1rem; text-align: center;
+    animation: loaderFadeIn .5s ease forwards;
+  }
+  @keyframes loaderFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .loader-logo {
+    width: 100px; height: 100px; object-fit: contain;
+    animation: logoPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0px rgba(240,180,41,0)); }
+    50%       { transform: scale(1.06); filter: drop-shadow(0 0 18px rgba(240,180,41,.6)); }
+  }
+
+  .loader-school-name {
+    display: flex; flex-direction: column; gap: .1rem;
+  }
+  .loader-main {
+    font-family: 'Playfair Display', serif; font-size: 1.7rem;
+    font-weight: 800; color: #fff; letter-spacing: .02em;
+  }
+  .loader-sub {
+    font-size: .78rem; font-weight: 600; color: #f0b429;
+    text-transform: uppercase; letter-spacing: .16em;
+  }
+
+  .loader-bar-wrap {
+    width: 180px; height: 3px; background: rgba(255,255,255,.15);
+    border-radius: 50px; overflow: hidden; margin-top: .5rem;
+  }
+  .loader-bar {
+    height: 100%; width: 0; background: #f0b429;
+    border-radius: 50px;
+    animation: loadBar 1.8s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  @keyframes loadBar { to { width: 100%; } }
+
+  .loader-tagline {
+    font-size: .75rem; color: rgba(255,255,255,.5);
+    letter-spacing: .1em; text-transform: uppercase; margin-top: .2rem;
+  }
+
+  /* ── MODAL ── */
+  .modal {
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    background-color: #fff; margin: 15% auto; padding: 20px;
+    border: 1px solid #888; width: 80%; max-width: 400px; border-radius: 8px;
+    text-align: center;
+  }
+  body.dark .modal-content { background-color: #1e293b; color: #e2e8f0; }
+  .close {
+    color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+  }
+  .close:hover { color: #000; }
+  body.dark .close:hover { color: #fff; }
+
+  .modal-event {
+    text-align: left; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;
+    padding: 10px 12px; margin: 10px 0; background: #fdf8ef;
+  }
+  .modal-event h4 { margin: 0 0 6px; font-size: 1rem; color: #003366; }
+  .modal-event p { margin: 4px 0; font-size: 0.9rem; color: #1f2937; }
+  .modal-event .event-tag { font-size: 0.75rem; padding: 2px 7px; border-radius: 999px; }
+
+  body.dark .modal-event { background: #0a1f3a; border-color: rgba(148,163,184,0.3); }
+
+  </style>
+</head>
+
+<body id="body">
+
+<div id="whis-loader">
+  <div class="loader-inner">
+    <img src="logo_WHIS.png" alt="Wonder Heights Logo" class="loader-logo">
+    <div class="loader-school-name">
+      <span class="loader-main">Wonder Heights</span>
+      <span class="loader-sub">International School</span>
+    </div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+    <p class="loader-tagline">Cultivating Tomorrow's Global Leaders</p>
+  </div>
+</div>
+
+  <!-- ═══════════════════════════ TOP BAR ═══════════════════════════ -->
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i> 020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i> admin@wonderheights.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-map-marker-alt gold"></i> Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i> Mon–Fri: 7:30am – 4:00pm</span>
+      <select class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="tw">🇬🇭 Twi</option>
+      </select>
+     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+  <i class="fas fa-moon" id="themeIcon"></i>
+</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
+        <div class="nav-logo-text">
+          <span class="main">Wonder Heights</span>
+          <span class="sub">International School</span>
+        </div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <!-- About Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          </div>
+        </div>
+        <!-- Academics Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#programs"><i class="fas fa-child"></i> Early Childhood</a>
+            <a href="#programs"><i class="fas fa-shapes"></i> Preschool</a>
+            <a href="#programs"><i class="fas fa-book-open"></i> Primary</a>
+            <a href="#programs"><i class="fas fa-graduation-cap"></i> JHS</a>
+            <a href="#programs"><i class="fas fa-heart"></i> Therapy</a>
+          </div>
+        </div>
+        <!-- Admission Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#enroll"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="#calendar" class="nav-btn">Events</a>
+        <a href="#gallery" class="nav-btn">Gallery</a>
+        <a href="#contact" class="nav-btn">Contact</a>
+        <a href="#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
+          <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
+        </a>
+      </div>
+
+      <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="#programs" onclick="closeMobileMenu()">Academics</a>
+    <a href="#calendar" onclick="closeMobileMenu()">Events</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
+  </div>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="hero" id="home">
+    <!-- Slides -->
+    <div class="hero-slide active" style="background-image:url('1.jfif');"></div>
+    <div class="hero-slide" style="background-image:url('2.jfif');"></div>
+    <div class="hero-slide" style="background-image:url('5.jfif');"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal up" style="animation-delay:0s;">
+        <i class="fas fa-award"></i> Cultivating Tomorrow's Global Leaders
+      </div>
+      <h1 class="reveal up" style="animation-delay:0.1s;" data-key="heroTitle">
+        Service <em>Beyond</em> Self
+      </h1>
+      <p class="reveal up" style="animation-delay:0.2s;" data-key="heroSub">
+        Educating and empowering each child to thrive in a rapidly evolving global society. Built on Christian values, excellence, and community.
+      </p>
+      <div class="hero-btns reveal up" style="animation-delay:0.3s;">
+        <a href="#programs" class="btn-primary" data-key="discover">
+          <i class="fas fa-compass" style="margin-right:0.4rem;"></i>Discover Our School
+        </a>
+        <a href="#enroll" class="btn-ghost" data-key="enrollToday">
+          <i class="fas fa-user-plus" style="margin-right:0.4rem;"></i>Enroll Today
+        </a>
+      </div>
+    </div>
+
+    <!-- Slide Dots -->
+    <div class="hero-dots">
+      <button class="hero-dot active" onclick="goToSlide(0)"></button>
+      <button class="hero-dot" onclick="goToSlide(1)"></button>
+      <button class="hero-dot" onclick="goToSlide(2)"></button>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ STATS BAR ═══════════════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item reveal up">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">Happy Students</div>
+      </div>
+      <div class="stat-item reveal up" style="animation-delay:0.1s;">
+        <div class="stat-num">15:1</div>
+        <div class="stat-label">Student–Teacher Ratio</div>
+      </div>
+      <div class="stat-item reveal up" style="animation-delay:0.2s;">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Safe Environment</div>
+      </div>
+      <div class="stat-item reveal up" style="animation-delay:0.3s;">
+        <div class="stat-num">A+</div>
+        <div class="stat-label">Academic Excellence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Images -->
+        <div class="about-img-stack reveal left">
+          <img src="4.jfif" alt="Students in library" class="about-img-main">
+          <img src="3.jfif" alt="Student writing" class="about-img-secondary">
+          <div class="about-badge-float">
+            <div class="num">10+</div>
+            <div class="lbl">Years of Excellence</div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="reveal right">
+          <div class="section-label">About Wonder Heights</div>
+          <h2 class="section-title" data-key="welcomeTitle">Welcome to Wonder Heights</h2>
+          <p class="section-sub" style="margin-bottom:1.5rem;" data-key="welcomeText">
+            Wonder Heights International School extends a warm welcome to all prospective learners and families, inviting them to embark on a journey of education that transcends conventional boundaries.
+          </p>
+          <p class="section-sub" style="font-size:0.9rem; margin-bottom:2rem;">
+            Our institution is dedicated to fostering the individual talents of each learner, creating an environment conducive to academic, social, and emotional growth — grounded in Christian values of responsibility, discipline, and service.
+          </p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+            <a href="about.html" class="btn-primary" style="background:var(--navy); box-shadow:0 4px 14px rgba(0,40,85,0.25); color:#fff; padding:0.8rem 1.8rem; font-size:0.88rem;">
+              Read Our Story
+            </a>
+            <a href="#enroll" class="btn-primary" style="background:var(--gold2); color:var(--navy); padding:0.8rem 1.8rem; font-size:0.88rem;">
+              Apply Now
+            </a>
+          </div>
+
+          <div class="about-stats">
+            <div class="about-stat">
+              <div class="val">15:1</div>
+              <div class="key">Ratio</div>
+            </div>
+            <div class="about-stat">
+              <div class="val">100%</div>
+              <div class="key">Safety</div>
+            </div>
+            <div class="about-stat">
+              <div class="val">A+</div>
+              <div class="key">Excellence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ VIDEO SECTION ═══════════════════════════ -->
+  <section class="section video-section" id="video-tour">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center; color:var(--gold2);">
+          <span style="background:var(--gold2); height:1px; display:block; width:28px;"></span>
+          School Tour
+          <span style="background:var(--gold2); height:1px; display:block; width:28px;"></span>
+        </div>
+        <h2 class="section-title" style="color:#fff;" data-key="videoTitle">Experience Wonder Heights</h2>
+        <p style="color:rgba(255,255,255,0.7); max-width:520px; margin:0 auto; font-size:1rem;">
+          Take a glimpse into the daily life of our students — where learning meets creativity, discipline, and joy.
+        </p>
+      </div>
+
+      <div class="video-wrapper reveal up" style="animation-delay:0.2s;">
+        <div class="video-frame" id="videoFrame">
+          <!-- ✏️ REPLACE WITH YOUR YOUTUBE EMBED URL: -->
+          <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&rel=0" allowfullscreen allow="autoplay; encrypted-media"></iframe> -->
+          
+          <!-- Placeholder shown when no video is set -->
+          <div class="video-placeholder" id="videoPlaceholder" onclick="playVideo()">
+            <div class="play-btn"><i class="fas fa-play" style="margin-left:4px;"></i></div>
+            <p style="color:rgba(255,255,255,0.8); font-size:1.1rem; font-weight:600;">Watch Our School Tour</p>
+            <p style="color:rgba(255,255,255,0.5); font-size:0.85rem;">Click to play</p>
+          </div>
+
+          <!-- Actual video element — replace src with your video file or YouTube embed -->
+          <video id="schoolVideo" poster="1.jfif" style="display:none; position:absolute; inset:0; width:100%; height:100%;" controls>
+            <source src="your-school-video.mp4" type="video/mp4">
+            <!-- Or use YouTube iframe instead -->
+          </video>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:2.5rem;" class="reveal up" style="animation-delay:0.3s;">
+        <a href="#enroll" class="btn-ghost" style="border-color:var(--gold2); color:var(--gold2);">
+          <i class="fas fa-calendar-check" style="margin-right:0.5rem;"></i> Book a Physical Tour
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PROGRAMS ═══════════════════════════ -->
+  <section class="section programs-section" id="programs">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3.5rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">Our Academic Offerings</div>
+        <h2 class="section-title" data-key="programsTitle">Nurturing Every Stage of Growth</h2>
+        <p class="section-sub" style="margin:0 auto; text-align:center;">
+          From early childhood through JHS, every programme is designed to inspire curiosity, build character, and achieve excellence.
+        </p>
+      </div>
+
+      <div class="programs-grid">
+        <!-- Card 1 -->
+        <div class="program-card reveal up">
+          <img src="1.jfif" alt="Early Childhood" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-baby"></i></div>
+            <h3>Early Childhood Education</h3>
+            <p>A nurturing foundation focused on play-based learning, social development, and early literacy for our youngest learners.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="program-card reveal up" style="transition-delay:0.1s;">
+          <img src="2.jfif" alt="Preschool" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-shapes"></i></div>
+            <h3>Day Care & Preschool</h3>
+            <p>Safe, engaging daycare from 7:30am–5pm, guiding toddlers through structured play and guided early-learning activities.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="program-card reveal up" style="transition-delay:0.2s;">
+          <img src="4.jfif" alt="Primary" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-book-open"></i></div>
+            <h3>Primary School</h3>
+            <p>Building critical thinkers and confident learners across all core subjects — Mathematics, Science, English, and more.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="program-card reveal up" style="transition-delay:0.15s;">
+          <img src="5.jfif" alt="JHS" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Junior High School (JHS)</h3>
+            <p>Preparing students for BECE and beyond with rigorous academics, leadership development, and extracurricular activities.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="program-card reveal up" style="transition-delay:0.25s;">
+          <img src="3.jfif" alt="Therapy" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-heart"></i></div>
+            <h3>Therapy & Support</h3>
+            <p>Comprehensive therapeutic support including speech, occupational, and behavioural therapy for children with unique needs.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 6 — Practical Lessons -->
+        <div class="program-card reveal up" style="transition-delay:0.3s;">
+          <img src="6.jfif" alt="Extracurricular" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-palette"></i></div>
+            <h3>Extracurricular Activities</h3>
+            <p>Art, music, sports, and STEM clubs ensuring every child discovers and develops their unique talents and passions.</p>
+            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ WHY CHOOSE US ═══════════════════════════ -->
+  <section class="section why-section" id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <div class="section-label reveal up">Why Choose Wonder Heights</div>
+          <h2 class="section-title reveal up" style="animation-delay:0.1s;">Where Values Meet <br>Academic Excellence</h2>
+          <p class="section-sub reveal up" style="animation-delay:0.15s; margin-bottom:2.5rem;">
+            Our school is grounded in Christian ideals — responsibility, discipline, excellence, ethical behaviour, leadership, and service beyond self.
+          </p>
+
+          <div class="why-items">
+            <div class="why-item reveal left" style="animation-delay:0.1s;">
+              <div class="why-icon"><i class="fas fa-sun"></i></div>
+              <div>
+                <h4>Early Drop-off & Late Pick-up</h4>
+                <p>We operate from 7:30am to 5:00pm, accommodating working parents with flexible hours and before/after-school care.</p>
+              </div>
+            </div>
+            <div class="why-item reveal left" style="animation-delay:0.18s;">
+              <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+              <div>
+                <h4>Safe, Spacious Environment</h4>
+                <p>Temperature-regulated classrooms, secure perimeter, and trained staff ensure every child is safe and comfortable all day.</p>
+              </div>
+            </div>
+            <div class="why-item reveal left" style="animation-delay:0.26s;">
+              <div class="why-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+              <div>
+                <h4>Dedicated, Passionate Educators</h4>
+                <p>Our teachers love what they do. Every school day is filled with exciting activities and personalised attention for each learner.</p>
+              </div>
+            </div>
+            <div class="why-item reveal left" style="animation-delay:0.34s;">
+              <div class="why-icon"><i class="fas fa-laptop-code"></i></div>
+              <div>
+                <h4>Library & Computer Laboratory</h4>
+                <p>A well-stocked library and modern computer lab give students access to resources that expand their world beyond the classroom.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-img-col reveal right" style="animation-delay:0.2s;">
+          <img src="5.jfif" alt="Happy students" class="why-img-main">
+          <div class="why-overlay-card">
+            <p>🏆 Award-winning school culture</p>
+            <span>Recognised for academic & character excellence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CALENDAR + EVENTS ═══════════════════════════ -->
+  <section class="section calendar-section" id="calendar">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">Stay Informed</div>
+        <h2 class="section-title">Academic Calendar & Upcoming Events</h2>
+        <p class="section-sub" style="margin:0 auto; text-align:center;">
+          Keep track of important school dates, holidays, and exciting events happening at Wonder Heights.
+        </p>
+      </div>
+
+      <div class="cal-events-grid">
+        <!-- Calendar -->
+        <div class="calendar-card reveal left">
+          <div class="cal-header">
+            <button class="cal-nav-btn" id="prevMonth">&#8249;</button>
+            <h3 id="calMonthYear">March 2026</h3>
+            <button class="cal-nav-btn" id="nextMonth">&#8250;</button>
+          </div>
+          <div class="cal-body">
+            <div class="cal-weekdays">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="cal-days" id="calDays"></div>
+          </div>
+          <div style="padding:1rem 1.2rem; border-top:1px solid #f1f5f9; display:flex; gap:1rem; font-size:0.78rem; color:var(--muted); align-items:center;">
+            <span style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px;height:8px;background:var(--gold2);border-radius:50%;display:inline-block;"></span> Has event</span>
+            <span style="display:flex; align-items:center; gap:0.3rem;"><span style="width:22px;height:22px;background:var(--navy);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;">22</span> Today</span>
+          </div>
+        </div>
+
+        <!-- Events List -->
+        <div class="events-card reveal right">
+          <div class="events-header">
+            <h3>Upcoming Events</h3>
+            <a href="events.html" class="view-all-link">View All →</a>
+          </div>
+          <div class="event-list" id="eventList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ GALLERY ═══════════════════════════ -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem;" class="reveal up">
+        <div>
+          <div class="section-label">Our Campus Life</div>
+          <h2 class="section-title">Life at Wonder Heights</h2>
+        </div>
+        <a href="#" class="btn-primary" style="background:var(--navy); color:#fff; padding:0.7rem 1.6rem; font-size:0.85rem; box-shadow:none;">
+          Full Gallery <i class="fas fa-images" style="margin-left:0.4rem;"></i>
+        </a>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item reveal up">
+          <img src="1.jfif" alt="School life">
+          <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="gallery-item reveal up" style="animation-delay:0.1s;">
+          <img src="2.jfif" alt="Students">
+          <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="gallery-item reveal up" style="animation-delay:0.15s;">
+          <img src="3.jfif" alt="Learning">
+          <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="gallery-item reveal up" style="animation-delay:0.2s;">
+          <img src="4.jfif" alt="Library">
+          <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="gallery-item reveal up" style="animation-delay:0.25s;">
+          <img src="5.jfif" alt="Secondary">
+          <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ ENROLLMENT FORM ═══════════════════════════ -->
+  <section class="section enroll-section" id="enroll">
+    <div class="container">
+      <div class="enroll-grid">
+        <!-- Info side -->
+        <div class="enroll-info reveal left">
+          <div class="section-label">Admissions 2026/2027</div>
+          <h2 class="section-title">Begin Your Child's Journey With Us</h2>
+          <p>
+            We're now accepting applications for the upcoming academic year. Fill out the form to start the enrollment process — our admissions team will contact you within 24 hours.
+          </p>
+          <div class="enroll-features">
+            <div class="enroll-feat"><i class="fas fa-check-circle"></i> Simple online application process</div>
+            <div class="enroll-feat"><i class="fas fa-check-circle"></i> Flexible enrollment for all stages</div>
+            <div class="enroll-feat"><i class="fas fa-check-circle"></i> Guided school tour available</div>
+            <div class="enroll-feat"><i class="fas fa-check-circle"></i> Scholarship & bursary options</div>
+            <div class="enroll-feat"><i class="fas fa-check-circle"></i> Quick response within 24 hours</div>
+          </div>
+
+          <div style="margin-top:2.5rem; padding:1.5rem; background:rgba(255,255,255,0.07); border-radius:12px; border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Academic Year</div>
+            <div style="font-size:1.5rem; color:var(--gold2); font-family:'Playfair Display',serif; font-weight:700;">2026 / 2027 Intake Open</div>
+            <div style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-top:0.3rem;">Applications closing soon — limited spaces available.</div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-card reveal right" style="animation-delay:0.15s;">
+          <h3>Student Enrollment Application</h3>
+          <p>Please complete all fields accurately. Fields marked * are required.</p>
+
+          <form id="enrollForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="first_name" placeholder="e.g. Kwame" required>
+                <span class="form-error-msg" id="firstNameErr">Please enter first name</span>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="last_name" placeholder="e.g. Mensah" required>
+                <span class="form-error-msg" id="lastNameErr">Please enter last name</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="date_of_birth" required>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender *</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="program">Program Applying For *</label>
+              <select id="program" name="program" required>
+                <option value="">Select a program</option>
+                <option value="daycare">Day Care</option>
+                <option value="early_childhood">Early Childhood Education</option>
+                <option value="preschool">Preschool (KG1–KG2)</option>
+                <option value="primary">Primary School (Class 1–6)</option>
+                <option value="jhs">Junior High School (JHS 1–3)</option>
+                <option value="therapy">Therapy Programme</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="parentName">Parent / Guardian Name *</label>
+                <input type="text" id="parentName" name="parent_name" placeholder="Full name" required>
+              </div>
+              <div class="form-group">
+                <label for="relationship">Relationship *</label>
+                <select id="relationship" name="relationship" required>
+                  <option value="">Select</option>
+                  <option value="mother">Mother</option>
+                  <option value="father">Father</option>
+                  <option value="guardian">Guardian</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="0XX XXX XXXX" required>
+                <span class="form-error-msg" id="phoneErr">Please enter a valid phone number</span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="parent@email.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="previousSchool">Previous School (if applicable)</label>
+              <input type="text" id="previousSchool" name="previous_school" placeholder="School name and location">
+            </div>
+
+            <div class="form-group">
+              <label for="howHeard">How did you hear about us?</label>
+              <select id="howHeard" name="how_heard">
+                <option value="">Select</option>
+                <option value="friend">Friend / Family</option>
+                <option value="social_media">Social Media</option>
+                <option value="google">Google Search</option>
+                <option value="flyer">Flyer / Poster</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Additional Notes / Special Needs</label>
+              <textarea id="notes" name="notes" placeholder="Any additional information you'd like us to know..."></textarea>
+            </div>
+
+            <button type="submit" class="form-submit" id="submitBtn">
+              <i class="fas fa-paper-plane" style="margin-right:0.5rem;"></i>Submit Application
+            </button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle" style="margin-right:0.5rem;"></i>
+            Application submitted successfully! Our team will contact you within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ TESTIMONIALS ═══════════════════════════ -->
+  <section class="section testi-section" id="testimonials">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">Parent Testimonials</div>
+        <h2 class="section-title">What Families Are Saying</h2>
+      </div>
+
+      <div class="testi-carousel" id="testiCarousel">
+        <div class="testi-track" id="testiTrack">
+          <!-- Testimonial 1 -->
+          <div class="testi-slide">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <blockquote>"Wonder Heights has been absolutely transformative for our daughter. The teachers are attentive, caring, and genuinely invested in every child's growth. Highly recommend!"</blockquote>
+              <div class="testi-author">
+                <div class="testi-avatar">AA</div>
+                <div>
+                  <div class="testi-name">Abena Acheampong</div>
+                  <div class="testi-role">Parent of Primary 4 Student</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonial 2 -->
+          <div class="testi-slide">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <blockquote>"The holistic approach to education at Wonder Heights is remarkable. Our son has grown academically AND in character. The facilities and dedicated staff are second to none!"</blockquote>
+              <div class="testi-author">
+                <div class="testi-avatar">KA</div>
+                <div>
+                  <div class="testi-name">Kofi Amponsah</div>
+                  <div class="testi-role">Parent of Primary 2 Student</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonial 3 -->
+          <div class="testi-slide">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <blockquote>"Communication with the school is top-notch. We always feel informed and involved. Our children are thriving here, and we couldn't be happier."</blockquote>
+              <div class="testi-author">
+                <div class="testi-avatar">JO</div>
+                <div>
+                  <div class="testi-name">Joshua & Olivia Asante</div>
+                  <div class="testi-role">Parents of JHS Students</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonial 4 -->
+          <div class="testi-slide">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <blockquote>"The sense of community at Wonder Heights is amazing. Our children feel safe, encouraged, and excited to learn every single day."</blockquote>
+              <div class="testi-author">
+                <div class="testi-avatar">BA</div>
+                <div>
+                  <div class="testi-name">Ben & Adwoa Ackah</div>
+                  <div class="testi-role">Parents of KG & Primary Students</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonial 5 -->
+          <div class="testi-slide">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <blockquote>"Excellent facilities and resources. My son has access to everything he needs to succeed, from the computer lab to a well-stocked library. Wonder Heights truly stands out."</blockquote>
+              <div class="testi-author">
+                <div class="testi-avatar">EM</div>
+                <div>
+                  <div class="testi-name">Enagol Mensah</div>
+                  <div class="testi-role">Parent of Primary 6 Student</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-controls">
+        <button class="testi-btn" id="testiPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="testi-btn" id="testiNext"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <div style="text-align:center; margin-top:2.5rem;" class="reveal up">
+        <p style="color:var(--muted); margin-bottom:1rem; font-size:0.9rem;">Share your experience with us</p>
+        <a href="https://www.facebook.com/profile.php?id=61559737448958" target="_blank" class="btn-primary" style="background:var(--navy); color:#fff; padding:0.8rem 2rem; box-shadow:none; font-size:0.9rem;">
+          <i class="fab fa-facebook" style="margin-right:0.5rem;"></i>Leave a Review on Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ NEWSLETTER ═══════════════════════════ -->
+  <section class="section-sm newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div>
+          <h2>Stay Connected</h2>
+          <p>Subscribe for school updates, events, and news.</p>
+        </div>
+        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" name="newsletter_email" required>
+          <button type="submit" class="newsletter-btn">Subscribe <i class="fas fa-arrow-right" style="margin-left:0.3rem;"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CONTACT STRIP ═══════════════════════════ -->
+  <section class="section-sm contact-strip" id="contact">
+    <div class="container">
+      <div class="contact-strip-grid">
+        <div class="cs-item reveal up">
+          <div class="cs-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <h4>Call Us</h4>
+            <p>020 101 6051 / 054 579 7990</p>
+          </div>
+        </div>
+        <div class="cs-item reveal up" style="animation-delay:0.1s;">
+          <div class="cs-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email Us</h4>
+            <p>admin@wonderheights.com</p>
+          </div>
+        </div>
+        <div class="cs-item reveal up" style="animation-delay:0.2s;">
+          <div class="cs-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h4>Find Us</h4>
+            <p><a href="https://maps.app.goo.gl/kKsWWx7ekNWz8zN59" target="_blank" style="color: inherit; text-decoration: none;">Afienya, Greater Accra, Ghana</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer>
+    <div class="footer-main">
+      <!-- Brand -->
+      <div>
+        <div class="footer-logo">
+          <img src="logo_WHIS.png" alt="WHIS Logo">
+          <span>Wonder Heights<br>International School</span>
+        </div>
+        <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#programs">Our Programs</a></li>
+          <li><a href="#enroll">Admissions</a></li>
+          <li><a href="#calendar">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <!-- Academics -->
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="#programs">Early Childhood</a></li>
+          <li><a href="#programs">Day Care</a></li>
+          <li><a href="#programs">Preschool</a></li>
+          <li><a href="#programs">Primary School</a></li>
+          <li><a href="#programs">Junior High (JHS)</a></li>
+          <li><a href="#programs">Therapy</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Afienya, Greater Accra, Ghana</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <span>020 101 6051<br>054 579 7990</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>admin@wonderheights.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon–Fri: 7:30am – 4:00pm<br>Drop-off from 7:30am</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026–2027 Wonder Heights International School. All rights reserved.
+      Built with <span>♥</span> for exceptional education.
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════ FLOATING BUTTONS ═══════════════════════════ -->
+  <div class="float-contact">
+    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="tel:+233201016051" class="float-btn phone" aria-label="Call us">
+      <i class="fas fa-phone-alt"></i>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════ EVENT MODAL ═══════════════════════════ -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Event Details</h3>
+      <div id="eventDetails"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ JAVASCRIPT ═══════════════════════════ -->
+  <script>
+    // ── MOBILE MENU ──
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── HERO SLIDESHOW ──
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    function goToSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5500);
+
+    // ── NAV SCROLL STYLE ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── SCROLL REVEAL ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── COUNTER ANIMATION ──
+    function animateCounter(el, target) {
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + '+';
+        if (current >= target) clearInterval(timer);
+      }, 30);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const target = parseInt(e.target.dataset.target);
+          if (target) animateCounter(e.target, target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+    // ── EVENTS DATA ──
+    const events = [
+      { date: '2026-01-01', title: 'New Year\'s Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-03-06', title: 'Independence Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-03-10', title: 'Mid-Term Break Begins', detail: 'School Campus', icon: 'map-marker-alt', tag: 'holiday' },
+      { date: '2026-03-14', title: 'Mid-Term Break Ends', detail: '7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-03-28', title: 'End of Term 2 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
+      { date: '2026-03-31', title: 'Eid al-Fitr', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-04-01', title: 'Term 3 Begins', detail: '7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-04-05', title: 'Easter Holiday Begins', detail: 'School Campus', icon: 'map-marker-alt', tag: 'holiday' },
+      { date: '2026-04-18', title: 'Good Friday', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-04-21', title: 'Easter Monday', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-04-22', title: 'Term 3 Resumes', detail: '7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-05-01', title: 'Workers\' Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-05-10', title: 'Inter-House Sports Day', detail: 'School Sports Ground', icon: 'map-marker-alt', tag: 'sports' },
+      { date: '2026-05-17', title: 'Parents\' Open Day', detail: '9:00am – 1:00pm', icon: 'clock', tag: 'event' },
+      { date: '2026-05-25', title: 'African Union Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-06-01', title: 'End of Term 3 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
+      { date: '2026-06-17', title: 'Eid al-Adha', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-06-30', title: 'End-of-Year Graduation Ceremony', detail: 'School Auditorium', icon: 'map-marker-alt', tag: 'event' },
+      { date: '2026-07-01', title: 'Republic Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-08-04', title: 'Founders\' Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-09-01', title: 'New Academic Year Begins', detail: '7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-09-21', title: 'Kwame Nkrumah Memorial Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-12-20', title: 'End of Term 1 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
+      { date: '2026-12-25', title: 'Christmas Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2026-12-26', title: 'Boxing Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' }
+    ];
+
+    // Generate calEventDates and eventNames from events
+    const calEventDates = {};
+    const eventNames = {};
+    events.forEach(event => {
+      const [year, month, day] = event.date.split('-');
+      const key = `${year}-${String(parseInt(month)).padStart(2, '0')}`;
+      if (!calEventDates[key]) calEventDates[key] = [];
+      calEventDates[key].push(parseInt(day));
+      eventNames[event.date] = event.title;
+    });
+
+    // ── CALENDAR ──
+    let calDate = new Date();
+    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    function renderCalendar() {
+      const year = calDate.getFullYear();
+      const month = calDate.getMonth();
+      const key = `${year}-${String(month + 1).padStart(2, '0')}`;
+      const eventDays = calEventDates[key] || [];
+      document.getElementById('calMonthYear').textContent = `${monthNames[month]} ${year}`;
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+      let html = '';
+      for (let i = 0; i < firstDay; i++) html += '<div class="cal-day other-month"></div>';
+      for (let d = 1; d <= daysInMonth; d++) {
+        let cls = 'cal-day';
+        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) cls += ' today';
+        if (eventDays.includes(d)) {
+          cls += ' has-event';
+          const eventDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+          html += `<div class="${cls}" onclick="showEvent('${eventDate}')">${d}</div>`;
+        } else {
+          html += `<div class="${cls}">${d}</div>`;
+        }
+      }
+      document.getElementById('calDays').innerHTML = html;
+    }
+    document.getElementById('prevMonth').onclick = () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); };
+    document.getElementById('nextMonth').onclick = () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); };
+    renderCalendar();
+
+    function showEvent(date) {
+      const eventsForDate = events.filter(e => e.date === date);
+      if (eventsForDate.length > 0) {
+        const detailsHtml = eventsForDate.map(event => {
+          const tagClass = `tag-${event.tag}`;
+          return `
+            <div class="modal-event ${tagClass}">
+              <h4>${event.title}</h4>
+              <p><strong>Date:</strong> ${date}</p>
+              <p><i class="fas fa-${event.icon}" style="margin-right:0.4rem;"></i>${event.detail}</p>
+              <p class="event-tag ${tagClass}">${event.tag.charAt(0).toUpperCase() + event.tag.slice(1)}</p>
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById('eventDetails').innerHTML = detailsHtml;
+        document.getElementById('eventModal').style.display = 'block';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('eventModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('eventModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    // ── POPULATE EVENTS LIST ──
+    function populateEventsList() {
+      const eventList = document.getElementById('eventList');
+      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      const upcomingEvents = events.filter(event => event.date >= today).sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 5);
+      let html = '';
+      upcomingEvents.forEach(event => {
+        const [year, month, day] = event.date.split('-');
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const monthShort = monthNames[parseInt(month) - 1];
+        const tagClass = `tag-${event.tag}`;
+        html += `
+          <div class="event-item">
+            <div class="event-date"><div class="day">${day}</div><div class="month">${monthShort}</div></div>
+            <div class="event-info">
+              <h4>${event.title}</h4>
+              <p><i class="fas fa-${event.icon}" style="margin-right:0.3rem;"></i>${event.detail}</p>
+              <span class="event-tag ${tagClass}">${event.tag.charAt(0).toUpperCase() + event.tag.slice(1)}</span>
+            </div>
+          </div>
+        `;
+      });
+      eventList.innerHTML = html;
+    }
+    populateEventsList();
+
+    // ── TESTIMONIALS CAROUSEL ──
+    let testiIndex = 0;
+    const testiTrack = document.getElementById('testiTrack');
+    const testiSlides = document.querySelectorAll('.testi-slide');
+    let slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+    window.addEventListener('resize', () => {
+      slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+      setTesti(testiIndex);
+    });
+    function setTesti(n) {
+      const max = testiSlides.length - slidesVisible;
+      testiIndex = Math.max(0, Math.min(n, max));
+      const slideW = testiSlides[0].getBoundingClientRect().width + 24;
+      testiTrack.style.transform = `translateX(-${testiIndex * slideW}px)`;
+    }
+    document.getElementById('testiPrev').onclick = () => setTesti(testiIndex - 1);
+    document.getElementById('testiNext').onclick = () => setTesti(testiIndex + 1);
+
+    // ── VIDEO PLACEHOLDER ──
+    function playVideo() {
+      const placeholder = document.getElementById('videoPlaceholder');
+      const video = document.getElementById('schoolVideo');
+      placeholder.classList.add('hidden');
+      video.style.display = 'block';
+      video.play();
+    }
+
+    // ── ENROLLMENT FORM ──
+    document.getElementById('enrollForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const form = this;
+      let valid = true;
+
+      // Validate required fields
+      ['firstName', 'lastName'].forEach(id => {
+        const el = document.getElementById(id);
+        const err = document.getElementById(id + 'Err');
+        if (!el.value.trim()) {
+          if (err) { err.classList.add('visible'); }
+          el.style.borderColor = '#dc2626';
+          valid = false;
+        } else {
+          if (err) { err.classList.remove('visible'); }
+          el.style.borderColor = '';
+        }
+      });
+      // Validate phone
+      const phoneEl = document.getElementById('phone');
+      const phoneErr = document.getElementById('phoneErr');
+      const phoneRegex = /^(\+233|0)[23579]\d{7}$/;
+      if (!phoneRegex.test(phoneEl.value.trim())) {
+        phoneErr.classList.add('visible');
+        phoneEl.style.borderColor = '#dc2626';
+        valid = false;
+      } else {
+        phoneErr.classList.remove('visible');
+        phoneEl.style.borderColor = '';
+      }
+      if (!valid) return;
+
+      // Show loading state
+      btn.textContent = 'Submitting...';
+      btn.disabled = true;
+
+      // ✏️ REPLACE THE URL BELOW WITH YOUR BACKEND ENDPOINT
+      // Example: await fetch('/api/enroll', { method:'POST', body: new FormData(form) });
+      await new Promise(r => setTimeout(r, 1200)); // Simulated delay
+
+      form.reset();
+      btn.textContent = '✓ Submitted!';
+      document.getElementById('formSuccess').classList.add('visible');
+      setTimeout(() => {
+        btn.textContent = 'Submit Application';
+        btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:0.5rem;"></i>Submit Application';
+        btn.disabled = false;
+        document.getElementById('formSuccess').classList.remove('visible');
+      }, 5000);
+    });
+
+    // Remove red border on input
+    document.querySelectorAll('#enrollForm input, #enrollForm select').forEach(el => {
+      el.addEventListener('input', function() {
+        this.style.borderColor = '';
+        const err = document.getElementById(this.id + 'Err');
+        if (err) err.classList.remove('visible');
+      });
+    });
+
+    // ── NEWSLETTER ──
+    function submitNewsletter(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button');
+      btn.textContent = '✓ Subscribed!';
+      form.reset();
+      setTimeout(() => btn.textContent = 'Subscribe', 3000);
+    }
+
+    // ── LANGUAGE ──
+    const t = {
+      en: { heroTitle: 'Service Beyond Self', heroSub: 'Educating and empowering each child to thrive in a rapidly evolving global society.', discover: 'Discover Our School', enrollToday: 'Enroll Today', welcomeTitle: 'Welcome to Wonder Heights', videoTitle: 'Experience Wonder Heights', programsTitle: 'Nurturing Every Stage of Growth' },
+      fr: { heroTitle: 'Service au-delà de soi', heroSub: 'Éduquer et autonomiser chaque enfant pour s\'épanouir dans une société mondiale.', discover: 'Découvrez l\'école', enrollToday: 'Inscrivez-vous', welcomeTitle: 'Bienvenue à Wonder Heights', videoTitle: 'Découvrez Wonder Heights', programsTitle: 'Nos Programmes' },
+      tw: { heroTitle: 'Som a ɛboro Wo Ho So', heroSub: 'Yɛrekyerɛkyerɛ na yɛahyɛ abofra biara den sɛ ɔbɛyɛ adwuma wɔ wiase mu.', discover: 'Hwehwɛ Yɛn Sukuu', enrollToday: 'Kyerɛ Wo Din', welcomeTitle: 'Akwaaba Wonder Heights', videoTitle: 'Hu Wonder Heights', programsTitle: 'Yɛn Nhyehyɛe' }
+    };
+    function changeLanguage(lang) {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const k = el.getAttribute('data-key');
+        if (t[lang] && t[lang][k]) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(4px)';
+          el.style.transition = 'opacity 0.2s, transform 0.2s';
+          setTimeout(() => {
+            el.textContent = t[lang][k];
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }, 200);
+        }
+      });
+    }
+
+    // ── PARTICLE CURSOR ──
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:9999;';
+    document.body.appendChild(canvas);
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    const particles = [];
+    class P {
+      constructor(x,y,click) {
+        this.x=x; this.y=y;
+        this.size = click ? Math.random()*4+2 : Math.random()*2+1;
+        this.vx = (Math.random()-0.5)*(click?4:1.5);
+        this.vy = (Math.random()-0.5)*(click?4:1.5);
+        this.color = ['rgba(0,40,85,0.6)','rgba(201,146,10,0.7)','rgba(240,180,41,0.5)'][Math.floor(Math.random()*3)];
+        this.life=1; this.decay = click ? 0.025 : 0.015;
+      }
+      update(){this.x+=this.vx; this.y+=this.vy; this.life-=this.decay; if(this.size>0.1) this.size-=0.04;}
+      draw(){ctx.globalAlpha=this.life; ctx.fillStyle=this.color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}
+    }
+    window.addEventListener('mousemove', e => { for(let i=0;i<2;i++) particles.push(new P(e.clientX,e.clientY,false)); });
+    window.addEventListener('click', e => { for(let i=0;i<12;i++) particles.push(new P(e.clientX,e.clientY,true)); });
+    (function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=particles.length-1;i>=0;i--){
+        particles[i].update(); particles[i].draw();
+        if(particles[i].life<=0) particles.splice(i,1);
+      }
+      requestAnimationFrame(animate);
+    })();
+
+     (function () {
+    const hide = () => {
+      const loader = document.getElementById('whis-loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 700);
+      }
+    };
+    const minWait = new Promise(r => setTimeout(r, 2000));
+    const pageLoad = new Promise(r => {
+      if (document.readyState === 'complete') r();
+      else window.addEventListener('load', r);
+    });
+    Promise.all([minWait, pageLoad]).then(hide);
+  })();
+
+  // ── THEME TOGGLE ──
+const themeIcon = document.getElementById('themeIcon');
+
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  if (themeIcon) themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  localStorage.setItem('whis-theme', isDark ? 'dark' : 'light');
+}
+
+// Apply saved preference on page load
+if (localStorage.getItem('whis-theme') === 'dark') {
+  document.body.classList.add('dark');
+  if (themeIcon) themeIcon.className = 'fas fa-sun';
+}
+  </script>
+</body>
+</html>
