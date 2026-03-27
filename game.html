@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wonder Arcade — Wonder Heights International School</title>
+  <link rel="icon" type="image/png" href="logo_WHIS.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root { --navy: #002855; --navy2: #003a7a; --gold: #f0b429; --gold2: #c9920a; --cream: #fdf8f0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: #fff; margin: 0; overflow-x: hidden; }
+    
+    /* Lobby / Welcome Screen */
+    #lobby { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+    .logo-img { width: 80px; margin-bottom: 20px; animation: pulse 2s infinite; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); margin: 10px 0; }
+    .subtitle { font-size: 1.1rem; opacity: 0.9; max-width: 500px; margin-bottom: 40px; }
+    
+    .game-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 900px; }
+    .game-card { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; cursor: pointer; transition: all 0.3s; text-align: center; }
+    .game-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.1); transform: translateY(-10px); }
+    .game-card i { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+    .game-card h2 { margin: 0 0 10px; font-family: 'Playfair Display'; }
+
+    /* Game Interface */
+    .game-view { display: none; padding: 40px 20px; min-height: 100vh; flex-direction: column; align-items: center; }
+    .back-btn { position: absolute; top: 20px; left: 20px; color: #fff; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
+    
+    /* Bubble Pop Specific */
+    #bubbleArea { position: relative; width: 100%; max-width: 800px; height: 500px; background: rgba(0,0,0,0.2); border-radius: 20px; overflow: hidden; margin-top: 20px; cursor: crosshair; }
+    .bubble { position: absolute; border-radius: 50%; cursor: pointer; animation: floatUp 4s linear forwards; transition: transform 0.1s; }
+    .timer { font-size: 2rem; font-weight: bold; color: var(--gold); }
+
+    /* Leaderboard */
+    .leaderboard { margin-top: 50px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; width: 100%; max-width: 400px; }
+    .leader-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+    .leader-row span:last-child { color: var(--gold); font-weight: bold; }
+
+    /* Win Message */
+    #winMessage { display: none; position: fixed; inset: 0; background: rgba(0,40,85,0.97); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .win-content { background: #fff; color: var(--navy); padding: 40px; border-radius: 20px; max-width: 450px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+    .btn-main { display: inline-block; margin-top: 25px; padding: 15px 35px; background: var(--navy); color: #fff !important; text-decoration: none; border-radius: 50px; font-weight: 800; }
+
+    @keyframes floatUp { from { bottom: -100px; } to { bottom: 110%; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  </style>
+</head>
+<body>
+
+  <div id="lobby">
+    <img src="logo_WHIS.png" class="logo-img" alt="WHIS Logo">
+    <h1>Wonder Arcade</h1>
+    <p class="subtitle">Welcome to our digital playground. Choose a challenge and show us your skills!</p>
+    <div class="back-btn" onclick="goHome()"><i ></i> <a href="index.html" style="text-decoration: none; color: white;">Home</a> </div>
+
+    <div class="game-selection">
+      <div class="game-card" onclick="startMemory()">
+        <i class="fas fa-brain"></i>
+        <h2>Wonder Match</h2>
+        <p>Test your memory by matching school icons. Fast and fun!</p>
+      </div>
+      <div class="game-card" onclick="startBubble()">
+        <i class="fas fa-magic"></i>
+        <h2>Bubble Pop</h2>
+        <p>A 60-second frenzy. Pop as many bubbles as you can!</p>
+      </div>
+    </div>
+
+    <div class="leaderboard">
+      <h3 style="font-family: 'Playfair Display'; margin-bottom: 15px;">Local Legends</h3>
+      <div id="leaderRows">
+        <div class="leader-row"><span>1. Kwame M. (Bubble)</span><span>142 pts</span></div>
+        <div class="leader-row"><span>2. Sister Efua (Match)</span><span>0:42s</span></div>
+        <div class="leader-row"><span>3. Teacher Kwesi (Bubble)</span><span>118 pts</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="memoryView" class="game-view">
+    <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back to Lobby</div>
+    <h2 style="font-family: 'Playfair Display'; color: var(--gold);">Wonder Match</h2>
+    <div id="matchGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; width: 100%; max-width: 800px; margin-top: 30px; padding: 10px;"></div>
+  </div>
+
+  <div id="bubbleView" class="game-view">
+    <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back to Lobby</div>
+    <div class="timer" id="bubbleTimer">60</div>
+    <div style="font-size: 1.2rem;">Score: <span id="bubbleScore">0</span></div>
+    <div id="bubbleArea"></div>
+  </div>
+
+  <div id="winMessage">
+    <div class="win-content">
+      <i class="fas fa-award" style="font-size: 4rem; color: #f0b429; margin-bottom: 20px;"></i>
+      <h2 style="font-family: 'Playfair Display'; font-size: 2rem;">Fantastic Work!</h2>
+      <p style="font-size: 1.1rem; line-height: 1.6;">You've demonstrated the kind of focus and energy we love at Wonder Heights.</p>
+      <p style="font-weight: bold; color: var(--gold2);">We invite you to experience our excellence in person. Visit our campus in Afienya today!</p>
+      <a href="index.html#enroll" class="btn-main">Visit Wonder Heights</a>
+      <a href="#" onclick="location.reload()" style="display: block; margin-top: 20px; color: #64748b; font-size: 0.85rem; text-decoration: none;">Try Another Game</a>
+    </div>
+  </div>
+
+  <script>
+    const lobby = document.getElementById('lobby');
+    const winMsg = document.getElementById('winMessage');
+    const colors = ['#f0b429', '#3b82f6', '#ec4899', '#22c55e', '#ffffff'];
+
+    function goHome() { location.reload(); }
+    function showWin() { winMsg.style.display = 'flex'; }
+
+    // --- BUBBLE POP LOGIC ---
+    let score = 0;
+    let timeLeft = 60;
+    let bubbleInterval;
+
+    function startBubble() {
+      lobby.style.display = 'none';
+      document.getElementById('bubbleView').style.display = 'flex';
+      bubbleInterval = setInterval(spawnBubble, 600);
+      const timerInt = setInterval(() => {
+        timeLeft--;
+        document.getElementById('bubbleTimer').textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(bubbleInterval);
+          clearInterval(timerInt);
+          showWin();
+        }
+      }, 1000);
+    }
+
+    function spawnBubble() {
+      const bubble = document.createElement('div');
+      const size = Math.random() * 60 + 20;
+      bubble.className = 'bubble';
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = Math.random() * 90 + '%';
+      bubble.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      bubble.style.opacity = '0.7';
+      bubble.style.border = '2px solid rgba(255,255,255,0.3)';
+      
+      bubble.onclick = () => {
+        score += 10;
+        document.getElementById('bubbleScore').textContent = score;
+        bubble.style.transform = 'scale(1.5)';
+        bubble.style.opacity = '0';
+        setTimeout(() => bubble.remove(), 100);
+      };
+      
+      document.getElementById('bubbleArea').appendChild(bubble);
+      setTimeout(() => bubble.remove(), 4000);
+    }
+
+    // --- MEMORY MATCH LOGIC (Simplified from your previous version) ---
+    function startMemory() {
+      lobby.style.display = 'none';
+      document.getElementById('memoryView').style.display = 'flex';
+      const icons = ['graduation-cap', 'book', 'palette', 'running', 'microscope', 'music', 'heart', 'laptop-code'];
+      const cards = [...icons, ...icons].sort(() => Math.random() - 0.5);
+      const grid = document.getElementById('matchGrid');
+      grid.innerHTML = ''; // Clear previous game if any
+      let flipped = [];
+      let matches = 0;
+
+      cards.forEach(icon => {
+        const card = document.createElement('div');
+        // Increased font-size to 2.5rem and added shadow for a better look
+        card.style.cssText = `
+          aspect-ratio: 1; 
+          background: var(--gold); 
+          border-radius: 15px; 
+          cursor: pointer; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          font-size: 2.5rem; 
+          color: var(--navy);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          transition: transform 0.2s;
+        `;
+        
+        card.innerHTML = `<i class="fas fa-star" style="color:var(--navy); opacity:0.3;"></i>`;
+        
+        card.onclick = () => {
+          if (flipped.length < 2 && !card.innerHTML.includes('fa-' + icon)) {
+            card.style.transform = "scale(1.05)";
+            card.innerHTML = `<i class="fas fa-${icon}"></i>`;
+            card.style.background = '#fff';
+            flipped.push({card, icon});
+            
+            if (flipped.length === 2) {
+              if (flipped[0].icon === flipped[1].icon) {
+                matches++;
+                flipped = [];
+                if (matches === 8) setTimeout(showWin, 500);
+              } else {
+                setTimeout(() => {
+                  flipped.forEach(f => {
+                    f.card.style.transform = "scale(1)";
+                    f.card.innerHTML = `<i class="fas fa-star" style="opacity:0.3;"></i>`;
+                    f.card.style.background = 'var(--gold)';
+                  });
+                  flipped = [];
+                }, 700);
+              }
+            }
+          }
+        };
+        grid.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

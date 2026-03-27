@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrollment Requirements — Wonder Heights International School</title>
+  <link rel="icon" type="image/png" href="logo_WHIS.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ── CORE STYLES FROM INDEX ── */
+    :root { 
+      --navy: #002855; --navy2: #003a7a; --gold: #c9920a; --gold2: #f0b429; 
+      --cream: #fdf8f0; --text: #1a1a2e; --muted: #64748b; --border: #e5e7eb; 
+      --dark: #0a0f1e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #f8fafc; line-height: 1.6; overflow-x: hidden; transition: background .3s; }
+    body.dark { background: var(--dark); color: #e2e8f0; }
+
+    /* ── TOPBAR STYLES ── */
+    .topbar { background: var(--navy); color: #cbd5e1; font-size: 0.78rem; padding: 0.45rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .topbar a { color: #cbd5e1; text-decoration: none; }
+    .topbar a:hover { color: var(--gold2); }
+    .top-left, .top-right { display: flex; align-items: center; gap: 1.2rem; }
+    .gold { color: var(--gold2); margin-right: 0.3rem; }
+    .lang-select { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.78rem; padding: 0.2rem 0.5rem; border-radius: 4px; outline: none; cursor: pointer; }
+    .theme-btn { background: none; border: none; cursor: pointer; color: var(--gold2); font-size: 1rem; transition: transform 0.3s; }
+    .theme-btn:hover { transform: rotate(20deg); }
+    
+    /* ── NAVBAR STYLES ── */
+    nav { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 20px rgba(0,40,85,0.08); transition: background .3s; }
+    body.dark nav { background: #0f172a; }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .nav-logo img { height: 44px; width: 44px; object-fit: contain; }
+    .nav-logo-text .main { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); display: block; }
+    body.dark .nav-logo-text .main { color: var(--gold2); }
+    .nav-logo-text .sub { font-size: 0.62rem; font-weight: 500; color: var(--gold); text-transform: uppercase; letter-spacing: 0.04em; }
+    
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; }
+    .nav-item { position: relative; }
+    .nav-btn { background: none; border: none; cursor: pointer; font-size: 0.88rem; font-weight: 500; color: var(--text); padding: 0.5rem 0.8rem; border-radius: 6px; display: flex; align-items: center; gap: 0.3rem; text-decoration: none; }
+    body.dark .nav-btn { color: #e2e8f0; }
+    .nav-btn:hover { background: #f0f4ff; color: var(--navy); }
+    body.dark .nav-btn:hover { color: var(--gold2); background: rgba(255,255,255,0.05); }
+    .chevron { font-size: 0.65rem; transition: transform 0.2s; }
+    .nav-item:hover .chevron { transform: rotate(180deg); }
+    
+    /* ── MATCHING DROPDOWN STYLES ── */
+    .dropdown {
+      position: absolute; 
+      top: calc(100% + 4px); 
+      left: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 10px 10px;
+      min-width: 220px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      opacity: 0; 
+      visibility: hidden; 
+      transform: translateY(-8px);
+      transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 200;
+    }
+
+    body.dark .dropdown { 
+      background: #1e293b; 
+      border-color: #334155; 
+    }
+
+    .nav-item:hover .dropdown { 
+      opacity: 1; 
+      visibility: visible; 
+      transform: translateY(0); 
+    }
+
+    .dropdown a {
+      display: flex; 
+      align-items: center; 
+      gap: 0.6rem;
+      padding: 0.6rem 1.1rem; 
+      font-size: 0.85rem; 
+      color: var(--text);
+      text-decoration: none; 
+      transition: background 0.15s, color 0.15s;
+    }
+
+    body.dark .dropdown a { 
+      color: #e2e8f0; 
+    }
+
+    /* The specific hover fix you requested */
+    .dropdown a:hover { 
+      background: #f0f4ff; 
+      color: var(--navy); 
+    }
+
+    body.dark .dropdown a:hover { 
+      background: rgba(255, 255, 255, 0.06); 
+      color: var(--gold2); 
+    }
+
+    .dropdown a i { 
+      width: 16px; 
+      color: var(--gold); 
+      font-size: 0.8rem; 
+    }
+
+    .enroll-cta { background: var(--navy); color: #fff !important; padding: 0.55rem 1.3rem; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 14px rgba(0,40,85,0.3); }
+    .enroll-cta:hover { background: var(--gold) !important; color: var(--navy) !important; transform: translateY(-2px); }
+
+    /* ── MOBILE MENU ── */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); margin: 5px 0; transition: .3s; }
+    body.dark .hamburger span { background: #e2e8f0; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,40,85,0.97); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #fff; font-size: 1.6rem; text-decoration: none; font-family: 'Playfair Display'; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; color: #fff; font-size: 1.5rem; background: none; border: none; cursor: pointer; }
+
+    /* ── HERO & CONTENT ── */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: 100px 20px 80px; text-align: center; color: #fff; position: relative; }
+    .hero-content-panel { background: rgba(0, 40, 85, 0.4); padding: 40px; border-radius: 20px; max-width: 700px; margin: 0 auto; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .hero-logo { width: 90px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; }
+    .conflicting-text { opacity: 0.9; font-size: 1.1rem; }
+    
+    .section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+    .req-card { background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,40,85,0.05); border-top: 4px solid var(--gold); }
+    body.dark .req-card { background: #1e293b; color: #fff; }
+    .req-card h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 20px; }
+    body.dark .req-card h3 { color: var(--gold); }
+    .req-card li { display: flex; gap: 10px; margin-bottom: 10px; color: var(--muted); }
+    body.dark .req-card li { color: #cbd5e1; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) { .nav-links { display: none; } .hamburger { display: block; } }
+  </style>
+</head>
+<body id="body">
+
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i> 020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i> admin@wonderheights.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-map-marker-alt gold"></i> Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i> Mon–Fri: 7:30am – 4:00pm</span>
+      <select class="lang-select" onchange="changeLanguage(this.value)" style="background-color: #002855;">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="tw">🇬🇭 Twi</option>
+      </select>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
+        <div class="nav-logo-text">
+          <span class="main">Wonder Heights</span>
+          <span class="sub">International School</span>
+        </div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item">
+          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="index.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
+        <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="index.html#enroll" class="nav-btn enroll-cta"><i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now</a>
+        <a href="game.html" class="nav-btn"><i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game</a>
+      </div>
+
+      <button class="hamburger" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="events.html" onclick="closeMobileMenu()">Events</a>
+    <a href="index.html#enroll" onclick="closeMobileMenu()">Enroll Now</a>
+  </div>
+
+  <section class="hero">
+    <div class="reveal hero-content-panel">
+      <img src="logo_WHIS.png" alt="Logo" class="hero-logo">
+      <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; color: var(--gold2); margin-bottom: 12px;">Admissions 2026/2027</div>
+      <h1>Admission Requirements</h1>
+      <p class="conflicting-text">Everything you need to join the Wonder Heights family. We guide you through every step of the journey.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <div class="req-card reveal">
+        <h3><i class="fas fa-file-invoice"></i> Mandatory Documents</h3>
+        <ul>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Completed Enrollment Application Form</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Child's Birth Certificate</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> 2 Recent Passport Photos</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Immunization Records</li>
+        </ul>
+      </div>
+      <div class="req-card reveal" style="transition-delay: 0.1s;">
+        <h3><i class="fas fa-credit-card"></i> Fees & Payments</h3>
+        <ul>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Admission Processing Fee</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Termly Tuition</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Uniform & Stationery Kit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ── SCRIPTS FROM INDEX ──
+    function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+    function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    const themeIcon = document.getElementById('themeIcon');
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('whis-theme', isDark ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('whis-theme') === 'dark') {
+      document.body.classList.add('dark');
+      if (themeIcon) themeIcon.className = 'fas fa-sun';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function changeLanguage(lang) {
+        // Basic placeholder for language logic from index
+        console.log("Language changed to: " + lang);
+    }
+  </script>
+</body>
+</html>

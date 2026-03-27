@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Sprouts School — Wonder Heights International School</title>
+  <link rel="icon" type="image/png" href="logo_WHIS.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--navy:#002855;--navy2:#003a7a;--gold:#c9920a;--gold2:#f0b429;--cream:#fdf8f0;--dark:#0a0f1e;--text:#1a1a2e;--muted:#64748b;--border:#e5e7eb;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f8fafc;overflow-x:hidden;transition:background .3s,color .3s;}
+    body.dark{background:var(--dark);color:#e2e8f0;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    a{text-decoration:none;}
+    img{max-width:100%;}
+
+    /* LOADER */
+    #whis-loader{position:fixed;inset:0;z-index:99999;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.9rem;transition:opacity .5s;}
+    #whis-loader.gone{opacity:0;pointer-events:none;}
+    .loader-logo{width:86px;height:86px;object-fit:contain;animation:lpa 1.8s ease-in-out infinite;}
+    @keyframes lpa{0%,100%{transform:scale(1);}50%{transform:scale(1.07);filter:drop-shadow(0 0 16px rgba(240,180,41,.65));}}
+    .loader-main{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:#fff;}
+    .loader-sub{font-size:.7rem;font-weight:600;color:var(--gold2);text-transform:uppercase;letter-spacing:.18em;}
+    .loader-bar-wrap{width:160px;height:3px;background:rgba(255,255,255,.15);border-radius:50px;overflow:hidden;}
+    .loader-bar{height:100%;width:0;background:var(--gold2);border-radius:50px;animation:ldb 1.5s cubic-bezier(.4,0,.2,1) forwards;}
+    @keyframes ldb{to{width:100%;}}
+
+    /* TOPBAR */
+    .topbar{background:var(--navy);color:#cbd5e1;font-size:.78rem;padding:.45rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+    .topbar a{color:#cbd5e1;}.topbar a:hover{color:var(--gold2);}
+    .top-left,.top-right{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+    .gold{color:var(--gold2);margin-right:.3rem;}
+    .theme-btn{background:none;border:none;cursor:pointer;color:var(--gold2);font-size:1rem;padding:.2rem;transition:transform .3s;}
+    .theme-btn:hover{transform:rotate(20deg);}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 20px rgba(0,40,85,.08);transition:background .3s;}
+    body.dark nav{background:#0f172a;}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:72px;}
+    .nav-logo{display:flex;align-items:center;gap:.7rem;}
+    .nav-logo img{height:44px;width:44px;object-fit:contain;}
+    .logo-main{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:block;}
+    body.dark .logo-main{color:var(--gold2);}
+    .logo-sub{font-size:.62rem;font-weight:500;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-btn{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--text);padding:.5rem .8rem;border-radius:6px;display:flex;align-items:center;gap:.3rem;transition:color .2s,background .2s;}
+    body.dark .nav-btn{color:#e2e8f0;}
+    .nav-btn:hover,.nav-btn.active{color:var(--navy);background:#f0f4ff;}
+    body.dark .nav-btn:hover{color:var(--gold2);background:rgba(255,255,255,.05);}
+    .chevron{font-size:.65rem;transition:transform .2s;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .dropdown{position:absolute;top:calc(100% + 4px);left:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--gold2);border-radius:0 0 10px 10px;min-width:240px;box-shadow:0 12px 40px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .22s;z-index:200;}
+    body.dark .dropdown{background:#1e293b;border-color:#334155;}
+    .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+    .dropdown a{display:flex;align-items:center;gap:.6rem;padding:.6rem 1.1rem;font-size:.85rem;color:var(--text);transition:background .15s;}
+    body.dark .dropdown a{color:#e2e8f0;}
+    .dropdown a:hover{background:#f0f4ff;color:var(--navy);}
+    body.dark .dropdown a:hover{background:rgba(255,255,255,.06);color:var(--gold2);}
+    .dropdown a i{width:16px;color:var(--gold);font-size:.8rem;}
+    .enroll-cta{background:var(--navy);color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600;font-size:.85rem;box-shadow:0 4px 14px rgba(0,40,85,.3);white-space:nowrap;}
+    .enroll-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.3rem;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:all .3s;}
+    body.dark .hamburger span{background:#e2e8f0;}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,40,85,.97);z-index:2000;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;}
+    .mobile-menu a:hover{color:var(--gold2);}
+    .mob-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
+    .mob-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
+
+    /* PAGE HERO */
+    .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,rgba(201,146,10,.35) 100%);padding:6rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background:url('logo_WHIS.png') center/270px no-repeat;opacity:.04;pointer-events:none;}
+    .ph-inner{position:relative;z-index:2;}
+    .breadcrumb{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:1rem;}
+    .breadcrumb a{color:var(--gold2);}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:var(--gold2);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;backdrop-filter:blur(8px);}
+    .page-hero h1{font-size:clamp(2rem,5vw,3.4rem);color:#fff;margin-bottom:.9rem;}
+    .page-hero p{color:rgba(255,255,255,.8);max-width:580px;margin:0 auto;font-size:1.02rem;line-height:1.7;}
+
+    /* LAYOUT */
+    .section{padding:5rem 1.5rem;}
+    .section-sm{padding:3rem 1.5rem;}
+    .container{max-width:1280px;margin:0 auto;}
+    .section-label{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;}
+    .section-label::before,.section-label::after{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+    .section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:1rem;}
+    body.dark .section-title{color:#fff;}
+    .section-sub{font-size:1rem;color:var(--muted);line-height:1.7;}
+    body.dark .section-sub{color:#94a3b8;}
+
+    /* BUTTONS */
+    .btn-primary{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold2);color:var(--navy);font-weight:700;padding:.85rem 2rem;border-radius:50px;font-size:.95rem;transition:all .25s;box-shadow:0 4px 20px rgba(240,180,41,.4);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn-primary:hover{background:#fff;color:var(--navy);transform:translateY(-3px);}
+    .btn-navy{display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;font-weight:700;padding:.85rem 2rem;border-radius:50px;font-size:.95rem;transition:all .25s;box-shadow:0 4px 16px rgba(0,40,85,.3);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn-navy:hover{background:var(--gold2);color:var(--navy);transform:translateY(-2px);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.4rem;border:2px solid var(--navy);color:var(--navy);font-weight:600;padding:.8rem 2rem;border-radius:50px;font-size:.9rem;transition:all .25s;background:none;font-family:'DM Sans',sans-serif;}
+    .btn-ghost:hover{background:var(--navy);color:#fff;}
+
+    /* REVEAL ANIMATIONS */
+    .reveal{opacity:0;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.up{transform:translateY(50px);} .reveal.left{transform:translateX(-60px);} .reveal.right{transform:translateX(60px);}
+    .reveal.visible{opacity:1;transform:none;}
+
+    /* TWO-COL INTRO */
+    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .intro-img{width:100%;height:440px;object-fit:cover;border-radius:20px;box-shadow:0 20px 60px rgba(0,40,85,.2);}
+
+    /* FEATURE LIST */
+    .feature-list{display:flex;flex-direction:column;gap:.9rem;margin:1.5rem 0 2rem;}
+    .feat{display:flex;align-items:flex-start;gap:.9rem;padding:1rem 1.2rem;background:#f8faff;border-radius:12px;border-left:3px solid var(--gold2);}
+    body.dark .feat{background:#1e293b;}
+    .feat-icon{width:40px;height:40px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:.9rem;flex-shrink:0;}
+    .feat h4{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;}
+    body.dark .feat h4{color:#fff;}
+    .feat p{font-size:.85rem;color:var(--muted);line-height:1.5;}
+    body.dark .feat p{color:#94a3b8;}
+
+    /* AGE BADGE */
+    .age-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:var(--gold2);padding:.4rem 1.1rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;}
+
+    /* SUBJECTS GRID */
+    .subjects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+    .subj-card{background:#fff;border-radius:14px;padding:1.5rem 1rem;text-align:center;box-shadow:0 4px 16px rgba(0,40,85,.07);transition:transform .3s;}
+    body.dark .subj-card{background:#1e293b;}
+    .subj-card:hover{transform:translateY(-5px);}
+    .subj-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:1.1rem;margin:0 auto .8rem;}
+    .subj-card h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;}
+    body.dark .subj-card h4{color:#fff;}
+    .subj-card p{font-size:.78rem;color:var(--muted);line-height:1.5;}
+
+    /* INFO CARDS */
+    .info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;}
+    .info-card{background:#fff;border-radius:16px;padding:2rem 1.5rem;text-align:center;box-shadow:0 4px 16px rgba(0,40,85,.07);border-bottom:4px solid var(--gold2);}
+    body.dark .info-card{background:#1e293b;}
+    .ic-icon{width:54px;height:54px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:1.2rem;margin:0 auto .9rem;}
+    .info-card h4{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;}
+    body.dark .info-card h4{color:#fff;}
+    .info-card p{font-size:.85rem;color:var(--muted);}
+
+    /* CTA BANNER */
+    .cta-banner{background:var(--navy);padding:4.5rem 1.5rem;text-align:center;}
+    .cta-banner h2{color:#fff;font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:1rem;}
+    .cta-banner p{color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 2rem;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .cta-ghost{display:inline-flex;align-items:center;gap:.4rem;border:2px solid rgba(255,255,255,.5);color:#fff;font-weight:600;padding:.8rem 2rem;border-radius:50px;font-size:.9rem;transition:all .25s;background:none;font-family:'DM Sans',sans-serif;}
+    .cta-ghost:hover{background:rgba(255,255,255,.1);}
+
+    /* FOOTER */
+    footer{background:#050f22;color:#94a3b8;}
+    .footer-main{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;padding:4rem 1.5rem 3rem;max-width:1280px;margin:0 auto;}
+    .footer-logo{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+    .footer-logo img{height:46px;}
+    .footer-logo span{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;line-height:1.2;}
+    footer p{font-size:.88rem;line-height:1.7;}
+    .footer-socials{display:flex;gap:.8rem;margin-top:1.4rem;}
+    .social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.9rem;transition:all .2s;}
+    .social-btn:hover{background:var(--gold2);border-color:var(--gold2);color:var(--navy);transform:translateY(-2px);}
+    .footer-col h4{color:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.2rem;}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .footer-col li a{color:#94a3b8;font-size:.88rem;transition:color .2s;}
+    .footer-col li a:hover{color:var(--gold2);padding-left:4px;}
+    .fci{display:flex;gap:.7rem;margin-bottom:.8rem;font-size:.88rem;align-items:flex-start;}
+    .fci i{color:var(--gold2);margin-top:.15rem;flex-shrink:0;}
+    .footer-bottom{text-align:center;padding:1.5rem;font-size:.82rem;border-top:1px solid rgba(255,255,255,.06);}
+    .footer-bottom span{color:var(--gold2);}
+    .float-contact{position:fixed;bottom:2rem;right:2rem;z-index:500;display:flex;flex-direction:column;gap:.7rem;}
+    .float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:all .25s;}
+    .float-btn.whatsapp{background:#25d366;color:#fff;}
+    .float-btn.phone{background:var(--navy);color:#fff;}
+    .float-btn:hover{transform:scale(1.1) translateY(-2px);}
+
+    /* FLOATING BUBBLES EFFECT CSS */
+    .magic-bubble {
+      position: fixed;
+      bottom: -60px;
+      border-radius: 50%;
+      pointer-events: none; /* So they don't block clicks */
+      z-index: 10; /* Behind main content but visible in backgrounds */
+      animation: floatUp linear infinite;
+    }
+    /* Gold/Yellow Bubbles */
+    .magic-bubble.gold {
+      background: rgba(240, 180, 41, 0.25);
+      border: 1px solid rgba(240, 180, 41, 0.4);
+    }
+    /* Navy Bubbles */
+    .magic-bubble.navy {
+      background: rgba(0, 40, 85, 0.15);
+      border: 1px solid rgba(0, 40, 85, 0.25);
+    }
+    body.dark .magic-bubble.navy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-120vh) translateX(20px) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    @media(max-width:1024px){.intro-grid{grid-template-columns:1fr;}.subjects-grid{grid-template-columns:repeat(2,1fr);}.info-cards{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.subjects-grid{grid-template-columns:1fr;}.info-cards{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <div id="whis-loader" style="position:fixed;inset:0;z-index:99999;background:#002855;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.9rem;transition:opacity .5s;">
+    <img src="logo_WHIS.png" alt="Logo" style="width:86px;height:86px;object-fit:contain;animation:lpa 1.8s ease-in-out infinite;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:#fff;">Wonder Heights</div>
+    <div style="font-size:.7rem;font-weight:600;color:#f0b429;text-transform:uppercase;letter-spacing:.18em;">International School</div>
+    <div style="width:160px;height:3px;background:rgba(255,255,255,.15);border-radius:50px;overflow:hidden;"><div style="height:100%;width:0;background:#f0b429;border-radius:50px;animation:ldb 1.5s cubic-bezier(.4,0,.2,1) forwards;"></div></div>
+    <style>@keyframes lpa{0%,100%{transform:scale(1);}50%{transform:scale(1.07);filter:drop-shadow(0 0 16px rgba(240,180,41,.65));}}@keyframes ldb{to{width:100%;}}</style>
+  </div>
+  <script>(function(){function h(){var l=document.getElementById('whis-loader');if(l){l.style.opacity='0';setTimeout(function(){if(l.parentNode)l.parentNode.removeChild(l);},550);};}setTimeout(h,800);window.addEventListener('load',function(){setTimeout(h,200);});})()</script>
+
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i>admin@wonderheights.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-map-marker-alt gold"></i>Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i>Mon–Fri: 7:30am – 4:00pm</span>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    </div>
+  </div>
+
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
+        <div><span class="logo-main">Wonder Heights</span><span class="logo-sub">International School</span></div>
+      </a>
+      <div class="nav-links">
+        <div class="nav-item">
+          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn active">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy &amp; Special Needs</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="index.html#gallery" class="nav-btn">Gallery</a>
+        <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
+          <i class="fas fa-user-graduate" style="margin-right:.4rem;"></i>Enroll Now
+        </a>
+        <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
+          <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
+      </div>
+      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mob-close" onclick="document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';"><i class="fas fa-times"></i></button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="early-sprouts.html">Early Sprouts</a>
+    <a href="primary.html">Primary</a>
+    <a href="secondary.html">Secondary (JHS & SHS)</a>
+    <a href="college.html">College</a>
+    <a href="therapy-special-needs.html">Therapy &amp; Special Needs</a>
+    <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
+  </div>
+
+  
+  <div class="page-hero">
+    <div class="ph-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#programs">Academics</a> / Early Sprouts</div>
+      <div class="page-badge"><i class="fas fa-shapes"></i>&nbsp; Ages 6 Months – 6 Years</div>
+      <h1>Early Sprouts School</h1>
+      <p>A safe, joyful, and nurturing start for your child — where curiosity is celebrated and every little mind is guided to bloom.</p>
+    </div>
+  </div>
+
+  <section class="section" style="background:#15496b;">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="reveal left">
+          <img src="9.jpg" alt="Early Sprouts children" class="intro-img" onerror="this.style.background='linear-gradient(135deg,#002855,#003a7a)';this.style.display='block';">
+        </div>
+        <div class="reveal right">
+          <div class="age-badge"><i class="fas fa-baby"></i>&nbsp; 6 Months – 6 Years</div>
+          <div class="section-label">Programme Overview</div>
+          <h2 class="section-title">Where Every Day is a New Discovery</h2>
+          <p class="section-sub" style="margin-bottom:1.5rem;">Our Early Sprouts programme wraps your child in a warm, structured, and stimulating environment from their very first day. From infants through kindergarten, we combine expert care with play-based learning so every child develops at their own wonderful pace.</p>
+          <div class="feature-list">
+            <div class="feat"><div class="feat-icon"><i class="fas fa-baby-carriage"></i></div><div><h4>Flexible Care: 7:30am – 5:00pm</h4><p>Extended hours designed around working parents, with safe drop-off from 7:30am every school day.</p></div></div>
+            <div class="feat"><div class="feat-icon"><i class="fas fa-shield-alt"></i></div><div><h4>Safe & Secure Environment</h4><p>Gated, supervised campus with trained caregivers ensuring your child is safe and settled all day.</p></div></div>
+            <div class="feat"><div class="feat-icon"><i class="fas fa-puzzle-piece"></i></div><div><h4>Play-Based Learning</h4><p>Structured play, sensory activities, and guided exploration build early cognitive and social skills.</p></div></div>
+            <div class="feat"><div class="feat-icon"><i class="fas fa-apple-alt"></i></div><div><h4>Nutrition & Rest</h4><p>Healthy, age-appropriate snacks, dedicated nap areas, and daily routines that mirror home comfort.</p></div></div>
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="index.html#enroll" class="btn-navy"><i class="fas fa-user-plus"></i>Enroll Now</a>
+            <a href="index.html#contact" class="btn-ghost"><i class="fas fa-phone-alt"></i>Ask a Question</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--muted);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2.5rem;" class="reveal up">
+        <div class="section-label" style="justify-content:center;">Daily Learning Areas</div>
+        <h2 class="section-title">What Your Child Explores Every Day</h2>
+      </div>
+      <div class="subjects-grid">
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-font"></i></div><h4>Language & Literacy</h4><p>Phonics, nursery rhymes, storytelling, and early reading readiness.</p></div>
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-calculator"></i></div><h4>Early Numeracy</h4><p>Counting, sorting, shapes, and colours through hands-on play.</p></div>
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-flask"></i></div><h4>Science Exploration</h4><p>Nature walks, water play, sand tables, and simple sensory experiments.</p></div>
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-paint-brush"></i></div><h4>Creative Arts</h4><p>Finger painting, clay, collage, and music for self-expression.</p></div>
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-running"></i></div><h4>Physical Development</h4><p>Outdoor play, gross motor activities, and coordination exercises.</p></div>
+        <div class="subj-card reveal up"><div class="subj-icon"><i class="fas fa-praying-hands"></i></div><h4>Christian Values</h4><p>Bible stories, prayers, and character-building through daily devotion.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--muted);">
+    <div class="container">
+      <div class="info-cards reveal up">
+        <div class="info-card"><div class="ic-icon"><i class="fas fa-clock"></i></div><h4>Hours</h4><p>7:30am – 5:00pm<br>Monday to Friday</p></div>
+        <div class="info-card"><div class="ic-icon"><i class="fas fa-baby"></i></div><h4>Age Range</h4><p>6 months through<br>6 years old</p></div>
+        <div class="info-card"><div class="ic-icon"><i class="fas fa-heart"></i></div><h4>Caregiver Ratio</h4><p>1:5 for infants<br>1:8 for toddlers</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner reveal up">
+    <div class="container">
+      <h2>Give Your Child the Best Possible Start</h2>
+      <p>Enrolment for Early Sprouts is open now. Limited spaces available — secure your child's place today.</p>
+      <div class="cta-btns">
+        <a href="index.html#enroll" class="btn-primary"><i class="fas fa-pen-to-square"></i>Apply Now</a>
+        <a href="index.html#contact" class="cta-ghost"><i class="fas fa-calendar-check"></i>Book a Tour</a>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo"><img src="logo_WHIS.png" alt="Logo"><span>Wonder Heights<br>International School</span></div>
+        <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051?text=Hello" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="index.html#video-tour" class="social-btn" id="video-tour"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#enroll">Admissions</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Academics</h4><ul>
+        <li><a href="early-sprouts.html">Early Sprouts</a></li>
+        <li><a href="primary.html">Primary School</a></li>
+        <li><a href="secondary.html">Secondary School</a></li>
+        <li><a href="college.html">College</a></li>
+        <li><a href="therapy-special-needs.html">Therapy &amp; Special Needs</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact Info</h4>
+        <div class="fci"><i class="fas fa-map-marker-alt"></i><span>Afienya, Greater Accra, Ghana</span></div>
+        <div class="fci"><i class="fas fa-phone-alt"></i><span><a href="tel:+233201016051" style="color:#94a3b8;">020 101 6051</a> / <a href="tel:+233545797990" style="color:#94a3b8;">054 579 7990</a></span></div>
+        <div class="fci"><i class="fas fa-envelope"></i><span><a href="mailto:admin@wonderheights.com" style="color:#94a3b8;">admin@wonderheights.com</a></span></div>
+        <div class="fci"><i class="fas fa-clock"></i><span>Mon–Fri: 7:30am – 4:00pm</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026–2027 Wonder Heights International School. All rights reserved. Built with <span>♥</span> for exceptional education.</div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://wa.me/233201016051?text=Hello%2C%20I%27m%20interested%20in%20Wonder%20Heights%20International%20School" class="float-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+233201016051" class="float-btn phone"><i class="fas fa-phone-alt"></i></a>
+  </div>
+
+  <script>
+    (function() {
+      // Create a container so we keep the body clean
+      const bubbleContainer = document.createElement('div');
+      bubbleContainer.id = 'bubble-container';
+      document.body.appendChild(bubbleContainer);
+
+      const bubbleCount = 15; // Number of bubbles on screen
+      
+      for (let i = 0; i < bubbleCount; i++) {
+        let bubble = document.createElement('div');
+        
+        // Randomly assign gold or navy class
+        let isGold = Math.random() > 0.5;
+        bubble.className = `magic-bubble ${isGold ? 'gold' : 'navy'}`;
+        
+        // Randomize size between 15px and 45px
+        let size = Math.random() * 30 + 15;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        
+        // Randomize horizontal starting position (avoiding very edges)
+        bubble.style.left = `${Math.random() * 94 + 3}vw`;
+        
+        // Randomize speed (between 12s and 25s)
+        bubble.style.animationDuration = `${Math.random() * 13 + 12}s`;
+        
+        // Randomize delay so they don't all appear at once
+        bubble.style.animationDelay = `${Math.random() * 8}s`;
+        
+        bubbleContainer.appendChild(bubble);
+      }
+    })();
+  </script>
+
+  <script>
+    // THEME
+    const themeIcon = document.getElementById('themeIcon');
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const d = document.body.classList.contains('dark');
+      if(themeIcon) themeIcon.className = d ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('whis-theme', d ? 'dark' : 'light');
+    }
+    if(localStorage.getItem('whis-theme')==='dark'){
+      document.body.classList.add('dark');
+      if(themeIcon) themeIcon.className = 'fas fa-sun';
+    }
+    // REVEAL
+    const ro = new IntersectionObserver(entries => entries.forEach(e => {
+      if(e.isIntersecting) e.target.classList.add('visible');
+    }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  </script>
+</body></html>

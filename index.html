@@ -417,7 +417,17 @@
     .why-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
     body.dark .why-item p { color: #94a3b8; }
     .why-img-col { position: relative; }
-    .why-img-main { width: 100%; height: 520px; object-fit: cover; border-radius: 20px; }
+    .why-img-main {
+      width: 100%;
+      max-height: 520px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 20px;
+      image-rendering: auto;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
     .why-overlay-card {
       position: absolute; bottom: 2rem; left: -2rem;
       background: var(--gold2); padding: 1.4rem 1.8rem;
@@ -842,6 +852,16 @@
 
   body.dark .modal-event { background: #0a1f3a; border-color: rgba(148,163,184,0.3); }
 
+  .map-btn {
+      background: var(--muted); ; border: none;
+      padding: 0.85rem 1.8rem; border-radius: 50px;
+      font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; transition: all 0.2s; white-space: nowrap;
+      color: var(--white);
+    }
+    .map-btn:hover { background: #fff; color: var(--navy); transform: scale(1.03); }
+
+
   </style>
 </head>
 
@@ -870,7 +890,7 @@
     <div class="top-right">
       <span><i class="fas fa-map-marker-alt gold"></i> Afienya, Greater Accra</span>
       <span><i class="fas fa-clock gold"></i> Mon–Fri: 7:30am – 4:00pm</span>
-      <select class="lang-select" onchange="changeLanguage(this.value)">
+      <select class="lang-select" onchange="changeLanguage(this.value)" style="background-color: #002855;">
         <option value="en">🇬🇧 English</option>
         <option value="fr">🇫🇷 Français</option>
         <option value="tw">🇬🇭 Twi</option>
@@ -895,14 +915,14 @@
       <div class="nav-links" id="navLinks">
         <!-- About Dropdown -->
         <div class="nav-item">
-          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <button class="nav-btn"><i class="fas fa-chevron-down chevron"></i> About Us</button>
           <div class="dropdown">
-            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#director"><i class="fas fa-star"></i> Message from Director</a>
             <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
             <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
-            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="#programs"><i class="fas fa-th-large"></i> Our Programs</a>
             <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
-            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#about"><i class="fas fa-shield-alt"></i> School Ethics</a>
             <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
           </div>
         </div>
@@ -910,28 +930,30 @@
         <div class="nav-item">
           <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="#programs"><i class="fas fa-child"></i> Early Childhood</a>
-            <a href="#programs"><i class="fas fa-shapes"></i> Preschool</a>
-            <a href="#programs"><i class="fas fa-book-open"></i> Primary</a>
-            <a href="#programs"><i class="fas fa-graduation-cap"></i> JHS</a>
-            <a href="#programs"><i class="fas fa-heart"></i> Therapy</a>
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="college.html"><i class="fas fa-graduation-cap"></i> College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
           </div>
         </div>
         <!-- Admission Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="#enroll"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
             <a href="#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
             <a href="#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
           </div>
         </div>
-        <a href="#calendar" class="nav-btn">Events</a>
-        <a href="#gallery" class="nav-btn">Gallery</a>
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
         <a href="#contact" class="nav-btn">Contact</a>
         <a href="#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
         </a>
+        <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
+          <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
 
       <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
@@ -955,9 +977,9 @@
   <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
   <section class="hero" id="home">
     <!-- Slides -->
-    <div class="hero-slide active" style="background-image:url('1.jfif');"></div>
-    <div class="hero-slide" style="background-image:url('2.jfif');"></div>
-    <div class="hero-slide" style="background-image:url('5.jfif');"></div>
+    <div class="hero-slide active" style="background-image:url('1.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('8.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('5.jpg');"></div>
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
@@ -1021,8 +1043,8 @@
       <div class="about-grid">
         <!-- Images -->
         <div class="about-img-stack reveal left">
-          <img src="4.jfif" alt="Students in library" class="about-img-main">
-          <img src="3.jfif" alt="Student writing" class="about-img-secondary">
+          <img src="2.jpg" alt="Students in library" class="about-img-main">
+          <img src="7.jpg" alt="Student writing" class="about-img-secondary">
           <div class="about-badge-float">
             <div class="num">10+</div>
             <div class="lbl">Years of Excellence</div>
@@ -1117,39 +1139,31 @@
         <div class="section-label" style="justify-content:center;">Our Academic Offerings</div>
         <h2 class="section-title" data-key="programsTitle">Nurturing Every Stage of Growth</h2>
         <p class="section-sub" style="margin:0 auto; text-align:center;">
-          From early childhood through JHS, every programme is designed to inspire curiosity, build character, and achieve excellence.
+          From early childhood through to College, every programme is designed to inspire curiosity, build character, and achieve excellence.
         </p>
       </div>
 
       <div class="programs-grid">
         <!-- Card 1 -->
-        <div class="program-card reveal up">
-          <img src="1.jfif" alt="Early Childhood" class="program-img">
-          <div class="program-body">
-            <div class="program-icon"><i class="fas fa-baby"></i></div>
-            <h3>Early Childhood Education</h3>
-            <p>A nurturing foundation focused on play-based learning, social development, and early literacy for our youngest learners.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
+        
         <!-- Card 2 -->
         <div class="program-card reveal up" style="transition-delay:0.1s;">
-          <img src="2.jfif" alt="Preschool" class="program-img">
+          <img src="9.jpg" alt="Preschool" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-shapes"></i></div>
-            <h3>Day Care & Preschool</h3>
+            <h3>Early Sprouts School</h3>
             <p>Safe, engaging daycare from 7:30am–5pm, guiding toddlers through structured play and guided early-learning activities.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="early-sprouts.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- Card 3 -->
         <div class="program-card reveal up" style="transition-delay:0.2s;">
-          <img src="4.jfif" alt="Primary" class="program-img">
+          <img src="3.jpg" alt="Primary" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-book-open"></i></div>
             <h3>Primary School</h3>
             <p>Building critical thinkers and confident learners across all core subjects — Mathematics, Science, English, and more.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="primary.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- Card 4 -->
@@ -1157,29 +1171,39 @@
           <img src="5.jfif" alt="JHS" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>Junior High School (JHS)</h3>
+            <h3>Secondary (Upper & Lower) | JHS & SHS </h3>
             <p>Preparing students for BECE and beyond with rigorous academics, leadership development, and extracurricular activities.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="secondary.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-        <!-- Card 5 -->
+        <!-- Card 5-->
+        <div class="program-card reveal up" style="transition-delay:0.15s;">
+          <img src="5.jfif" alt="JHS" class="program-img">
+          <div class="program-body">
+            <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>College</h3>
+            <p>Preparing students for WASSCE and beyond with rigorous academics, leadership development, and extracurricular activities.</p>
+            <a href="college.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 6 -->
         <div class="program-card reveal up" style="transition-delay:0.25s;">
           <img src="3.jfif" alt="Therapy" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-heart"></i></div>
-            <h3>Therapy & Support</h3>
+            <h3>Therapy & Special Needs School</h3>
             <p>Comprehensive therapeutic support including speech, occupational, and behavioural therapy for children with unique needs.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="therapy-special-needs.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-        <!-- Card 6 — Practical Lessons -->
+        <!-- Card 7 — Practical Lessons -->
         <div class="program-card reveal up" style="transition-delay:0.3s;">
           <img src="6.jfif" alt="Extracurricular" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-palette"></i></div>
             <h3>Extracurricular Activities</h3>
             <p>Art, music, sports, and STEM clubs ensuring every child discovers and develops their unique talents and passions.</p>
-            <a href="#enroll" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="extracurricular.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -1209,7 +1233,7 @@
               <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
               <div>
                 <h4>Safe, Spacious Environment</h4>
-                <p>Temperature-regulated classrooms, secure perimeter, and trained staff ensure every child is safe and comfortable all day.</p>
+                <p>Temperature-regulated classrooms, secure perimeter with CCTVs, and trained staff ensure every child is safe and comfortable all day.</p>
               </div>
             </div>
             <div class="why-item reveal left" style="animation-delay:0.26s;">
@@ -1230,7 +1254,7 @@
         </div>
 
         <div class="why-img-col reveal right" style="animation-delay:0.2s;">
-          <img src="5.jfif" alt="Happy students" class="why-img-main">
+          <img src="222.jpg" alt="Happy students" class="why-img-main">
           <div class="why-overlay-card">
             <p>🏆 Award-winning school culture</p>
             <span>Recognised for academic & character excellence</span>
@@ -1291,30 +1315,30 @@
           <div class="section-label">Our Campus Life</div>
           <h2 class="section-title">Life at Wonder Heights</h2>
         </div>
-        <a href="#" class="btn-primary" style="background:var(--navy); color:#fff; padding:0.7rem 1.6rem; font-size:0.85rem; box-shadow:none;">
+        <a href="gallery.html" class="btn-primary" style="background:var(--navy); color:#fff; padding:0.7rem 1.6rem; font-size:0.85rem; box-shadow:none;">
           Full Gallery <i class="fas fa-images" style="margin-left:0.4rem;"></i>
         </a>
       </div>
 
       <div class="gallery-grid">
         <div class="gallery-item reveal up">
-          <img src="1.jfif" alt="School life">
+          <img src="" alt="School life">
           <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
         </div>
         <div class="gallery-item reveal up" style="animation-delay:0.1s;">
-          <img src="2.jfif" alt="Students">
+          <img src="" alt="Students">
           <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
         </div>
         <div class="gallery-item reveal up" style="animation-delay:0.15s;">
-          <img src="3.jfif" alt="Learning">
+          <img src="" alt="Learning">
           <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
         </div>
         <div class="gallery-item reveal up" style="animation-delay:0.2s;">
-          <img src="4.jfif" alt="Library">
+          <img src="" alt="Library">
           <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
         </div>
         <div class="gallery-item reveal up" style="animation-delay:0.25s;">
-          <img src="5.jfif" alt="Secondary">
+          <img src="" alt="Secondary">
           <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
         </div>
       </div>
@@ -1592,7 +1616,7 @@
           <div class="cs-icon"><i class="fas fa-map-marker-alt"></i></div>
           <div>
             <h4>Find Us</h4>
-            <p><a href="https://maps.app.goo.gl/kKsWWx7ekNWz8zN59" target="_blank" style="color: inherit; text-decoration: none;">Afienya, Greater Accra, Ghana</a></p>
+            <p><button class="map-btn"><a href="https://maps.app.goo.gl/kKsWWx7ekNWz8zN59" target="_blank" style="color: inherit; text-decoration: none;">Afienya, Greater Accra, Ghana</a></p></button>
           </div>
         </div>
       </div>
@@ -1613,8 +1637,8 @@
           <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="https://wa.me/233201016051" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="index.html#video-tour" class="social-btn" aria-label="YouTube" id="video-tour"><i class="fab fa-youtube"></i></a>
+          <!-- <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a> -->
         </div>
       </div>
       <!-- Quick Links -->
@@ -1622,24 +1646,24 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="#programs">Our Programs</a></li>
-          <li><a href="#enroll">Admissions</a></li>
-          <li><a href="#calendar">Events</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="index.html#programs">Our Programs</a></li>
+          <li><a href="index.html#enroll">Admissions</a></li>
+          <li><a href="index.html#calendar">Events</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="about.html#policies">Privacy Policy</a></li>
         </ul>
       </div>
       <!-- Academics -->
       <div class="footer-col">
         <h4>Academics</h4>
         <ul>
-          <li><a href="#programs">Early Childhood</a></li>
-          <li><a href="#programs">Day Care</a></li>
-          <li><a href="#programs">Preschool</a></li>
-          <li><a href="#programs">Primary School</a></li>
-          <li><a href="#programs">Junior High (JHS)</a></li>
-          <li><a href="#programs">Therapy</a></li>
+          <!-- <li><a href="#programs">Early Childhood</a></li> -->
+          <li><a href="early-sprouts.html">Early Sprouts</a></li>
+          <li><a href="primary.html">Primary School</a></li>
+          <li><a href="secondary.html">Secondary School</a></li>
+          <li><a href="college.html">College</a></li>
+          <li><a href="therapy-special-needs.html">Therapy & Support</a></li>
         </ul>
       </div>
       <!-- Contact -->
@@ -1706,13 +1730,16 @@
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.hero-dot');
     function goToSlide(n) {
+      if (!slides.length || !dots.length) return;
       slides[currentSlide].classList.remove('active');
       dots[currentSlide].classList.remove('active');
-      currentSlide = n;
+      currentSlide = (n + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
     }
-    setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5500);
+    if (slides.length && dots.length) {
+      setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5500);
+    }
 
     // ── NAV SCROLL STYLE ──
     window.addEventListener('scroll', () => {
@@ -1749,32 +1776,40 @@
     document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
     // ── EVENTS DATA ──
+    // ── UPDATED EVENTS DATA 2025/2026 ──
     const events = [
-      { date: '2026-01-01', title: 'New Year\'s Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-03-06', title: 'Independence Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-03-10', title: 'Mid-Term Break Begins', detail: 'School Campus', icon: 'map-marker-alt', tag: 'holiday' },
-      { date: '2026-03-14', title: 'Mid-Term Break Ends', detail: '7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-03-28', title: 'End of Term 2 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
-      { date: '2026-03-31', title: 'Eid al-Fitr', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-04-01', title: 'Term 3 Begins', detail: '7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-04-05', title: 'Easter Holiday Begins', detail: 'School Campus', icon: 'map-marker-alt', tag: 'holiday' },
-      { date: '2026-04-18', title: 'Good Friday', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-04-21', title: 'Easter Monday', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-04-22', title: 'Term 3 Resumes', detail: '7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-05-01', title: 'Workers\' Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-05-10', title: 'Inter-House Sports Day', detail: 'School Sports Ground', icon: 'map-marker-alt', tag: 'sports' },
-      { date: '2026-05-17', title: 'Parents\' Open Day', detail: '9:00am – 1:00pm', icon: 'clock', tag: 'event' },
-      { date: '2026-05-25', title: 'African Union Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-06-01', title: 'End of Term 3 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
-      { date: '2026-06-17', title: 'Eid al-Adha', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-06-30', title: 'End-of-Year Graduation Ceremony', detail: 'School Auditorium', icon: 'map-marker-alt', tag: 'event' },
-      { date: '2026-07-01', title: 'Republic Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-08-04', title: 'Founders\' Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-09-01', title: 'New Academic Year Begins', detail: '7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-09-21', title: 'Kwame Nkrumah Memorial Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-12-20', title: 'End of Term 1 Exams', detail: '8:00am – 12:00pm', icon: 'clock', tag: 'academic' },
-      { date: '2026-12-25', title: 'Christmas Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2026-12-26', title: 'Boxing Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' }
+      // TERM 1 — FIRST TRIMESTER (2025)
+      { date: '2025-09-09', title: 'School Re-opens', detail: 'Term 1 Begins', icon: 'clock', tag: 'academic' },
+      { date: '2025-09-19', title: 'World Cleanup Day', detail: 'School Activity', icon: 'leaf', tag: 'event' },
+      { date: '2025-09-22', title: 'Kwame Nkrumah Memorial Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
+      { date: '2025-10-24', title: 'Mid-Term Break Begins', detail: 'School Closed', icon: 'calendar-minus', tag: 'holiday' },
+      { date: '2025-10-28', title: 'School Resumes', detail: 'Resumption from Mid-Term', icon: 'clock', tag: 'academic' },
+      { date: '2025-11-05', title: 'School-Wide Spelling Bee', detail: '9:00am School Hall', icon: 'spell-check', tag: 'event' },
+      { date: '2025-12-05', title: 'Farmer\'s Day', detail: 'Public Holiday', icon: 'tractor', tag: 'holiday' },
+      { date: '2025-12-11', title: 'Vacation Day', detail: 'Term 1 Closes', icon: 'door-open', tag: 'academic' },
+      { date: '2025-12-14', title: 'Carols Service', detail: 'Festive Celebration', icon: 'music', tag: 'event' },
+
+      // TERM 2 — SECOND TRIMESTER (2026)
+      { date: '2026-01-01', title: 'New Year\'s Day', detail: 'Public Holiday', icon: 'glass-cheers', tag: 'holiday' },
+      { date: '2026-01-06', title: 'Term 2 Begins', detail: 'School Re-opens', icon: 'clock', tag: 'academic' },
+      { date: '2026-01-09', title: 'Constitution Day', detail: 'Public Holiday', icon: 'landmark', tag: 'holiday' },
+      { date: '2026-01-23', title: 'Int. Day of Education', detail: 'Club Activities Begin', icon: 'book', tag: 'academic' },
+      { date: '2026-02-11', title: 'Women & Girls in Science', detail: 'Special Presentation', icon: 'microscope', tag: 'event' },
+      { date: '2026-02-13', title: 'Chocolate/Valentine\'s Day', detail: 'School Celebration', icon: 'heart', tag: 'event' },
+      { date: '2026-02-19', title: 'Maths and Science Quiz', detail: 'Inter-class Competition', icon: 'lightbulb', tag: 'academic' },
+      { date: '2026-02-20', title: 'Mid-Term Break Begins', detail: 'Feb 20 – Feb 23', icon: 'calendar-minus', tag: 'holiday' },
+      { date: '2026-02-24', title: 'School Resumes', detail: '7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-03-05', title: 'Traditional Day', detail: 'Cultural Celebration', icon: 'tshirt', tag: 'event' },
+      { date: '2026-03-06', title: 'Independence Day', detail: 'National Holiday', icon: 'flag', tag: 'holiday' },
+      { date: '2026-03-20', title: 'Eid ul-Fitr', detail: 'Public Holiday', icon: 'moon', tag: 'holiday' },
+      { date: '2026-03-23', title: 'Revision Week Begins', detail: 'Term 2 Exams', icon: 'book-reader', tag: 'academic' },
+      { date: '2026-03-26', title: 'Exams Week Begins', detail: 'Term 2 Exams', icon: 'book-reader', tag: 'academic' },
+      { date: '2026-04-02', title: 'Vacation Day / Spellathon', detail: 'Term 2 Closes', icon: 'award', tag: 'academic' },
+
+      // TERM 3 — THIRD TRIMESTER (PRELIMINARY)
+      { date: '2026-04-27', title: 'Term 3 Begins', detail: 'School Resumes 7:30am', icon: 'clock', tag: 'academic' },
+      { date: '2026-05-10', title: 'Inter-House Sports Day', detail: 'Sports Ground', icon: 'running', tag: 'sports' },
+      { date: '2026-07-31', title: 'Graduation Ceremony', detail: 'End of Academic Year', icon: 'graduation-cap', tag: 'event' }
     ];
 
     // Generate calEventDates and eventNames from events
@@ -1882,18 +1917,22 @@
     const testiTrack = document.getElementById('testiTrack');
     const testiSlides = document.querySelectorAll('.testi-slide');
     let slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-    window.addEventListener('resize', () => {
-      slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-      setTesti(testiIndex);
-    });
     function setTesti(n) {
-      const max = testiSlides.length - slidesVisible;
+      if (!testiTrack || !testiSlides.length) return;
+      slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+      const max = Math.max(0, testiSlides.length - slidesVisible);
       testiIndex = Math.max(0, Math.min(n, max));
-      const slideW = testiSlides[0].getBoundingClientRect().width + 24;
+      const firstSlide = testiSlides[0];
+      if (!firstSlide) return;
+      const slideW = firstSlide.getBoundingClientRect().width + 24;
       testiTrack.style.transform = `translateX(-${testiIndex * slideW}px)`;
     }
-    document.getElementById('testiPrev').onclick = () => setTesti(testiIndex - 1);
-    document.getElementById('testiNext').onclick = () => setTesti(testiIndex + 1);
+    window.addEventListener('resize', () => setTesti(testiIndex));
+    const testiPrevBtn = document.getElementById('testiPrev');
+    const testiNextBtn = document.getElementById('testiNext');
+    if (testiPrevBtn) testiPrevBtn.onclick = () => setTesti(testiIndex - 1);
+    if (testiNextBtn) testiNextBtn.onclick = () => setTesti(testiIndex + 1);
+    setTesti(0);
 
     // ── VIDEO PLACEHOLDER ──
     function playVideo() {

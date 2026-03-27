@@ -84,7 +84,9 @@
     .section{padding:5rem 1.5rem;}
     .container{max-width:1280px;margin:0 auto;}
     .section-label{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;}
+    .section-label1{display:inline-flex;align-items:center;gap:.5rem;color:var(--dark);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;}
     .section-label::before,.section-label::after{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+    .section-label1::before,.section-label1::after{content:'';display:block;width:28px;height:1px;background:var(--dark);}
     .section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:1rem;}
     body.dark .section-title{color:#fff;}
     .section-sub{font-size:1rem;color:var(--muted);line-height:1.7;}
@@ -224,13 +226,48 @@
     .float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:all .25s;}
     .float-btn.whatsapp{background:#25d366;color:#fff;} .float-btn.phone{background:var(--navy);color:#fff;}
     .float-btn:hover{transform:scale(1.1) translateY(-2px);}
+
+    /* EVENT FLOATING FX */
+    #event-fx-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 50; /* Sits above background, below the UI */
+      pointer-events: none; /* Do not block clicks! */
+      overflow: hidden;
+    }
+    .ev-fx-item {
+      position: absolute;
+      top: -10vh;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: fallSway linear infinite;
+    }
+    .ev-fx-item i {
+      display: block;
+    }
+    @keyframes fallSway {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% {
+        transform: translateY(120vh) translateX(30px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
     @media(max-width:1024px){.ev-layout{grid-template-columns:1fr;}.cal-widget{position:static;}}
     @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.stat-grid{grid-template-columns:repeat(2,1fr);}.stat-item:nth-child(2){border-right:none;}.gh-grid{grid-template-columns:1fr;}}
+
   </style>
 </head>
 <body>
 
-  <!-- LOADER -->
   <div id="loader">
     <img src="logo_WHIS.png" alt="Logo">
     <div class="ln">Wonder Heights</div>
@@ -239,7 +276,6 @@
   </div>
   <script>(function(){function h(){var l=document.getElementById('loader');if(l){l.classList.add('gone');setTimeout(function(){if(l.parentNode)l.parentNode.removeChild(l);},550);}}setTimeout(h,800);window.addEventListener('load',function(){setTimeout(h,200);});})();</script>
 
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="top-left">
       <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
@@ -251,7 +287,6 @@
     </div>
   </div>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
@@ -259,45 +294,44 @@
         <div><span class="logo-main">Wonder Heights</span><span class="logo-sub">International School</span></div>
       </a>
     <div class="nav-links" id="navLinks">
-        <!-- About Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
             <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
             <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
             <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
-            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="#programs"><i class="fas fa-th-large"></i> Our Programs</a>
             <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
             <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
             <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
           </div>
         </div>
-        <!-- Academics Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="#programs"><i class="fas fa-child"></i> Early Childhood</a>
-            <a href="#programs"><i class="fas fa-shapes"></i> Preschool</a>
-            <a href="#programs"><i class="fas fa-book-open"></i> Primary</a>
-            <a href="#programs"><i class="fas fa-graduation-cap"></i> JHS</a>
-            <a href="#programs"><i class="fas fa-heart"></i> Therapy</a>
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="lower-secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="upper-secondary.html"><i class="fas fa-graduation-cap"></i>College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
           </div>
         </div>
-        <!-- Admission Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="#enroll"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
-            <a href="#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
-            <a href="#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="enrollment.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="index.html#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
           </div>
         </div>
-        <a href="#calendar" class="nav-btn">Events</a>
-        <a href="#gallery" class="nav-btn">Gallery</a>
-        <a href="#contact" class="nav-btn">Contact</a>
-        <a href="#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
+        <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
         </a>
+        <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
+          <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
 
       <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
@@ -306,7 +340,6 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
     <a href="index.html" onclick="closeMobileMenu()">Home</a>
@@ -318,7 +351,6 @@
     <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
   </div>
 
-  <!-- PAGE HERO -->
   <div class="page-hero">
     <div class="ph-inner">
       <div class="breadcrumb"><a href="index.html">Home</a> / Events &amp; Calendar</div>
@@ -328,7 +360,6 @@
     </div>
   </div>
 
-  <!-- STAT STRIP -->
   <div class="stat-strip">
     <div class="stat-grid">
       <div class="stat-item"><div class="stat-num" id="totalCount">32</div><div class="stat-lbl">Total Events</div></div>
@@ -338,12 +369,10 @@
     </div>
   </div>
 
-  <!-- CALENDAR + EVENTS -->
-  <section class="section" style="background:var(--cream);">
+  <section class="section" style="background:var(--navy2);">
     <div class="container">
       <div class="ev-layout">
 
-        <!-- CALENDAR -->
         <div>
           <div class="cal-widget reveal left">
             <div class="cal-head">
@@ -360,14 +389,12 @@
               <span><span class="leg-today">•</span> Today</span>
             </div>
           </div>
-          <!-- Month summary -->
           <div class="month-summary" id="monthSummary">
             <div class="ms-label">Events This Month</div>
             <div id="msList"></div>
           </div>
         </div>
 
-        <!-- EVENTS PANEL -->
         <div class="ev-panel reveal right">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.3rem;flex-wrap:wrap;gap:.8rem;">
             <h2 id="panelTitle">Upcoming Events</h2>
@@ -387,46 +414,37 @@
     </div>
   </section>
 
-  <!-- TERM DATES TABLE -->
-  <section class="section" style="background:#fff;">
+  <section class="section" style="background:#055c96;">
     <div class="container">
-      <div style="text-align:center;margin-bottom:2.5rem;" class="reveal up">
-        <div class="section-label" style="justify-content:center;">2025 / 2026 Academic Year</div>
-        <h2 class="section-title">School Term Dates</h2>
-        <p class="section-sub" style="max-width:540px;margin:0 auto;">Key dates for all three terms at Wonder Heights International School.</p>
-      </div>
-      <div class="term-wrap reveal up">
-        <table class="term-table">
-          <thead><tr><th>Term</th><th>Opens</th><th>Mid-Term Break</th><th>Exams</th><th>Closes</th><th>Weeks</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong style="color:var(--navy);">Term 1</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">First Trimester</span></td>
-              <td>1 Sep 2025</td><td>13–17 Oct 2025</td><td>24–28 Nov 2025</td><td>5 Dec 2025</td>
-              <td><span class="tag-pill tag-academic">13 wks</span></td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--navy);">Term 2</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">Second Trimester</span></td>
-              <td>12 Jan 2026</td><td>10–14 Mar 2026</td><td>23–27 Mar 2026</td><td>31 Mar 2026</td>
-              <td><span class="tag-pill tag-academic">11 wks</span></td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--navy);">Term 3</strong> <span style="font-size:.75rem;color:var(--muted);display:block;">Third Trimester</span></td>
-              <td>22 Apr 2026</td><td>25–29 May 2026</td><td>22–26 Jun 2026</td><td>30 Jun 2026</td>
-              <td><span class="tag-pill tag-academic">10 wks</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<table class="term-table">
+  <thead><tr><th>Term</th><th>Opens</th><th>Mid-Term Break</th><th>Exams</th><th>Closes</th><th>Weeks</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong style="color:var(--navy);">Term 1</strong> <span style="font-size:.75rem;color:var(--cream);display:block;">First Trimester</span></td>
+      <td>9 Sep 2025</td><td>24–27 Oct 2025</td><td>1–11 Dec 2025</td><td>11 Dec 2025</td>
+      <td><span class="tag-pill tag-academic">14 wks</span></td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--navy);">Term 2</strong> <span style="font-size:.75rem;color:var(--cream);display:block;">Second Trimester</span></td>
+      <td>6 Jan 2026</td><td>20–23 Feb 2026</td><td>23 Mar – 2 Apr 2026</td><td>2 Apr 2026</td>
+      <td><span class="tag-pill tag-academic">13 wks</span></td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--navy);">Term 3</strong> <span style="font-size:.75rem;color:var(--cream);display:block;">Third Trimester</span></td>
+      <td>27 Apr 2026</td><td>– May 2026</td><td>– Jun 2026</td><td>31 Jun 2026</td>
+      <td><span class="tag-pill tag-academic">13 wks</span></td>
+    </tr>
+  </tbody>
+</table>
     </div>
   </section>
 
-  <!-- GHANA PUBLIC HOLIDAYS -->
-  <section class="section" style="background:var(--cream);">
-    <div class="container">
+  <section class="section" style="background:var(--muted); background-image: url('Untitled design (1).jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="container" style="background: rgba(156, 204, 243, 0.781); padding: 2rem; border-radius: 20px;">
       <div style="text-align:center;margin-bottom:2.5rem;" class="reveal up">
-        <div class="section-label" style="justify-content:center;">Republic of Ghana</div>
-        <h2 class="section-title">Ghana Public Holidays 2026</h2>
-        <p class="section-sub" style="max-width:540px;margin:0 auto;">Official statutory public holidays declared for the Republic of Ghana in 2026.</p>
+        <div class="section-label1" style="justify-content:center; color: var(--navy2);">Republic of Ghana</div>
+        <h2 class="section-title" style="color: var(--dark);">Ghana Public Holidays 2026</h2>
+        <p class="section-sub" style="max-width:540px;margin:0 auto; color: var(--navy);">Official statutory public holidays declared for the Republic of Ghana in 2026.</p>
       </div>
       <div class="gh-grid">
         <div class="gh-card reveal up"><div class="gh-icon"><i class="fas fa-glass-cheers"></i></div><div><h4>New Year's Day</h4><div class="gh-date"><i class="fas fa-calendar-alt" style="color:var(--gold2);margin-right:.3rem;"></i>Thursday, 1 January 2026</div><div class="gh-desc">Celebration of the start of the new calendar year.</div><div style="margin-top:.5rem;"><span class="tag-pill tag-holiday">Public Holiday</span></div></div></div>
@@ -449,7 +467,6 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <div class="cta-banner reveal up">
     <div class="container">
       <h2>Questions About the School Calendar?</h2>
@@ -461,7 +478,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-main">
       <div>
@@ -480,9 +496,11 @@
         <li><a href="gallery.html">Gallery</a></li><li><a href="index.html#contact">Contact</a></li>
       </ul></div>
       <div class="footer-col"><h4>Academics</h4><ul>
-        <li><a href="index.html#programs">Early Childhood</a></li><li><a href="index.html#programs">Day Care</a></li>
-        <li><a href="index.html#programs">Primary School</a></li><li><a href="index.html#programs">Junior High (JHS)</a></li>
-        <li><a href="index.html#programs">Therapy</a></li>
+        <li><a href="early-sprouts.html">Early Sprouts</a></li>
+        <li><a href="primary.html">Primary School</a></li>
+        <li><a href="secondary.html">Secondary School</a></li>
+        <li><a href="college.html">College</a></li>
+        <li><a href="therapy-special-needs.html">Therapy &amp; Special Needs</a></li>
       </ul></div>
       <div class="footer-col"><h4>Contact Info</h4>
         <div class="fci"><i class="fas fa-map-marker-alt"></i><span>Afienya, Greater Accra, Ghana</span></div>
@@ -521,27 +539,44 @@
     { date:'2026-12-04', title:"Farmer's Day",                       detail:'Public Holiday',             icon:'tractor',          tag:'holiday' },
     { date:'2026-12-25', title:'Christmas Day',                      detail:'Public Holiday',             icon:'star',             tag:'holiday' },
     { date:'2026-12-26', title:'Boxing Day',                         detail:'Public Holiday',             icon:'gift',             tag:'holiday' },
-    // TERM 2 — SECOND TRIMESTER
-    { date:'2026-01-12', title:'Term 2 Begins',                      detail:'7:30am — School opens',      icon:'clock',            tag:'academic' },
-    { date:'2026-03-10', title:'Mid-Term Break Begins',              detail:'School closed',               icon:'map-marker-alt',   tag:'holiday'  },
-    { date:'2026-03-14', title:'Mid-Term Break Ends · School Resumes',detail:'7:30am',                    icon:'clock',            tag:'academic' },
-    { date:'2026-03-23', title:'End of Term 2 Exams Begin',          detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
-    { date:'2026-03-27', title:'Term 2 Exams End',                   detail:'Last day of Term 2 exams',    icon:'graduation-cap',   tag:'academic' },
-    { date:'2026-03-31', title:'Term 2 Closes',                      detail:'School closes for holiday',   icon:'map-marker-alt',   tag:'academic' },
-    // TERM 3 — THIRD TRIMESTER
-    { date:'2026-04-22', title:'Term 3 Begins',                      detail:'7:30am — School resumes',     icon:'clock',            tag:'academic' },
-    { date:'2026-05-10', title:'Inter-House Sports Day',             detail:'8:00am – 3:00pm · Sports Ground',icon:'running',       tag:'sports'   },
-    { date:'2026-05-17', title:"Parents' Open Day",                   detail:"9:00am – 1:00pm · School Hall", icon:'clock',          tag:'event'    },
-    { date:'2026-05-25', title:'Mid-Term Break Begins',              detail:'School closed',               icon:'map-marker-alt',   tag:'holiday'  },
-    { date:'2026-05-29', title:'Mid-Term Break Ends',                detail:'School resumes 7:30am',       icon:'clock',            tag:'academic' },
-    { date:'2026-06-22', title:'End of Term 3 Exams Begin',          detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
-    { date:'2026-06-26', title:'Term 3 Exams End',                   detail:'Last day of exams',           icon:'graduation-cap',   tag:'academic' },
-    { date:'2026-06-30', title:'End-of-Year Graduation & Prize-Giving',detail:'10:00am · School Auditorium',icon:'award',           tag:'event'    },
-    // TERM 1 NEXT YEAR
-    { date:'2026-09-01', title:'New Academic Year Begins',           detail:'7:30am — Term 1 opens',       icon:'clock',            tag:'academic' },
-    { date:'2026-12-20', title:'End of Term 1 Exams',                detail:'8:00am – 12:00pm',            icon:'clock',            tag:'academic' },
-  ];
+    // TERM 1 — FIRST TRIMESTER (2025)
+    { date:'2025-09-09', title:'School Re-opens',                  detail:'Term 1 begins',               icon:'clock',            tag:'academic' },
+    { date:'2025-09-19', title:'World Cleanup Day',                detail:'Observed at school',          icon:'leaf',             tag:'event'    },
+    { date:'2025-09-22', title:'Kwame Nkrumah Memorial Day',       detail:'Public Holiday (School Closed)',icon:'user-tie',         tag:'holiday'  },
+    { date:'2025-09-23', title:'Club Activities Begin',            detail:'International Day of Sign Language', icon:'hands',      tag:'academic' },
+    { date:'2025-10-03', title:"World Teachers' Day",              detail:'Celebrated at school',        icon:'apple-alt',        tag:'event'    },
+    { date:'2025-10-24', title:'Mid-Term Break Begins',            detail:'School closed until Oct 27',  icon:'calendar-minus',   tag:'holiday'  },
+    { date:'2025-10-28', title:'School Resumes',                   detail:'Resumption from Mid-Term',    icon:'clock',            tag:'academic' },
+    { date:'2025-11-05', title:'School-Wide Spelling Bee',         detail:'9:00am — School Hall',        icon:'spell-check',      tag:'event'    },
+    { date:'2025-12-01', title:'Examination Week Begins',          detail:'End of Term 1 Exams',         icon:'file-signature',   tag:'academic' },
+    { date:'2025-12-05', title:"Farmer's Day",                     detail:'Public Holiday',              icon:'tractor',          tag:'holiday'  },
+    { date:'2025-12-11', title:'Vacation Day',                     detail:'Term 1 Closes',               icon:'door-open',        tag:'academic' },
+    { date:'2025-12-14', title:'Carols Service',                   detail:'Festive celebration',         icon:'music',            tag:'event'    },
 
+    // TERM 2 — SECOND TRIMESTER (2026)
+    
+    { date:'2026-01-06', title:'Term 2 Begins',                    detail:'School re-opens',             icon:'clock',            tag:'academic' },
+ 
+    { date:'2026-01-23', title:'Int. Day of Education',            detail:'Club activities take off',    icon:'book',             tag:'academic' },
+    { date:'2026-01-28', title:'Day of Peaceful Coexistence',      detail:'Special school activity',     icon:'dove',             tag:'event'    },
+    { date:'2026-02-11', title:'Women & Girls in Science',         detail:'Science department event',    icon:'microscope',       tag:'event'    },
+    { date:'2026-02-13', title:'Chocolate / Valentine’s Day',      detail:'World Radio Day observed',    icon:'heart',            tag:'event'    },
+    { date:'2026-02-19', title:'Maths and Science Quiz',           detail:'Inter-class competition',     icon:'lightbulb',        tag:'academic' },
+    { date:'2026-02-20', title:'Mid-Term Break Begins',            detail:'Feb 20 – Feb 23',             icon:'calendar-minus',   tag:'holiday'  },
+    { date:'2026-02-24', title:'School Resumes',                   detail:'7:30am',                      icon:'clock',            tag:'academic' },
+    { date:'2026-03-05', title:'Traditional Day',                  detail:'Cultural celebration',        icon:'tshirt',           tag:'event'    },
+    
+    { date:'2026-03-19', title:'Happiness & French Day',           detail:'Language and wellbeing event',icon:'smile',            tag:'event'    },
+    
+    { date:'2026-03-23', title:'Revision Week Begins',             detail:'Term 2 Revision',                icon:'book-reader',      tag:'academic' },
+    { date:'2026-03-26', title:'Exams Week Begins',             detail:'Term 2 Exams',                icon:'book-reader',      tag:'academic' },
+    { date:'2026-04-02', title:'Vacation Day / Spellathon',        detail:'Term 2 Closes',               icon:'award',            tag:'academic' },
+
+    // TERM 3 — THIRD TRIMESTER (PRELIMINARY)
+    { date:'2026-04-27', title:'Term 3 Begins',                    detail:'School resumes 7:30am',       icon:'clock',            tag:'academic' },
+    { date:'2026-05-10', title:'Inter-House Sports Day',           detail:'Sports Ground',               icon:'running',          tag:'sports'   },
+    { date:'2026-07-31', title:'Graduation Ceremony',              detail:'End of Academic Year',        icon:'graduation-cap',   tag:'event'    }
+  ];
   // ═══════════════════════════════════════════
   //  ENGINE — do not edit below this line
   // ═══════════════════════════════════════════
@@ -664,6 +699,54 @@
   renderCalendar();
   filterAndRender();
   updateStats();
+  </script>
+
+  <script>
+    (function() {
+      // 1. Create a container for the floating events fx
+      const container = document.createElement('div');
+      container.id = 'event-fx-container';
+      document.body.appendChild(container);
+
+      // 2. We use the same colors as the event tags (Academic, Sports, Holiday, Event)
+      const colors = [
+        'rgba(59, 130, 246, 0.4)',  // Academic Blue
+        'rgba(34, 197, 94, 0.4)',   // Sports Green
+        'rgba(240, 180, 41, 0.6)',  // Holiday Gold
+        'rgba(236, 72, 153, 0.4)'   // Event Pink
+      ];
+
+      // Use some celebration/calendar icons and simple circles (confetti dots)
+      const icons = ['fa-star', 'fa-calendar-day', 'fa-flag', 'fa-circle'];
+      const itemsCount = 28; // Enough to feel festive, but not overwhelming
+      
+      for (let i = 0; i < itemsCount; i++) {
+        let el = document.createElement('div');
+        el.className = 'ev-fx-item';
+        
+        let icon = icons[Math.floor(Math.random() * icons.length)];
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // If it's a circle, make it tiny like a piece of confetti
+        if (icon === 'fa-circle') {
+          el.innerHTML = `<i class="fas ${icon}" style="font-size: ${Math.random() * 4 + 4}px; color: ${color};"></i>`;
+        } else {
+          // Other icons slightly larger
+          el.innerHTML = `<i class="fas ${icon}" style="font-size: ${Math.random() * 12 + 10}px; color: ${color};"></i>`;
+        }
+        
+        // Randomize starting position across the whole width
+        el.style.left = `${Math.random() * 100}vw`;
+        
+        // Randomize speed of falling (between 15s and 35s)
+        el.style.animationDuration = `${Math.random() * 20 + 15}s`;
+        
+        // Randomize delay so they don't all fall at once
+        el.style.animationDelay = `${Math.random() * 20}s`;
+        
+        container.appendChild(el);
+      }
+    })();
   </script>
 </body>
 </html>

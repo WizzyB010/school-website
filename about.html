@@ -6,6 +6,7 @@
   <title>About Us — Wonder Heights International School</title>
   <meta name="description" content="Learn about Wonder Heights International School's history, values, team, and policies.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/png" href="logo_WHIS.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -136,6 +137,13 @@
     body.dark .policy-item{background:#1e293b;border-color:#334155;}
     .policy-header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;cursor:pointer;transition:background .2s;}
     .policy-header:hover{background:#f8faff;}
+
+    /* CTA buttons */
+    .cta-btn { display: inline-flex; align-items: center; justify-content: center; padding: .9rem 2.2rem; border-radius: 50px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+    .cta-btn--primary { background: var(--gold2); color: var(--navy); }
+    .cta-btn--secondary { border: 2px solid rgba(255,255,255,.5); color: #fff; background: transparent; }
+    .cta-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 25px rgba(0,40,85,.3); }
+    .cta-btn--secondary:hover { background: rgba(255,255,255,.12); }
     body.dark .policy-header:hover{background:rgba(255,255,255,.04);}
     .policy-header h4{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--navy);}
     body.dark .policy-header h4{color:#fff;}
@@ -174,20 +182,30 @@
 <body id="body">
 
   <!-- TOP BAR -->
+ 
+
+  <!-- ═══════════════════════════ TOP BAR ═══════════════════════════ -->
   <div class="topbar">
     <div class="top-left">
-      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
-      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i>admin@wonderheights.com</a>
+      <span><i class="fas fa-phone-alt gold"></i> 020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i> admin@wonderheights.com</a>
     </div>
     <div class="top-right">
-      <span><i class="fas fa-map-marker-alt gold"></i>Afienya, Greater Accra</span>
-      <select class="lang-select"><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option><option value="tw">🇬🇭 Twi</option></select>
-      <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i></button>
+      <span><i class="fas fa-map-marker-alt gold"></i> Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i> Mon–Fri: 7:30am – 4:00pm</span>
+      <select class="lang-select" onchange="changeLanguage(this.value)" style="background-color: #002855;">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="tw">🇬🇭 Twi</option>
+      </select>
+     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+  <i class="fas fa-moon" id="themeIcon"></i>
+</button>
     </div>
   </div>
 
-  <!-- NAV -->
-  <nav>
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+  <nav id="mainNav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="logo_WHIS.png" alt="WHIS Logo">
@@ -196,48 +214,69 @@
           <span class="sub">International School</span>
         </div>
       </a>
-      <div class="nav-links">
+
+      <div class="nav-links" id="navLinks">
+        <!-- About Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="#director"><i class="fas fa-star"></i>Message from Director</a>
-            <a href="#history"><i class="fas fa-landmark"></i>School History</a>
-            <a href="#policies"><i class="fas fa-file-alt"></i>Policies</a>
-            <a href="#programs"><i class="fas fa-th-large"></i>Our Programs</a>
-            <a href="#team"><i class="fas fa-users"></i>Our Team</a>
-            <a href="#ethics"><i class="fas fa-shield-alt"></i>School Ethics</a>
-            <a href="#conduct"><i class="fas fa-gavel"></i>Code of Conduct</a>
+            <a href="about.html#director"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="index.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#about"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
           </div>
         </div>
+        <!-- Academics Dropdown -->
         <div class="nav-item">
           <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
           <div class="dropdown">
-            <a href="index.html#programs"><i class="fas fa-child"></i>Early Childhood</a>
-            <a href="index.html#programs"><i class="fas fa-shapes"></i>Preschool</a>
-            <a href="index.html#programs"><i class="fas fa-book-open"></i>Primary</a>
-            <a href="index.html#programs"><i class="fas fa-graduation-cap"></i>JHS</a>
-            <a href="index.html#programs"><i class="fas fa-heart"></i>Therapy</a>
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
           </div>
         </div>
-        <a href="index.html#enroll" class="nav-btn">Admission</a>
-        <a href="index.html#calendar" class="nav-btn">Events</a>
-        <a href="index.html#gallery" class="nav-btn">Gallery</a>
-        <a href="index.html#contact" class="nav-btn">Contact</a>
-        <a href="index.html#enroll" class="nav-btn enroll-cta"><i class="fas fa-user-graduate" style="margin-right:.4rem;"></i>Enroll Now</a>
+        <!-- Admission Dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="#enroll"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="index.html#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="#gallery" class="nav-btn">Gallery</a>
+        <a href="#contact" class="nav-btn">Contact</a>
+        <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
+          <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
+        </a>
+        <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
+          <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
-      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+
+      <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')"><i class="fas fa-times"></i></button>
-    <a href="index.html">Home</a>
-    <a href="#director">About</a>
-    <a href="#team">Our Team</a>
-    <a href="#policies">Policies</a>
-    <a href="index.html#enroll" class="mobile-enroll">Enroll Now</a>
+    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="#programs" onclick="closeMobileMenu()">Academics</a>
+    <a href="#calendar" onclick="closeMobileMenu()">Events</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
   </div>
+
 
   <!-- PAGE HERO -->
   <div class="page-hero">
@@ -249,7 +288,7 @@
   </div>
 
   <!-- MISSION / VISION / VALUES -->
-  <section class="section" style="background:#fff;" id="about">
+  <section class="section" style="background:#1c5d83;" id="about">
     <div class="container">
       <div style="text-align:center;" class="reveal up">
         <div class="section-label" style="justify-content:center;">Who We Are</div>
@@ -293,14 +332,14 @@
   </div>
 
   <!-- DIRECTOR MESSAGE -->
-  <section class="section" style="background:var(--cream);" id="director">
+  <section class="section reveal up" style="background:var(--navy);padding:4rem 1.5rem;text-align:center;" class="reveal up" id="director">
     <div class="container">
       <div class="director-grid">
         <div class="reveal left">
-          <img src="logo_WHIS.png" alt="School Director" class="director-img" style="background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem;">
+          <img src="boss.png" alt="School Director" class="director-img" style="background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem;">
           <div style="background:var(--gold2);padding:1.2rem;border-radius:0 0 14px 14px;text-align:center;">
             <div style="font-weight:700;color:var(--navy);font-size:1rem;">The Director</div>
-            <div style="font-size:.82rem;color:rgba(0,40,85,.75);">Wonder Heights International School</div>
+            <div style="font-size:.82rem;color:rgba(0,40,85,.75);">MR. SYLVANUS DZIWORNU AVEH, PRINCIPAL</div>
           </div>
         </div>
         <div class="reveal right">
@@ -322,7 +361,7 @@
   </section>
 
   <!-- SCHOOL HISTORY -->
-  <section class="section" style="background:#fff;" id="history">
+  <section class="section" style="background:#1c5d83;" id="history">
     <div class="container">
       <div style="max-width:800px;margin:0 auto;text-align:center;" class="reveal up">
         <div class="section-label" style="justify-content:center;">Our Journey</div>
@@ -348,28 +387,56 @@
       <div class="team-grid">
         <div class="team-card reveal up">
           <div class="team-img-wrap">
-            <img src="1.jfif" alt="Team Member">
+            <img src="mama.jpg" alt="Team Member">
             <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Head Teacher</h4><p>Academic Leadership</p></div>
+          <div class="team-body"><h4>Mrs.Sefakor Aveh,</h4><p>Co-Director</p></div>
         </div>
         <div class="team-card reveal up" style="transition-delay:.1s;">
           <div class="team-img-wrap">
-            <img src="4.jfif" alt="Team Member">
+            <img src="hos.jpg" alt="Team Member">
             <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Senior Class Teacher</h4><p>Primary Education</p></div>
+          <div class="team-body"><h4>Mr. Dela Kaiser</h4><p>Head of School</p></div>
+        </div>
+         <div class="team-card reveal up" style="transition-delay:.15s;">
+          <div class="team-img-wrap">
+            <img src="hoa.jpg" alt="Team Member">
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+          </div>
+          <div class="team-body"><h4>Anthony Karlton Twumasi</h4><p>Head of Academics</p></div>
         </div>
         <div class="team-card reveal up" style="transition-delay:.15s;">
           <div class="team-img-wrap">
-            <img src="3.jfif" alt="Team Member">
+            <img src="admin.jpg" alt="Team Member">
             <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Early Childhood Lead</h4><p>Preschool & KG</p></div>
+          <div class="team-body"><h4>Mr. Emmanuel Taylor</h4><p>Administrator</p></div>
+        </div>
+         <div class="team-card reveal up" style="transition-delay:.15s;">
+          <div class="team-img-wrap">
+            <img src="hosp.jpg" alt="Team Member">
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+          </div>
+          <div class="team-body"><h4>Ms. Rubby Kpodoh</h4><p>Head of Pre-school Department</p></div>
+        </div>
+        <div class="team-card reveal up" style="transition-delay:.15s;">
+          <div class="team-img-wrap">
+            <img src="hosf.jpg" alt="Team Member">
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+          </div>
+          <div class="team-body"><h4>Mrs. Vivian Doe Teye</h4><p>Head of Food and Beverages</p></div>
         </div>
         <div class="team-card reveal up" style="transition-delay:.2s;">
           <div class="team-img-wrap">
-            <img src="2.jfif" alt="Team Member">
+            <img src="drive.jpg" alt="Team Member">
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+          </div>
+          <div class="team-body"><h4>Mr. Glover</h4><p>Logistics & Transport Support</p></div>
+        </div>
+        <div class="team-card reveal up" style="transition-delay:.2s;">
+          <div class="team-img-wrap">
+            <img src="10.jpg" alt="Team Member">
             <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
           </div>
           <div class="team-body"><h4>Therapy Coordinator</h4><p>Special Education Support</p></div>
@@ -379,7 +446,7 @@
   </section>
 
   <!-- POLICIES + CODE OF CONDUCT -->
-  <section class="section" style="background:#f8fafc;" id="policies">
+  <section class="section" style="background:var(--navy);padding:4rem 1.5rem;text-align:center;" class="reveal up" id="policies">
     <div class="container">
       <div style="max-width:800px;margin:0 auto;">
         <div class="reveal up">
@@ -459,36 +526,101 @@
       <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:1rem;">Ready to Join the Wonder Heights Family?</h2>
       <p style="color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 2rem;">Applications for the 2025/2026 academic year are now open. Limited spaces available.</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="index.html#enroll" style="background:var(--gold2);color:var(--navy);padding:.9rem 2.2rem;border-radius:50px;font-weight:700;text-decoration:none;font-size:.95rem;">Apply Now →</a>
-        <a href="index.html#contact" style="border:2px solid rgba(255,255,255,.5);color:#fff;padding:.9rem 2.2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.95rem;">Contact Us</a>
+        <a href="index.html#enroll" class="cta-btn cta-btn--primary">Apply Now →</a>
+        <a href="index.html#contact" class="cta-btn cta-btn--secondary">Contact Us</a>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer>
+   <footer>
     <div class="footer-main">
+      <!-- Brand -->
       <div>
-        <div class="footer-logo"><img src="logo_WHIS.png" alt="WHIS"><span>Wonder Heights<br>International School</span></div>
-        <p>Educating and empowering each child to thrive in a rapidly evolving global society.</p>
+        <div class="footer-logo">
+          <img src="logo_WHIS.png" alt="WHIS Logo">
+          <span>Wonder Heights<br>International School</span>
+        </div>
+        <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/233201016051" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="index.html#video-tour" class="social-btn" aria-label="YouTube" id="video-tour"><i class="fab fa-youtube"></i></a>
+          <!-- <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a> -->
         </div>
       </div>
-      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="#director">About Us</a></li><li><a href="index.html#programs">Programs</a></li><li><a href="index.html#enroll">Admissions</a></li><li><a href="index.html#calendar">Events</a></li></ul></div>
-      <div class="footer-col"><h4>Academics</h4><ul><li><a href="index.html#programs">Early Childhood</a></li><li><a href="index.html#programs">Primary</a></li><li><a href="index.html#programs">JHS</a></li><li><a href="index.html#programs">Therapy</a></li></ul></div>
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#programs">Our Programs</a></li>
+          <li><a href="index.html#enroll">Admissions</a></li>
+          <li><a href="index.html#calendar">Events</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="about.html#policies">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <!-- Academics -->
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <!-- <li><a href="#programs">Early Childhood</a></li> -->
+          <li><a href="early-sprouts.html">Early Sprouts</a></li>
+          <li><a href="primary.html">Primary School</a></li>
+          <li><a href="secondary.html">Secondary School</a></li>
+          <li><a href="college.html">College</a></li>
+          <li><a href="therapy-special-needs.html">Therapy & Support</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
       <div class="footer-col">
         <h4>Contact Info</h4>
-        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Afienya, Greater Accra, Ghana</span></div>
-        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span>020 101 6051<br>054 579 7990</span></div>
-        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>admin@wonderheights.com</span></div>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Afienya, Greater Accra, Ghana</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <span>020 101 6051<br>054 579 7990</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>admin@wonderheights.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon–Fri: 7:30am – 4:00pm<br>Drop-off from 7:30am</span>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">© 2025–2026 Wonder Heights International School. All rights reserved. <span>♥</span></div>
+
+    <div class="footer-bottom">
+      © 2026–2027 Wonder Heights International School. All rights reserved.
+      Built with <span>♥</span> for exceptional education.
+    </div>
   </footer>
+
+  <!-- ═══════════════════════════ FLOATING BUTTONS ═══════════════════════════ -->
+  <!-- <div class="float-contact">
+    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="tel:+233201016051" class="float-btn phone" aria-label="Call us">
+      <i class="fas fa-phone-alt"></i>
+    </a>
+  </div> -->
+
+  <!-- ═══════════════════════════ EVENT MODAL ═══════════════════════════ -->
+  <!-- <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Event Details</h3>
+      <div id="eventDetails"></div>
+    </div>
+  </div> -->
 
   <script>
     const body = document.getElementById('body');
@@ -496,7 +628,27 @@
     if(localStorage.getItem('whis-theme')==='dark'){body.classList.add('dark');document.getElementById('themeIcon').className='fas fa-sun';}
     const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+    const translations = {
+      en: { },
+      fr: { },
+      tw: { }
+    };
+    function changeLanguage(lang) {
+      // Fallback no-op for any text elements not yet keyed up.
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
     function togglePolicy(item){item.classList.toggle('open');}
+    function openMobileMenu() {
+      document.querySelector('.mobile-menu').classList.add('open');
+    }
+    function closeMobileMenu() {
+      document.querySelector('.mobile-menu').classList.remove('open');
+    }
   </script>
 </body>
 </html>
