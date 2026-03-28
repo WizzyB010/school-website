@@ -405,20 +405,18 @@
             <label><i class="fas fa-graduation-cap" style="margin-right:.3rem;"></i>Graduations</label>
             <div class="filter-pills" id="graduationFilter">
               <button class="pill active" data-group="graduation" data-value="all">All Years</button>
+              <button class="pill" data-group="graduation" data-value="grad-2026">Class of 2026</button>
+              <button class="pill" data-group="graduation" data-value="grad-2025">Class of 2025</button>
               <button class="pill" data-group="graduation" data-value="grad-2024">Class of 2024</button>
-              <button class="pill" data-group="graduation" data-value="grad-2023">Class of 2023</button>
-              <button class="pill" data-group="graduation" data-value="grad-2022">Class of 2022</button>
-              <button class="pill" data-group="graduation" data-value="grad-2021">Class of 2021</button>
             </div>
           </div>
           <div class="filter-group">
             <label><i class="fas fa-bus" style="margin-right:.3rem;"></i>School Field Trips</label>
             <div class="filter-pills" id="fieldtripFilter">
               <button class="pill active" data-group="fieldtrip" data-value="all">All Years</button>
+              <button class="pill" data-group="fieldtrip" data-value="trip-2026">2025/26</button>
               <button class="pill" data-group="fieldtrip" data-value="trip-2025">2024/25</button>
               <button class="pill" data-group="fieldtrip" data-value="trip-2024">2023/24</button>
-              <button class="pill" data-group="fieldtrip" data-value="trip-2023">2022/23</button>
-              <button class="pill" data-group="fieldtrip" data-value="trip-2022">2021/22</button>
             </div>
           </div>
         </div>
@@ -635,64 +633,72 @@
   // For demonstration we use placeholder images from Unsplash (school/children themed)
   // and your actual school images where referenced (1.jpg, 2.jpg etc.)
 
-  const GALLERY_DATA = [
-    // ---- EARLY SPROUTS ----
-    { src:'1.jpg', caption:'Learning Through Play', year:'2024', tags:['early-sprouts'], category:'Early Sprouts' },
-    { src:'https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80', caption:'Nursery Art Time', year:'2024', tags:['early-sprouts'], category:'Early Sprouts' },
-    { src:'https://images.unsplash.com/photo-1545151414-4b5e3e4c61c5?w=600&q=80', caption:'Morning Circle', year:'2023', tags:['early-sprouts'], category:'Early Sprouts' },
-    { src:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80', caption:'Outdoor Discovery', year:'2023', tags:['early-sprouts'], category:'Early Sprouts' },
-    { src:'https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=600&q=80', caption:'Sensory Play Session', year:'2024', tags:['early-sprouts'], category:'Early Sprouts' },
+// ========================
+  // DYNAMIC GALLERY DATA (From Google Drive)
+  // ========================
+  // ========================
+  // DYNAMIC GALLERY DATA & AUTO-TAGGING
+  // ========================
+  let GALLERY_DATA = [];
 
-    // ---- PRIMARY ----
-    { src:'3.jpg', caption:'Science Experiments', year:'2024', tags:['primary'], category:'Primary' },
-    { src:'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80', caption:'Reading Together', year:'2024', tags:['primary'], category:'Primary' },
-    { src:'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80', caption:'Maths Challenge Day', year:'2023', tags:['primary'], category:'Primary' },
-    { src:'https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&q=80', caption:'ICT Lab Session', year:'2023', tags:['primary'], category:'Primary' },
-    { src:'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80', caption:'Creative Arts Festival', year:'2024', tags:['primary'], category:'Primary' },
-    { src:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&q=80', caption:'Sports Day Sprint', year:'2023', tags:['primary'], category:'Primary' },
+  // ⚠️ PASTE YOUR NEW APPS SCRIPT URL HERE:
+  const API_URL = "https://script.google.com/macros/s/AKfycbwRagKfAUqOSn4wFHRec-CtdSBg4brQR0XtaX_VRN2Ud4KDIO1GmZu-LFfQi1UTJj0k/exec";
 
-    // ---- LOWER SECONDARY & JHS ----
-    { src:'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&q=80', caption:'Group Project Showcase', year:'2024', tags:['lower-secondary'], category:'Lower Secondary & JHS' },
-    { src:'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80', caption:'Library Research Hour', year:'2024', tags:['lower-secondary'], category:'Lower Secondary & JHS' },
-    { src:'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80', caption:'Debate Competition', year:'2023', tags:['lower-secondary'], category:'Lower Secondary & JHS' },
-    { src:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80', caption:'Science Fair JHS', year:'2024', tags:['lower-secondary'], category:'Lower Secondary & JHS' },
+  async function loadDriveImages() {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '<div style="text-align:center; padding: 3rem; grid-column: 1 / -1;"><i class="fas fa-circle-notch fa-spin fa-2x" style="color:var(--gold2);margin-bottom:1rem;"></i><p>Loading school memories instantly...</p></div>';
 
-    // ---- UPPER SECONDARY & SHS ----
-    { src:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80', caption:'SHS Mock Examination', year:'2024', tags:['upper-secondary'], category:'Upper Secondary & SHS' },
-    { src:'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80', caption:'College Prep Seminar', year:'2024', tags:['upper-secondary'], category:'Upper Secondary & SHS' },
-    { src:'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80', caption:'Leadership Workshop', year:'2023', tags:['upper-secondary'], category:'Upper Secondary & SHS' },
-    { src:'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600&q=80', caption:'Drama & Performance Night', year:'2024', tags:['upper-secondary'], category:'Upper Secondary & SHS' },
-    
-    // ---- COLLEGE ----
-    { src:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80', caption:'College Mock Examination', year:'2024', tags:['college'], category:'College' },
-    { src:'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80', caption:'College Seminar', year:'2024', tags:['college'], category:'College' },
-    { src:'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80', caption:'Leadership Workshop', year:'2023', tags:['college'], category:'College' },
-    { src:'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600&q=80', caption:'Drama & Performance Night', year:'2024', tags:['college'], category:'College' },
+    try {
+      const response = await fetch(API_URL);
+      const rawData = await response.json();
+      
+      // SMART AUTO-TAGGER: Analyzes file names and folder names
+      GALLERY_DATA = rawData.map(item => {
+        let searchText = (item.caption + " " + item.folder).toLowerCase();
+        let tags = [];
+        let category = item.folder || 'School Event';
+        
+        // Extract a year if it exists (e.g., "2025" or "2026")
+        let yearMatch = searchText.match(/(20\d{2})/);
+        let year = yearMatch ? yearMatch[1] : new Date().getFullYear().toString();
 
-    // ---- THERAPY & SPECIAL NEEDS ----
-    { src:'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80', caption:'Sensory Integration Session', year:'2024', tags:['therapy'], category:'Therapy & Special Needs' },
-    { src:'https://images.unsplash.com/photo-1541199249251-f713e6145474?w=800&q=80', caption:'Art Therapy Showcase', year:'2024', tags:['therapy'], category:'Therapy & Special Needs' },
-    { src:'https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=600&q=80', caption:'Occupational Therapy Time', year:'2023', tags:['therapy'], category:'Therapy & Special Needs' },
+        // 1. Assign Programme Tags
+        if (searchText.includes('sprout') || searchText.includes('early')) tags.push('early-sprouts');
+        if (searchText.includes('primary')) tags.push('primary');
+        if (searchText.includes('lower') || searchText.includes('jhs')) tags.push('lower-secondary');
+        if (searchText.includes('upper') || searchText.includes('shs')) tags.push('upper-secondary');
+        if (searchText.includes('college')) tags.push('college');
+        if (searchText.includes('therapy') || searchText.includes('special')) tags.push('therapy');
 
-    // ---- GRADUATIONS ----
-    { src:'https://images.unsplash.com/photo-1612178991541-b48cc8e92a4d?w=800&q=80', caption:'Class of 2024 – Ceremony', year:'2024', tags:['upper-secondary','grad-2024'], category:'Graduation – 2024' },
-    { src:'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80', caption:'Class of 2024 – Cap Toss', year:'2024', tags:['upper-secondary','grad-2024'], category:'Graduation – 2024' },
-    { src:'https://images.unsplash.com/photo-1627556704283-c8d17c0f0fbc?w=600&q=80', caption:'Class of 2024 – Awards', year:'2024', tags:['lower-secondary','grad-2024'], category:'Graduation – 2024' },
-    { src:'https://images.unsplash.com/photo-1535982330050-f1c2fb79ff78?w=800&q=80', caption:'Class of 2023 – Ceremony', year:'2023', tags:['upper-secondary','grad-2023'], category:'Graduation – 2023' },
-    { src:'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=600&q=80', caption:'Class of 2023 – Diplomas', year:'2023', tags:['lower-secondary','grad-2023'], category:'Graduation – 2023' },
-    { src:'https://images.unsplash.com/photo-1549057446-9f5c6ac91a04?w=600&q=80', caption:'Class of 2022 – Procession', year:'2022', tags:['upper-secondary','grad-2022'], category:'Graduation – 2022' },
-    { src:'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80', caption:'Class of 2021 – Celebration', year:'2021', tags:['upper-secondary','grad-2021'], category:'Graduation – 2021' },
+        // 2. Assign Graduation Tags
+        if (searchText.includes('grad') || searchText.includes('class of')) {
+          tags.push('grad-' + year);
+          category = 'Graduation';
+        }
 
-    // ---- FIELD TRIPS ----
-    { src:'https://images.unsplash.com/photo-1543269664-56d93c4c5fc8?w=800&q=80', caption:'2024/25 – Science Museum Visit', year:'2025', tags:['primary','lower-secondary','trip-2025'], category:'Field Trip – 2024/25' },
-    { src:'https://images.unsplash.com/photo-1511884242227-16b5769a6b71?w=600&q=80', caption:'2024/25 – Nature Walk Adventure', year:'2025', tags:['early-sprouts','primary','trip-2025'], category:'Field Trip – 2024/25' },
-    { src:'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=80', caption:'2023/24 – Accra City Tour', year:'2024', tags:['primary','trip-2024'], category:'Field Trip – 2023/24' },
-    { src:'https://images.unsplash.com/photo-1476158085676-e67f57ed9ed7?w=600&q=80', caption:'2023/24 – KNUST Campus Visit', year:'2024', tags:['upper-secondary','trip-2024'], category:'Field Trip – 2023/24' },
-    { src:'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80', caption:'2022/23 – Cape Coast Excursion', year:'2023', tags:['lower-secondary','upper-secondary','trip-2023'], category:'Field Trip – 2022/23' },
-    { src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80', caption:'2022/23 – Agricultural Farm Visit', year:'2023', tags:['primary','trip-2023'], category:'Field Trip – 2022/23' },
-    { src:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80', caption:'2021/22 – Nature Reserve', year:'2022', tags:['early-sprouts','primary','trip-2022'], category:'Field Trip – 2021/22' },
-    { src:'https://images.unsplash.com/photo-1547519975-af3d2e6c8124?w=600&q=80', caption:'2021/22 – Cultural Centre', year:'2022', tags:['lower-secondary','trip-2022'], category:'Field Trip – 2021/22' },
-  ];
+        // 3. Assign Field Trip Tags
+        if (searchText.includes('trip') || searchText.includes('visit') || searchText.includes('tour') || searchText.includes('excursion')) {
+          tags.push('trip-' + year);
+          category = 'Field Trip';
+        }
+
+        // Return the perfectly formatted item for the gallery
+        return {
+          src: item.src,
+          caption: item.caption,
+          year: year,
+          tags: tags,
+          category: category
+        };
+      });
+      
+      document.getElementById('statPhotos').textContent = GALLERY_DATA.length + '+';
+      renderGallery(); 
+      
+    } catch (error) {
+      grid.innerHTML = '<p style="color: #dc2626; text-align: center; grid-column: 1 / -1; padding: 2rem;">Unable to load gallery. Please check your connection.</p>';
+    }
+  }
 
   // ========================
   // FILTER STATE
@@ -704,7 +710,8 @@
       const progOk = state.programme === 'all' || item.tags.includes(state.programme);
       const gradOk = state.graduation === 'all' || item.tags.includes(state.graduation);
       const tripOk = state.fieldtrip === 'all' || item.tags.includes(state.fieldtrip);
-      return progOk && gradOk && tripOk;
+      // Ensure the image matches ALL active filter categories
+      return progOk && gradOk && tripOk; 
     });
   }
 
@@ -719,7 +726,7 @@
     const empty = document.getElementById('emptyState');
     const countEl = document.getElementById('countDisplay');
     currentItems = getFilteredItems();
-    lbIndex = 0; // reset lightbox index when filtering changes
+    lbIndex = 0; 
     countEl.textContent = currentItems.length;
 
     grid.classList.add('loading');
@@ -757,14 +764,13 @@
   }
 
   // ========================
-  // PILL CLICKS
+  // PILL CLICKS (Filters)
   // ========================
   document.querySelectorAll('.pill').forEach(btn => {
     btn.addEventListener('click', () => {
       const group = btn.dataset.group;
       const value = btn.dataset.value;
 
-      // Deactivate siblings in same group
       document.querySelectorAll(`.pill[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       state[group] = value;
@@ -834,10 +840,8 @@
     if (e.key === 'Escape') closeLightboxDirect();
   });
 
-  // ========================
-  // INIT
-  // ========================
-  renderGallery();
+  // START
+  loadDriveImages();
   </script>
 </body>
 </html>
