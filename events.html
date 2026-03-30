@@ -71,6 +71,13 @@
     .mobile-menu a:hover{color:var(--gold2);}
     .mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
     .mobile-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
+
+    /* .skip-link{position:absolute;top:-44px;left:0;background:var(--gold2);color:var(--navy);padding:.6rem 1rem;z-index:10000;transition:top .25s ease;}
+    .skip-link:focus{top:0;outline:3px solid #fff;text-decoration:none;}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+    .nav-btn:focus{outline:2px solid var(--gold2);outline-offset:2px;}
+    .nav-links a:focus,.dropdown a:focus,.mobile-menu a:focus{outline:2px dashed var(--gold2);outline-offset:3px;}
+     */
     /* PAGE HERO */
     .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,rgba(201,146,10,.4) 100%);padding:5.5rem 1.5rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
     .page-hero::after{content:'';position:absolute;inset:0;background:url('logo_WHIS.png') center/260px no-repeat;opacity:.04;pointer-events:none;}
@@ -267,6 +274,7 @@
   </style>
 </head>
 <body>
+  <!-- <a href="#mainContent" class="skip-link">Skip to content</a> -->
 
   <div id="loader">
     <img src="logo_WHIS.png" alt="Logo">
@@ -287,71 +295,75 @@
     </div>
   </div>
 
-  <nav>
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="logo_WHIS.png" alt="Logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
         <div><span class="logo-main">Wonder Heights</span><span class="logo-sub">International School</span></div>
       </a>
-    <div class="nav-links" id="navLinks">
+      <div class="nav-links">
         <div class="nav-item">
-          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
-            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
-            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
-            <a href="#programs"><i class="fas fa-th-large"></i> Our Programs</a>
-            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
-            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
-            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="about-dropdown">About Us <i class="fas fa-chevron-down chevron" aria-hidden="true"></i></button>
+          <div class="dropdown" id="about-dropdown" role="menu" aria-label="About pages">
+            <a href="about.html" role="menuitem"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history" role="menuitem"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies" role="menuitem"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="about.html#programs" role="menuitem"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team" role="menuitem"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics" role="menuitem"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct" role="menuitem"><i class="fas fa-gavel"></i> Code of Conduct</a>
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
-            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
-            <a href="lower-secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
-            <a href="upper-secondary.html"><i class="fas fa-graduation-cap"></i>College</a>
-            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="academics-dropdown">Academics <i class="fas fa-chevron-down chevron" aria-hidden="true"></i></button>
+          <div class="dropdown" id="academics-dropdown" role="menu" aria-label="Academic programs">
+            <a href="early-sprouts.html" role="menuitem"><i class="fas fa-shapes"></i> Early Sprouts</a>
+            <a href="primary.html" role="menuitem"><i class="fas fa-book-open"></i> Primary</a>
+            <a href="secondary.html" role="menuitem"><i class="fas fa-graduation-cap"></i> Secondary (JHS & SHS)</a>
+            <a href="college.html" role="menuitem"><i class="fas fa-graduation-cap"></i> College</a>
+            <a href="therapy-special-needs.html" role="menuitem"><i class="fas fa-heart"></i> Therapy & Special Needs</a>
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
-            <a href="enrollment.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
-            <a href="index.html#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="admission-dropdown">Admission <i class="fas fa-chevron-down chevron" aria-hidden="true"></i></button>
+          <div class="dropdown" id="admission-dropdown" role="menu" aria-label="Admission links">
+            <a href="enrollment.html" role="menuitem"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll" role="menuitem"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
           </div>
         </div>
-        <a href="events.html" class="nav-btn">Events</a>
+        <a href="events.html" class="nav-btn" aria-current="page">Events</a>
         <a href="gallery.html" class="nav-btn">Gallery</a>
         <a href="index.html#contact" class="nav-btn">Contact</a>
         <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
-          <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
+          <i class="fas fa-user-graduate" style="margin-right:.4rem;"></i> Enroll Now
         </a>
         <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
           <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
-
-      <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+      <button class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open mobile menu" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+    <button class="mobile-close" aria-label="Close mobile menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <div id="mobileMenuTitle" class="sr-only">Mobile menu</div>
     <a href="index.html" onclick="closeMobileMenu()">Home</a>
     <a href="about.html" onclick="closeMobileMenu()">About Us</a>
-    <a href="#programs" onclick="closeMobileMenu()">Academics</a>
-    <a href="#calendar" onclick="closeMobileMenu()">Events</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
+    <a href="early-sprouts.html" onclick="closeMobileMenu()">Early Sprouts</a>
+    <a href="primary.html" onclick="closeMobileMenu()">Primary</a>
+    <a href="lower-secondary.html" onclick="closeMobileMenu()">Secondary (JHS & SHS)</a>
+    <a href="upper-secondary.html" onclick="closeMobileMenu()">College</a>
+    <a href="therapy-special-needs.html" onclick="closeMobileMenu()">Therapy & Special Needs</a>
+    <a href="events.html" onclick="closeMobileMenu()">Events</a>
+    <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="game.html" onclick="closeMobileMenu()">Game</a>
+    <a href="index.html#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
   </div>
 
-  <div class="page-hero">
+  <section id="mainContent" class="page-hero">
     <div class="ph-inner">
       <div class="breadcrumb"><a href="index.html">Home</a> / Events &amp; Calendar</div>
       <div class="page-badge"><i class="fas fa-calendar-alt"></i>&nbsp; Academic Year 2025 / 2026</div>
@@ -359,7 +371,7 @@
       <p>All school events, term dates, Ghana public holidays, and activities in one place. Click any date on the calendar to see what's on.</p>
     </div>
   </div>
-
+  </section>
   <div class="stat-strip">
     <div class="stat-grid">
       <div class="stat-item"><div class="stat-num" id="totalCount">32</div><div class="stat-lbl">Total Events</div></div>
@@ -401,11 +413,11 @@
             <button class="show-all-btn" onclick="showAll()"><i class="fas fa-list"></i> Show All</button>
           </div>
           <div class="filter-bar">
-            <button class="filter-btn active" data-f="all"      onclick="setFilter('all',this)"><i class="fas fa-border-all"></i> All</button>
-            <button class="filter-btn" data-f="academic"        onclick="setFilter('academic',this)"><span class="dot" style="background:#3b82f6;"></span> Academic</button>
-            <button class="filter-btn" data-f="holiday"         onclick="setFilter('holiday',this)"><span class="dot" style="background:#eab308;"></span> Holidays</button>
-            <button class="filter-btn" data-f="sports"          onclick="setFilter('sports',this)"><span class="dot" style="background:#22c55e;"></span> Sports</button>
-            <button class="filter-btn" data-f="event"           onclick="setFilter('event',this)"><span class="dot" style="background:#ec4899;"></span> Events</button>
+            <button class="filter-btn active" data-f="all"      aria-pressed="true" onclick="setFilter('all',this)"><i class="fas fa-border-all"></i> All</button>
+            <button class="filter-btn" data-f="academic"         aria-pressed="false" onclick="setFilter('academic',this)"><span class="dot" style="background:#3b82f6;"></span> Academic</button>
+            <button class="filter-btn" data-f="holiday"          aria-pressed="false" onclick="setFilter('holiday',this)"><span class="dot" style="background:#eab308;"></span> Holidays</button>
+            <button class="filter-btn" data-f="sports"           aria-pressed="false" onclick="setFilter('sports',this)"><span class="dot" style="background:#22c55e;"></span> Sports</button>
+            <button class="filter-btn" data-f="event"            aria-pressed="false" onclick="setFilter('event',this)"><span class="dot" style="background:#ec4899;"></span> Events</button>
           </div>
           <div class="ev-list" id="evList"></div>
         </div>
@@ -644,14 +656,22 @@
 
   function showAll(){
     selectedDate=null; activeFilter='all';
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.f==='all'));
+    document.querySelectorAll('.filter-btn').forEach(b=>{
+      b.classList.toggle('active',b.dataset.f==='all');
+      b.setAttribute('aria-pressed', b.dataset.f==='all' ? 'true' : 'false');
+    });
     renderCalendar(); filterAndRender();
   }
 
   function setFilter(f,btn){
     activeFilter=f; selectedDate=null;
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active'); renderCalendar(); filterAndRender();
+    document.querySelectorAll('.filter-btn').forEach(b=>{
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed','true');
+    renderCalendar(); filterAndRender();
   }
 
   function filterAndRender(){
@@ -699,6 +719,77 @@
   renderCalendar();
   filterAndRender();
   updateStats();
+
+  // Accessible mobile nav and menu keyboard handling
+  const mobileMenu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  const mobileClose = document.querySelector('.mobile-close');
+
+  function openMobileMenu(){
+    if(!mobileMenu) return;
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden','false');
+    hamburger?.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    const firstLink = mobileMenu.querySelector('a');
+    if(firstLink) firstLink.focus();
+  }
+
+  function closeMobileMenu(){
+    if(!mobileMenu) return;
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden','true');
+    hamburger?.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    hamburger?.focus();
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeMobileMenu();
+      document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+        const dd = btn.nextElementSibling;
+        if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+      });
+    }
+  });
+
+  document.querySelectorAll('.nav-item > button').forEach(button=>{
+    const dropdown = button.nextElementSibling;
+    if(!dropdown || !dropdown.classList.contains('dropdown')) return;
+    button.addEventListener('click', function(e){
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.nav-item > button').forEach(btn=>{
+        if(btn !== button){ btn.setAttribute('aria-expanded','false'); const dd=btn.nextElementSibling; if(dd && dd.classList.contains('dropdown')) dd.style.display=''; }
+      });
+      button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      dropdown.style.display = isOpen ? '' : 'block';
+    });
+    button.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        button.click();
+      }
+    });
+  });
+
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.nav-item')){
+      document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+        const dd = btn.nextElementSibling;
+        if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+      });
+    }
+    if(mobileMenu && mobileMenu.classList.contains('open') && !e.target.closest('#mobileMenu') && !e.target.closest('.hamburger')){
+      closeMobileMenu();
+    }
+  });
+
+  if(mobileClose){ mobileClose.addEventListener('click', closeMobileMenu); }
+
   </script>
 
   <script>

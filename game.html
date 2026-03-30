@@ -10,7 +10,30 @@
   <style>
     :root { --navy: #002855; --navy2: #003a7a; --gold: #f0b429; --gold2: #c9920a; --cream: #fdf8f0; }
     body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: #fff; margin: 0; overflow-x: hidden; }
-    
+
+    .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold2); color: #002855; padding: 10px 16px; font-weight: 700; text-decoration: none; z-index: 1100; transition: top 0.2s ease-in-out; }
+    .skip-link:focus { top: 12px; }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    nav { position: sticky; top: 0; z-index: 1000; background: #fff; color: #002855; box-shadow: 0 2px 20px rgba(0,40,85,0.08); }
+    .topbar { background: var(--navy); color: #cbd5e1; font-size: .78rem; padding: .45rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+    .topbar a { color: #cbd5e1; text-decoration: none; }
+    .topbar a:hover { color: var(--gold2); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: #002855; }
+    .nav-logo img { height: 44px; width: 44px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .2rem; }
+    .nav-btn, .nav-links a { background: none; border: none; cursor: pointer; font-size: .88rem; font-weight: 500; color: var(--navy); padding: .5rem .8rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: .3rem; }
+    .nav-btn:hover, .nav-links a:hover { background: #f0f4ff; color: var(--navy); }
+    .enroll-cta { background: var(--navy); color: #fff !important; padding: .55rem 1.3rem; border-radius: 50px; font-weight: 600; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); margin: 5px 0; transition: .3s; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,40,85,0.97); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #fff; font-size: 1.4rem; text-decoration: none; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; color: #fff; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
     /* Lobby / Welcome Screen */
     #lobby { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
     .logo-img { width: 80px; margin-bottom: 20px; animation: pulse 2s infinite; }
@@ -47,8 +70,62 @@
   </style>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">Skip to content</a>
 
-  <div id="lobby">
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.com"><i class="fas fa-envelope gold"></i>admin@wonderheights.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-map-marker-alt gold"></i>Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i>Mon–Fri: 7:30am – 4:00pm</span>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    </div>
+  </div>
+
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
+        <span>Wonder Heights</span>
+      </a>
+      <div class="nav-links">
+        <a href="about.html">About Us</a>
+        <a href="early-sprouts.html">Early Sprouts</a>
+        <a href="primary.html">Primary</a>
+        <a href="secondary.html">Secondary</a>
+        <a href="college.html">College</a>
+        <a href="therapy-special-needs.html">Therapy</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html#enroll" class="enroll-cta">Enroll</a>
+        <a href="game.html" class="nav-btn" style="font-weight:700;">Game</a>
+      </div>
+      <button class="hamburger" aria-label="Open mobile menu" aria-controls="mobileMenu" aria-expanded="false" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+    <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
+    <div id="mobileMenuTitle" class="sr-only">Mobile menu</div>
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="early-sprouts.html" onclick="closeMobileMenu()">Early Sprouts</a>
+    <a href="primary.html" onclick="closeMobileMenu()">Primary</a>
+    <a href="secondary.html" onclick="closeMobileMenu()">Secondary</a>
+    <a href="college.html" onclick="closeMobileMenu()">College</a>
+    <a href="therapy-special-needs.html" onclick="closeMobileMenu()">Therapy</a>
+    <a href="events.html" onclick="closeMobileMenu()">Events</a>
+    <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="index.html#enroll" class="enroll-cta" onclick="closeMobileMenu()">Enroll</a>
+  </div>
+
+  <div id="mainContent" class="lobby">
     <img src="logo_WHIS.png" class="logo-img" alt="WHIS Logo">
     <h1>Wonder Arcade</h1>
     <p class="subtitle">Welcome to our digital playground. Choose a challenge and show us your skills!</p>
@@ -102,11 +179,50 @@
   </div>
 
   <script>
-    const lobby = document.getElementById('lobby');
+    const lobby = document.getElementById('mainContent');
     const winMsg = document.getElementById('winMessage');
     const colors = ['#f0b429', '#3b82f6', '#ec4899', '#22c55e', '#ffffff'];
 
+    function openMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      const firstLink = mobileMenu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (hamburger) hamburger.focus();
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
     function goHome() { location.reload(); }
+
+    const themeIcon = document.getElementById('themeIcon');
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      if (themeIcon) themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('whis-theme', isDark ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('whis-theme') === 'dark') {
+      document.body.classList.add('dark');
+      if (themeIcon) themeIcon.className = 'fas fa-sun';
+    }
     function showWin() { winMsg.style.display = 'flex'; }
 
     // --- BUBBLE POP LOGIC ---

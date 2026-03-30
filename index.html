@@ -135,7 +135,7 @@
       z-index: 200;
     }
     body.dark .dropdown { background: #1e293b; border-color: #334155; }
-    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-item:hover .dropdown, .dropdown.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown a {
       display: flex; align-items: center; gap: 0.6rem;
       padding: 0.6rem 1.1rem; font-size: 0.85rem; color: var(--text);
@@ -734,6 +734,24 @@
     }
     .float-btn:hover .float-label { opacity: 1; }
 
+    /* .skip-link {
+      position: absolute; top: -999px; left: 1rem; background: #002855; color: #fff;
+      padding: 0.7rem 1rem; border-radius: 4px; z-index: 9999; font-size: 0.9rem;
+      text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .skip-link:focus {
+      top: 1rem; left: 1rem; outline: 3px solid #f0b429;
+      opacity: 1; transition: top 0.2s ease;
+    }
+
+    button:focus, input:focus, select:focus, textarea:focus, .nav-btn:focus, .hero-btn:focus, .program-link:focus, .calendar-card:focus, .event-item:focus {
+      outline: 2px solid #f0b429; outline-offset: 3px;
+    } */
+
+    .hamburger, .mobile-close, .map-btn, .form-submit, .newsletter-btn, .float-btn {
+      touch-action: manipulation; min-height: 44px; min-width: 44px;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .about-grid, .why-grid { grid-template-columns: 1fr; }
@@ -749,25 +767,43 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
-      .hero { height: 85vh; }
+      .nav-logo-text .main { font-size: 0.95rem; }
+      .nav-logo-text .sub { font-size: 0.55rem; }
+      .hero { height: 70vh; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 0.95rem; }
+      .hero-btns { flex-direction: column; gap: 0.8rem; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.15); }
       .programs-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: repeat(2,1fr); }
-      .gallery-item:first-child { grid-column: span 2; }
-      .testi-slide { flex: 0 0 calc(100% - 1rem); }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .testi-slide { flex: 0 0 100%; margin-right: 0; }
       .footer-main { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
       .contact-strip-grid { grid-template-columns: 1fr; }
       .topbar .top-left { gap: 0.7rem; }
+      .topbar .top-right { display: none; }
       .scroll-hint { display: none; }
+      .program-card, .calendar-card, .events-card, .testi-card { min-height: auto; }
+      .section { padding: 2rem 1rem; }
+      .hero-dots { bottom: 1rem; }
     }
     @media (max-width: 480px) {
-      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
       .stat-item { border-right: none !important; }
       .newsletter-form { flex-direction: column; }
-      .about-stats { grid-template-columns: repeat(3,1fr); }
+      .about-stats { grid-template-columns: 1fr; }
+      .enroll-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 1rem; }
+      .contact-strip { padding: 1rem; }
+      .hero-content h1 { font-size: 1.6rem; }
+      .hero-content p { font-size: 0.88rem; }
+      .hero { height: 65vh; }
+      .floating-btn { width: 42px; height: 42px; }
+      .float-label { display: none; }
+      .modal-content { margin: 10% 1rem; width: auto; }
     }
 
     #whis-loader {
@@ -862,10 +898,43 @@
     .map-btn:hover { background: #fff; color: var(--navy); transform: scale(1.03); }
 
 
+/* --- CUSTOM ERROR POPUP --- */
+#error-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fee2e2; /* Soft Red */
+  border-left: 5px solid #dc2626; /* Deep Red */
+  color: #991b1b;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10000;
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-weight: 500;
+  max-width: 350px;
+}
+#error-popup.show { transform: translateX(0); }
+#error-popup i { font-size: 1.2rem; }
+
+body.dark #error-popup {
+  background: #450a0a;
+  color: #fecaca;
+  border-left-color: #ef4444;
+}
   </style>
 </head>
 
 <body id="body">
+  <!-- <a href="#mainContent" class="skip-link">Skip to content</a> -->
+   <div id="error-popup" role="alert">
+  <i class="fas fa-exclamation-circle"></i>
+  <span id="error-msg"></span>
+</div>
 
 <div id="whis-loader">
   <div class="loader-inner">
@@ -902,7 +971,7 @@
   </div>
 
   <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
-  <nav id="mainNav">
+  <nav id="mainNav" role="navigation" aria-label="Primary navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="logo_WHIS.png" alt="WHIS Logo">
@@ -915,9 +984,9 @@
       <div class="nav-links" id="navLinks">
         <!-- About Dropdown -->
         <div class="nav-item">
-          <button class="nav-btn"><i class="fas fa-chevron-down chevron"></i> About Us</button>
-          <div class="dropdown">
-            <a href="about.html#director"><i class="fas fa-star"></i> Message from Director</a>
+          <button class="nav-btn nav-dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="about-dropdown"><i class="fas fa-chevron-down chevron"></i> About Us</button>
+          <div class="dropdown" id="about-dropdown" role="menu" aria-label="About pages">
+            <a href="about.html#director" role="menuitem"><i class="fas fa-star"></i> Message from Director</a>
             <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
             <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
             <a href="#programs"><i class="fas fa-th-large"></i> Our Programs</a>
@@ -928,9 +997,9 @@
         </div>
         <!-- Academics Dropdown -->
         <div class="nav-item">
-          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+          <button class="nav-btn nav-dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="academics-dropdown">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" id="academics-dropdown" role="menu" aria-label="Academic programs">
+            <a href="early-sprouts.html" role="menuitem"><i class="fas fa-shapes"></i>Early Sprouts</a>
             <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
             <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
             <a href="college.html"><i class="fas fa-graduation-cap"></i> College</a>
@@ -939,9 +1008,9 @@
         </div>
         <!-- Admission Dropdown -->
         <div class="nav-item">
-          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+          <button class="nav-btn nav-dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="admission-dropdown">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" id="admission-dropdown" role="menu" aria-label="Admission links">
+            <a href="enrollment.html" role="menuitem"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
             <a href="#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
             <a href="#calendar"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
           </div>
@@ -956,26 +1025,34 @@
           <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
 
-      <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+      <button class="hamburger" onclick="openMobileMenu()" aria-label="Open mobile menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile navigation menu">
+    <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
     <a href="index.html" onclick="closeMobileMenu()">Home</a>
     <a href="about.html" onclick="closeMobileMenu()">About Us</a>
-    <a href="#programs" onclick="closeMobileMenu()">Academics</a>
-    <a href="#calendar" onclick="closeMobileMenu()">Events</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <a href="#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
+    <a href="index.html#programs" onclick="closeMobileMenu()">Programs</a>
+    <a href="early-sprouts.html" onclick="closeMobileMenu()">Early Sprouts</a>
+    <a href="primary.html" onclick="closeMobileMenu()">Primary</a>
+    <a href="secondary.html" onclick="closeMobileMenu()">Secondary (JHS/SHS)</a>
+    <a href="college.html" onclick="closeMobileMenu()">College</a>
+    <a href="therapy-special-needs.html" onclick="closeMobileMenu()">Therapy & Special Needs</a>
+    <a href="enrollment.html" onclick="closeMobileMenu()">Admission Requirements</a>
+    <a href="index.html#calendar" onclick="closeMobileMenu()">Academic Calendar</a>
+    <a href="index.html#calendar" onclick="closeMobileMenu()">Events</a>
+    <a href="index.html#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="index.html#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
+    <a href="game.html" onclick="closeMobileMenu()">Game</a>
   </div>
 
   <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
-  <section class="hero" id="home">
+  <section class="hero" id="mainContent" role="main">
     <!-- Slides -->
     <div class="hero-slide active" style="background-image:url('1.jpg');"></div>
     <div class="hero-slide" style="background-image:url('8.jpg');"></div>
@@ -990,7 +1067,7 @@
         Service <em>Beyond</em> Self
       </h1>
       <p class="reveal up" style="animation-delay:0.2s;" data-key="heroSub">
-        Educating and empowering each child to thrive in a rapidly evolving global society. Built on Christian values, excellence, and community.
+        "Empowering global leaders through a harmonised Cambridge and GES curriculum. We provide a world-class education grounded in Christian values and academic rigour."
       </p>
       <div class="hero-btns reveal up" style="animation-delay:0.3s;">
         <a href="#programs" class="btn-primary" data-key="discover">
@@ -1056,11 +1133,11 @@
           <div class="section-label">About Wonder Heights</div>
           <h2 class="section-title" data-key="welcomeTitle">Welcome to Wonder Heights</h2>
           <p class="section-sub" style="margin-bottom:1.5rem;" data-key="welcomeText">
-            Wonder Heights International School extends a warm welcome to all prospective learners and families, inviting them to embark on a journey of education that transcends conventional boundaries.
+            "Wonder Heights International School offers a premier educational experience, seamlessly integrating the Cambridge International Curriculum with GES standards. Our approach ensures that learners are not only rooted in Ghanaian excellence but are also prepared to compete on the global stage."
           </p>
-          <p class="section-sub" style="font-size:0.9rem; margin-bottom:2rem;">
+          <!-- <p class="section-sub" style="font-size:0.9rem; margin-bottom:2rem;">
             Our institution is dedicated to fostering the individual talents of each learner, creating an environment conducive to academic, social, and emotional growth — grounded in Christian values of responsibility, discipline, and service.
-          </p>
+          </p> -->
           <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
             <a href="about.html" class="btn-primary" style="background:var(--navy); box-shadow:0 4px 14px rgba(0,40,85,0.25); color:#fff; padding:0.8rem 1.8rem; font-size:0.88rem;">
               Read Our Story
@@ -1162,33 +1239,33 @@
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-book-open"></i></div>
             <h3>Primary School</h3>
-            <p>Building critical thinkers and confident learners across all core subjects — Mathematics, Science, English, and more.</p>
+            <p>Integrating the <strong>Cambridge Primary</strong> and <strong>GES frameworks</strong> to build mastery in Literacy, Numeracy, and Science through inquiry-based learning.</p>
             <a href="primary.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- Card 4 -->
-        <div class="program-card reveal up" style="transition-delay:0.15s;">
-          <img src="5.jfif" alt="JHS" class="program-img">
+       <div class="program-card reveal up" style="transition-delay:0.15s;">
+          <img src="2222.jpg" alt="Secondary Education" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>Secondary (Upper & Lower) | JHS & SHS </h3>
-            <p>Preparing students for BECE and beyond with rigorous academics, leadership development, and extracurricular activities.</p>
+            <h3>Secondary Education</h3>
+            <p>Comprehensive preparation for <strong>BECE (GES)</strong>, <strong>Cambridge Checkpoints</strong>, and <strong>IGCSE</strong>. We bridge national excellence with global qualifications.</p>
             <a href="secondary.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- Card 5-->
         <div class="program-card reveal up" style="transition-delay:0.15s;">
-          <img src="5.jfif" alt="JHS" class="program-img">
+          <img src="cg.jpg" alt="College and SAT Prep" class="program-img">
           <div class="program-body">
-            <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>College</h3>
-            <p>Preparing students for WASSCE and beyond with rigorous academics, leadership development, and extracurricular activities.</p>
+            <div class="program-icon"><i class="fas fa-university"></i></div>
+            <h3>College & Sixth Form</h3>
+            <p>Directing students toward <strong>WASSCE</strong>, <strong>A-Levels</strong>, and <strong>SAT</strong> success. Expert coaching for top-tier university placement in Ghana and abroad.</p>
             <a href="college.html" class="program-link">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- Card 6 -->
         <div class="program-card reveal up" style="transition-delay:0.25s;">
-          <img src="3.jfif" alt="Therapy" class="program-img">
+          <img src="sp.jpg" alt="Therapy" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-heart"></i></div>
             <h3>Therapy & Special Needs School</h3>
@@ -1220,6 +1297,7 @@
           <p class="section-sub reveal up" style="animation-delay:0.15s; margin-bottom:2.5rem;">
             Our school is grounded in Christian ideals — responsibility, discipline, excellence, ethical behaviour, leadership, and service beyond self.
           </p>
+          
 
           <div class="why-items">
             <div class="why-item reveal left" style="animation-delay:0.1s;">
@@ -1388,16 +1466,15 @@
               </div>
             </div>
 
-            <div class="form-group">
+           <div class="form-group">
               <label for="program">Program Applying For *</label>
               <select id="program" name="program" required>
                 <option value="">Select a program</option>
-                <option value="daycare">Day Care</option>
-                <option value="early_childhood">Early Childhood Education</option>
-                <option value="preschool">Preschool (KG1–KG2)</option>
-                <option value="primary">Primary School (Class 1–6)</option>
-                <option value="jhs">Junior High School (JHS 1–3)</option>
-                <option value="therapy">Therapy Programme</option>
+                <option value="early_sprouts">Early Sprouts (Daycare)</option>
+                <option value="primary">Primary School (Cambridge & GES)</option>
+                <option value="secondary">Secondary (BECE, Checkpoint, IGCSE)</option>
+                <option value="college">College (WASSCE, A-Levels, SAT)</option>
+                <option value="therapy">Therapy & Special Needs</option>
               </select>
             </div>
 
@@ -1570,7 +1647,7 @@
           <p>Subscribe for school updates, events, and news.</p>
         </div>
         <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
-          <input type="email" class="newsletter-input" placeholder="Enter your email address" name="newsletter_email" required>
+          <input type="email" class="newsletter-input" name="newsletter_email" placeholder="Enter your email address" required>
           <button type="submit" class="newsletter-btn">Subscribe <i class="fas fa-arrow-right" style="margin-left:0.3rem;"></i></button>
         </form>
       </div>
@@ -1700,13 +1777,71 @@
   <script>
     // ── MOBILE MENU ──
     function openMobileMenu() {
-      document.getElementById('mobileMenu').classList.add('open');
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.add('open');
+      menu.setAttribute('aria-hidden', 'false');
+      const hamburger = document.querySelector('.hamburger');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      menu.querySelector('a, button').focus();
     }
     function closeMobileMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      const hamburger = document.querySelector('.hamburger');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (hamburger) hamburger.focus();
     }
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    function closeAllDropdowns() {
+      document.querySelectorAll('.nav-btn[aria-expanded="true"]').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        const drop = btn.closest('.nav-item')?.querySelector('.dropdown');
+        if (drop) {
+          drop.classList.remove('visible');
+          drop.style.opacity = '';
+          drop.style.visibility = '';
+          drop.style.transform = '';
+        }
+      });
+    }
+
+    document.querySelectorAll('.nav-item > button[aria-haspopup="true"]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const open = this.getAttribute('aria-expanded') === 'true';
+        closeAllDropdowns();
+        if (!open) {
+          this.setAttribute('aria-expanded', 'true');
+          const drop = this.nextElementSibling;
+          if (drop) {
+            drop.classList.add('visible');
+            drop.style.opacity = '1';
+            drop.style.visibility = 'visible';
+            drop.style.transform = 'translateY(0)';
+          }
+        }
+      });
+
+      btn.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeAllDropdowns();
+      }
+    });
 
     // ── HERO SLIDESHOW ──
     let currentSlide = 0;
@@ -1926,81 +2061,153 @@
       video.play();
     }
 
-    // ── ENROLLMENT FORM ──
-    document.getElementById('enrollForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const form = this;
-      let valid = true;
+    // --- UPDATED ENROLLMENT FORM SUBMISSION ---
+// Function to trigger the nice CSS popup
+function showError(message) {
+  const popup = document.getElementById('error-popup');
+  const msgSpan = document.getElementById('error-msg');
+  msgSpan.textContent = message;
+  popup.classList.add('show');
+  
+  // Auto-hide after 4 seconds
+  setTimeout(() => {
+    popup.classList.remove('show');
+  }, 4000);
+}
 
-      // Validate required fields
-      ['firstName', 'lastName'].forEach(id => {
-        const el = document.getElementById(id);
-        const err = document.getElementById(id + 'Err');
-        if (!el.value.trim()) {
-          if (err) { err.classList.add('visible'); }
-          el.style.borderColor = '#dc2626';
-          valid = false;
-        } else {
-          if (err) { err.classList.remove('visible'); }
-          el.style.borderColor = '';
-        }
-      });
-      // Validate phone
-      const phoneEl = document.getElementById('phone');
-      const phoneErr = document.getElementById('phoneErr');
-      const phoneRegex = /^(\+233|0)[23579]\d{7}$/;
-      if (!phoneRegex.test(phoneEl.value.trim())) {
-        phoneErr.classList.add('visible');
-        phoneEl.style.borderColor = '#dc2626';
-        valid = false;
-      } else {
-        phoneErr.classList.remove('visible');
-        phoneEl.style.borderColor = '';
-      }
-      if (!valid) return;
+document.getElementById('enrollForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const form = this;
+  let valid = true;
 
-      // Show loading state
-      btn.textContent = 'Submitting...';
-      btn.disabled = true;
+  // 1. Validate Required Text Fields
+  ['firstName', 'lastName', 'parentName'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#dc2626';
+      valid = false;
+    }
+  });
 
-      // ✏️ REPLACE THE URL BELOW WITH YOUR BACKEND ENDPOINT
-      // Example: await fetch('/api/enroll', { method:'POST', body: new FormData(form) });
-      await new Promise(r => setTimeout(r, 1200)); // Simulated delay
+  if (!valid) {
+    showError("Please fill in all required fields marked with *");
+    return;
+  }
 
+  // 2. Validate Program Selection
+  const programEl = document.getElementById('program');
+  if (programEl.value === "") {
+    showError("Please select an academic program.");
+    programEl.style.borderColor = '#dc2626';
+    return;
+  }
+
+  // 3. Validate Phone (Ghanaian format)
+  const phoneEl = document.getElementById('phone');
+  const phoneRegex = /^(?:\+233|0)[235]\d{8}$/; 
+  if (!phoneRegex.test(phoneEl.value.trim())) {
+    showError("Please enter a valid Ghana phone number (e.g.  054 579 7990).");
+    phoneEl.style.borderColor = '#dc2626';
+    return;
+  }
+
+  // 4. Email Validation (.com check)
+  const emailEl = document.getElementById('email');
+  const emailValue = emailEl.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
+  if (emailValue !== "" && !emailRegex.test(emailValue)) {
+    showError("The email address must include '@' and end with a domain like '.com'.");
+    emailEl.style.borderColor = '#dc2626';
+    return;
+  }
+
+  // 5. SUBMIT TO GOOGLE SHEETS
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; 
+
+  try {
+    const response = await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
+    if (response.ok) {
       form.reset();
       btn.textContent = '✓ Submitted!';
       document.getElementById('formSuccess').classList.add('visible');
-      setTimeout(() => {
-        btn.textContent = 'Submit Application';
-        btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:0.5rem;"></i>Submit Application';
-        btn.disabled = false;
-        document.getElementById('formSuccess').classList.remove('visible');
-      }, 5000);
-    });
+    } else {
+      throw new Error();
+    }
+  } catch (error) {
+    showError("Network error. Please check your internet and try again.");
+    btn.textContent = 'Submit Application';
+    btn.disabled = false;
+  } finally {
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:0.4rem;"></i>Submit Application';
+      btn.disabled = false;
+      document.getElementById('formSuccess').classList.remove('visible');
+    }, 5000);
+  }
+});
 
-    // Remove red border on input
-    document.querySelectorAll('#enrollForm input, #enrollForm select').forEach(el => {
-      el.addEventListener('input', function() {
-        this.style.borderColor = '';
-        const err = document.getElementById(this.id + 'Err');
-        if (err) err.classList.remove('visible');
-      });
-    });
+// Removes red borders as user types
+document.querySelectorAll('#enrollForm input, #enrollForm select').forEach(el => {
+  el.addEventListener('input', function() {
+    this.style.borderColor = '';
+    const err = document.getElementById(this.id + 'Err');
+    if (err) err.classList.remove('visible');
+  });
+});
 
     // ── NEWSLETTER ──
-    function submitNewsletter(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('button');
+    async function submitNewsletter(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button');
+  const emailInput = form.querySelector('input[name="newsletter_email"]');
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; // Use your Google Script URL here
+
+  // Basic validation to ensure it's a real email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(emailInput.value)) {
+    showError("Please enter a valid email address ending in .com or similar.");
+    return;
+  }
+
+  btn.textContent = 'Subscribing...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch(scriptURL, { 
+      method: 'POST', 
+      body: new FormData(form) 
+    });
+    
+    if (response.ok) {
       btn.textContent = '✓ Subscribed!';
       form.reset();
-      setTimeout(() => btn.textContent = 'Subscribe', 3000);
+      // Optional: Show a success message
+    } else {
+      throw new Error();
     }
-
+  } catch (error) {
+    showError("Connection error. Please try again.");
+    btn.textContent = 'Subscribe';
+    btn.disabled = false;
+  }
+}
     // ── LANGUAGE ──
     const t = {
-      en: { heroTitle: 'Service Beyond Self', heroSub: 'Educating and empowering each child to thrive in a rapidly evolving global society.', discover: 'Discover Our School', enrollToday: 'Enroll Today', welcomeTitle: 'Welcome to Wonder Heights', videoTitle: 'Experience Wonder Heights', programsTitle: 'Nurturing Every Stage of Growth' },
+      en: { 
+        heroTitle: 'Service Beyond Self', 
+        heroSub: 'Empowering global leaders through a harmonised Cambridge and GES curriculum.', 
+        discover: 'Discover Our School', 
+        enrollToday: 'Enroll Today', 
+        welcomeTitle: 'A Fusion of Global & National Excellence', 
+        videoTitle: 'Experience Wonder Heights', 
+        programsTitle: 'Nurturing Every Stage of Growth' 
+      },
       fr: { heroTitle: 'Service au-delà de soi', heroSub: 'Éduquer et autonomiser chaque enfant pour s\'épanouir dans une société mondiale.', discover: 'Découvrez l\'école', enrollToday: 'Inscrivez-vous', welcomeTitle: 'Bienvenue à Wonder Heights', videoTitle: 'Découvrez Wonder Heights', programsTitle: 'Nos Programmes' },
       tw: { heroTitle: 'Som a ɛboro Wo Ho So', heroSub: 'Yɛrekyerɛkyerɛ na yɛahyɛ abofra biara den sɛ ɔbɛyɛ adwuma wɔ wiase mu.', discover: 'Hwehwɛ Yɛn Sukuu', enrollToday: 'Kyerɛ Wo Din', welcomeTitle: 'Akwaaba Wonder Heights', videoTitle: 'Hu Wonder Heights', programsTitle: 'Yɛn Nhyehyɛe' }
     };

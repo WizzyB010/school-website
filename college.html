@@ -68,6 +68,15 @@
     .mob-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
     .mob-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
 
+    /* .skip-link{position:absolute;top: -40px;left:0;right:auto;background:var(--gold2);color:var(--navy);padding:.6rem 1rem;border-radius:0 0 6px 0;z-index:9999;transition:top .25s ease,out 0.3s;}
+    .skip-link:focus{top:0;text-decoration:none;outline:3px solid #ffffff;} */
+
+    /* .nav-btn:focus{outline:2px solid var(--gold2);outline-offset:2px;}
+    .nav-links a:focus,.dropdown a:focus,.mobile-menu a:focus{outline:2px dashed var(--gold2);outline-offset:3px;}
+
+    @media(max-width:1024px){.intro-grid{grid-template-columns:1fr;}.subjects-grid{grid-template-columns:repeat(2,1fr);}.info-cards{grid-template-columns:repeat(2,1fr);}.tracks-grid{grid-template-columns:1fr;}.pathway::before{display:none;}.pathway{flex-direction:column;gap:1.5rem;}}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.subjects-grid{grid-template-columns:1fr;}.info-cards{grid-template-columns:1fr;}.hero-stats{gap:1.5rem;}}  */
+
     /* PAGE HERO */
     .page-hero{background:linear-gradient(135deg,#020d1f 0%,var(--navy) 45%,rgba(201,146,10,.45) 100%);padding:6rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden;}
     .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(240,180,41,.12) 0%,transparent 70%);pointer-events:none;}
@@ -215,6 +224,7 @@
   </style>
 </head>
 <body>
+  <!-- <a href="#page-content" class="skip-link">Skip to content</a> -->
 
   <div id="whis-loader" style="position:fixed;inset:0;z-index:99999;background:#002855;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.9rem;transition:opacity .5s;">
     <img src="logo_WHIS.png" alt="Logo" style="width:86px;height:86px;object-fit:contain;animation:lpa 1.8s ease-in-out infinite;">
@@ -239,7 +249,7 @@
     </div>
   </div>
 
-  <nav id="mainNav">
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="logo_WHIS.png" alt="WHIS Logo">
@@ -247,8 +257,8 @@
       </a>
       <div class="nav-links">
         <div class="nav-item">
-          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
+          <button class="nav-btn" aria-haspopup="true" aria-expanded="false">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="About Us submenu">
             <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
             <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
             <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
@@ -259,8 +269,8 @@
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn active">Academics <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
+          <button class="nav-btn active" aria-haspopup="true" aria-expanded="false">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="Academics submenu">
             <a href="early-sprouts.html"><i class="fas fa-shapes"></i> Early Sprouts</a>
             <a href="primary.html"><i class="fas fa-book-open"></i> Primary School</a>
             <a href="secondary.html"><i class="fas fa-graduation-cap"></i> Secondary (JHS &amp; SHS)</a>
@@ -269,8 +279,8 @@
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
+          <button class="nav-btn" aria-haspopup="true" aria-expanded="false">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="Admission submenu">
             <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
             <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
             <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
@@ -286,14 +296,14 @@
           <i class="fas fa-sign-in-alt" style="margin-right:.4rem;"></i>Game
         </a>
       </div>
-      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';">
+      <button class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open mobile menu" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mob-close" onclick="document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';"><i class="fas fa-times"></i></button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="mob-close" aria-label="Close mobile menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="early-sprouts.html">Early Sprouts</a>
@@ -301,6 +311,10 @@
     <a href="secondary.html">Secondary (JHS &amp; SHS)</a>
     <a href="college.html">College</a>
     <a href="therapy-special-needs.html">Therapy &amp; Special Needs</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="game.html">Game</a>
     <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
   </div>
 
@@ -310,7 +324,7 @@
       <div class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#programs">Academics</a> / College</div>
       <div class="page-badge"><i class="fas fa-university"></i>&nbsp; Post-Secondary · Tertiary Preparation</div>
       <h1>Wonder Heights College</h1>
-      <p>Advanced academic programmes, professional certifications, and tertiary pathway support — bridging senior high school to university and the world of work.</p>
+      <p>Advanced academic programmes focusing on <strong>WASSCE, A-Levels, and SAT</strong> success — bridging the gap between secondary school and global university excellence.</p>
       <div class="hero-stats">
         <div class="hstat"><span class="hstat-num">4</span><span class="hstat-lbl">Academic Tracks</span></div>
         <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-lbl">University Guidance</span></div>
@@ -325,7 +339,7 @@
     <div class="container">
       <div class="intro-grid">
         <div class="reveal left">
-          <img src="5.jfif" alt="College students" class="intro-img" onerror="this.style.background='linear-gradient(135deg,#002855,#003a7a)';this.style.display='block';">
+          <img src="cg.jpg" alt="College students" class="intro-img" onerror="this.style.background='linear-gradient(135deg,#002855,#003a7a)';this.style.display='block';">
         </div>
         <div class="reveal right">
           <div class="age-badge"><i class="fas fa-user-graduate"></i>&nbsp; Post-SHS · Ages 19+</div>
@@ -577,6 +591,87 @@
     function triggerReveals(){document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{const rect=el.getBoundingClientRect();if(rect.top<window.innerHeight-60)el.classList.add('visible');});}
     window.addEventListener('scroll',triggerReveals);
     triggerReveals();
+
+    // ACCESSIBLE MOBILE MENU AND NAVIGATION
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburgerBtn = document.querySelector('.hamburger');
+    const closeMenuBtn = document.querySelector('.mob-close');
+
+    function openMobileMenu(){
+      if(!mobileMenu)return;
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden','false');
+      hamburgerBtn && hamburgerBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+      const firstLink = mobileMenu.querySelector('a');
+      if(firstLink) firstLink.focus();
+    }
+
+    function closeMobileMenu(){
+      if(!mobileMenu)return;
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden','true');
+      hamburgerBtn && hamburgerBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+      hamburgerBtn && hamburgerBtn.focus();
+    }
+
+    document.addEventListener('keydown', function(e){
+      if(e.key==='Escape'){
+        closeMobileMenu();
+        document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+          btn.setAttribute('aria-expanded','false');
+          const dd=btn.nextElementSibling;
+          if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+        });
+      }
+    });
+
+    document.querySelectorAll('.nav-item > button').forEach(button=>{
+      const dropdown = button.nextElementSibling;
+      if(!dropdown || !dropdown.classList.contains('dropdown')) return;
+      button.addEventListener('click', function(e){
+        e.stopPropagation();
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.nav-item > button').forEach(btn=>{
+          if(btn !== button){
+            btn.setAttribute('aria-expanded','false');
+            const dd = btn.nextElementSibling;
+            if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+          }
+        });
+        button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if(!expanded){
+          dropdown.style.display='block';
+        } else {
+          dropdown.style.display='';
+        }
+      });
+      button.addEventListener('keydown', function(e){
+        if(e.key==='Enter' || e.key===' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.nav-item')){
+        document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+          btn.setAttribute('aria-expanded','false');
+          const dropdown = btn.nextElementSibling;
+          if(dropdown && dropdown.classList.contains('dropdown')) dropdown.style.display='';
+        });
+      }
+      if(mobileMenu && mobileMenu.classList.contains('open') && !e.target.closest('#mobileMenu') && !e.target.closest('.hamburger')){
+        closeMobileMenu();
+      }
+    });
+
+    if(closeMenuBtn){
+      closeMenuBtn.addEventListener('click', closeMobileMenu);
+    }
+
   </script>
 </body>
 </html>

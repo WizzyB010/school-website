@@ -27,6 +27,35 @@
     .lang-select { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.78rem; padding: 0.2rem 0.5rem; border-radius: 4px; outline: none; cursor: pointer; }
     .theme-btn { background: none; border: none; cursor: pointer; color: var(--gold2); font-size: 1rem; transition: transform 0.3s; }
     .theme-btn:hover { transform: rotate(20deg); }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--gold);
+      color: #002855;
+      padding: 10px 16px;
+      font-weight: 700;
+      text-decoration: none;
+      z-index: 1100;
+      transition: top 0.2s ease-in-out;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
     
     /* ── NAVBAR STYLES ── */
     nav { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 20px rgba(0,40,85,0.08); transition: background .3s; }
@@ -70,11 +99,13 @@
       border-color: #334155; 
     }
 
-    .nav-item:hover .dropdown { 
+    .nav-item:hover .dropdown, .nav-item.show-dropdown .dropdown { 
       opacity: 1; 
       visibility: visible; 
       transform: translateY(0); 
     }
+
+    .nav-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
     .dropdown a {
       display: flex; 
@@ -143,6 +174,7 @@
   </style>
 </head>
 <body id="body">
+  <a href="#mainContent" class="skip-link">Skip to content</a>
 
   <div class="topbar">
     <div class="top-left">
@@ -163,7 +195,7 @@
     </div>
   </div>
 
-  <nav id="mainNav">
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="logo_WHIS.png" alt="WHIS Logo">
@@ -175,33 +207,39 @@
 
       <div class="nav-links" id="navLinks">
         <div class="nav-item">
-          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
-            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
-            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
-            <a href="index.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
-            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
-            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
-            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="about-dropdown">
+            About Us <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" id="about-dropdown" role="menu" aria-label="About pages">
+            <a href="about.html" role="menuitem"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history" role="menuitem"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies" role="menuitem"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="index.html#programs" role="menuitem"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team" role="menuitem"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics" role="menuitem"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct" role="menuitem"><i class="fas fa-gavel"></i> Code of Conduct</a>
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
-            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
-            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
-            <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
-            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy & Special Needs</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="academics-dropdown">
+            Academics <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" id="academics-dropdown" role="menu" aria-label="Academic programs">
+            <a href="early-sprouts.html" role="menuitem"><i class="fas fa-shapes"></i> Early Sprouts</a>
+            <a href="primary.html" role="menuitem"><i class="fas fa-book-open"></i> Primary</a>
+            <a href="secondary.html" role="menuitem"><i class="fas fa-graduation-cap"></i> Secondary (JHS & SHS)</a>
+            <a href="college.html" role="menuitem"><i class="fas fa-graduation-cap"></i> College</a>
+            <a href="therapy-special-needs.html" role="menuitem"><i class="fas fa-heart"></i> Therapy & Special Needs</a>
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="#"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
-            <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
-            <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          <button class="nav-btn nav-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="admission-dropdown">
+            Admission <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" id="admission-dropdown" role="menu" aria-label="Admission">
+            <a href="#" role="menuitem" aria-current="page"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll" role="menuitem"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
           </div>
         </div>
         <a href="events.html" class="nav-btn">Events</a>
@@ -211,21 +249,30 @@
         <a href="game.html" class="nav-btn"><i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game</a>
       </div>
 
-      <button class="hamburger" onclick="openMobileMenu()">
+      <button class="hamburger" aria-label="Open mobile menu" aria-controls="mobileMenu" aria-expanded="false" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle" aria-hidden="true">
+    <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
+    <div id="mobileMenuTitle" class="sr-only">Mobile menu</div>
     <a href="index.html" onclick="closeMobileMenu()">Home</a>
     <a href="about.html" onclick="closeMobileMenu()">About Us</a>
+    <a href="early-sprouts.html" onclick="closeMobileMenu()">Early Sprouts</a>
+    <a href="primary.html" onclick="closeMobileMenu()">Primary</a>
+    <a href="secondary.html" onclick="closeMobileMenu()">Secondary</a>
+    <a href="college.html" onclick="closeMobileMenu()">College</a>
+    <a href="therapy-special-needs.html" onclick="closeMobileMenu()">Therapy & Special Needs</a>
     <a href="events.html" onclick="closeMobileMenu()">Events</a>
+    <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
     <a href="index.html#enroll" onclick="closeMobileMenu()">Enroll Now</a>
+    <a href="game.html" onclick="closeMobileMenu()">Game</a>
   </div>
 
-  <section class="hero">
+  <section class="hero" id="mainContent">
     <div class="reveal hero-content-panel">
       <img src="logo_WHIS.png" alt="Logo" class="hero-logo">
       <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; color: var(--gold2); margin-bottom: 12px;">Admissions 2026/2027</div>
@@ -258,8 +305,58 @@
 
   <script>
     // ── SCRIPTS FROM INDEX ──
-    function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
-    function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+    function openMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      // Move focus into mobile menu for accessibility
+      const firstLink = mobileMenu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (hamburger) hamburger.focus();
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+        closeAllDropdowns();
+      }
+    });
+
+    // Dropdown toggle behavior for keyboard + click users
+    function closeAllDropdowns() {
+      document.querySelectorAll('.nav-btn[aria-expanded="true"]').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.closest('.nav-item')?.classList.remove('show-dropdown');
+      });
+    }
+
+    document.querySelectorAll('.nav-btn.nav-dropdown').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        closeAllDropdowns();
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        btn.closest('.nav-item')?.classList.toggle('show-dropdown', !expanded);
+      });
+
+      btn.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          btn.click();
+        }
+      });
+    });
 
     const themeIcon = document.getElementById('themeIcon');
     function toggleTheme() {

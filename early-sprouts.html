@@ -74,6 +74,11 @@
     .mob-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
     .mob-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
 
+    /* .skip-link{position:absolute;top:-44px;left:0;background:var(--gold2);color:var(--navy);padding:.6rem 1rem;z-index:10000;transition:top .25s ease;}
+    .skip-link:focus{top:0;outline:3px solid #fff;text-decoration:none;}
+    .nav-btn:focus{outline:2px solid var(--gold2);outline-offset:2px;}
+    .nav-links a:focus,.dropdown a:focus,.mobile-menu a:focus{outline:2px dashed var(--gold2);outline-offset:3px;} */
+
     /* PAGE HERO */
     .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,rgba(201,146,10,.35) 100%);padding:6rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden;}
     .page-hero::after{content:'';position:absolute;inset:0;background:url('logo_WHIS.png') center/270px no-repeat;opacity:.04;pointer-events:none;}
@@ -219,6 +224,7 @@
   </style>
 </head>
 <body>
+  <!-- <a href="#page-content" class="skip-link">Skip to content</a> -->
 
   <div id="whis-loader" style="position:fixed;inset:0;z-index:99999;background:#002855;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.9rem;transition:opacity .5s;">
     <img src="logo_WHIS.png" alt="Logo" style="width:86px;height:86px;object-fit:contain;animation:lpa 1.8s ease-in-out infinite;">
@@ -241,7 +247,7 @@
     </div>
   </div>
 
-  <nav id="mainNav">
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="logo_WHIS.png" alt="WHIS Logo">
@@ -249,8 +255,8 @@
       </a>
       <div class="nav-links">
         <div class="nav-item">
-          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
+          <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-label="Open About Us submenu">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="About Us submenu">
             <a href="about.html"><i class="fas fa-star"></i> Message from Director</a>
             <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
             <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
@@ -261,9 +267,9 @@
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn active">Academics <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
-            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+          <button class="nav-btn active" aria-haspopup="true" aria-expanded="false" aria-label="Open Academics submenu">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="Academics submenu">
+            <a href="early-sprouts.html" aria-current="page"><i class="fas fa-shapes"></i>Early Sprouts</a>
             <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
             <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
             <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
@@ -271,8 +277,8 @@
           </div>
         </div>
         <div class="nav-item">
-          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
-          <div class="dropdown">
+          <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-label="Open Admission submenu">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown" aria-label="Admission submenu">
             <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
             <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
             <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
@@ -287,13 +293,13 @@
         <a href="game.html" class="nav-btn portal-btn" style="text-decoration:none;">
           <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i> Game </a>
       </div>
-      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';">
+      <button class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open mobile menu" onclick="openMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mob-close" onclick="document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';"><i class="fas fa-times"></i></button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile navigation menu">
+    <button class="mob-close" aria-label="Close mobile menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="early-sprouts.html">Early Sprouts</a>
@@ -301,6 +307,10 @@
     <a href="secondary.html">Secondary (JHS & SHS)</a>
     <a href="college.html">College</a>
     <a href="therapy-special-needs.html">Therapy &amp; Special Needs</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="game.html">Game</a>
     <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
   </div>
 
@@ -457,6 +467,80 @@
   </script>
 
   <script>
+    // ACCESSIBLE MOBILE MENU + NAV
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    const mobileClose = document.querySelector('.mob-close');
+
+    function openMobileMenu(){
+      if(!mobileMenu) return;
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden','false');
+      hamburger?.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+      const firstLink = mobileMenu.querySelector('a');
+      if(firstLink) firstLink.focus();
+    }
+
+    function closeMobileMenu(){
+      if(!mobileMenu) return;
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden','true');
+      hamburger?.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+      hamburger?.focus();
+    }
+
+    document.addEventListener('keydown', function(e){
+      if(e.key==='Escape'){
+        closeMobileMenu();
+        document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+          btn.setAttribute('aria-expanded','false');
+          const dd = btn.nextElementSibling;
+          if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+        });
+      }
+    });
+
+    document.querySelectorAll('.nav-item > button').forEach(button=>{
+      const dropdown = button.nextElementSibling;
+      if(!dropdown || !dropdown.classList.contains('dropdown')) return;
+      button.addEventListener('click', function(e){
+        e.stopPropagation();
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.nav-item > button').forEach(btn=>{
+          if(btn!==button){
+            btn.setAttribute('aria-expanded','false');
+            const dd = btn.nextElementSibling;
+            if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+          }
+        });
+        button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        dropdown.style.display = isOpen ? '' : 'block';
+      });
+      button.addEventListener('keydown', function(e){
+        if(e.key==='Enter' || e.key===' '){
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.nav-item')){
+        document.querySelectorAll('.nav-item > button[aria-expanded="true"]').forEach(btn=>{
+          btn.setAttribute('aria-expanded','false');
+          const dd = btn.nextElementSibling;
+          if(dd && dd.classList.contains('dropdown')) dd.style.display='';
+        });
+      }
+      if(mobileMenu && mobileMenu.classList.contains('open') && !e.target.closest('#mobileMenu') && !e.target.closest('.hamburger')){
+        closeMobileMenu();
+      }
+    });
+
+    if(mobileClose){ mobileClose.addEventListener('click', closeMobileMenu); }
+
     // THEME
     const themeIcon = document.getElementById('themeIcon');
     function toggleTheme() {
