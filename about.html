@@ -182,6 +182,27 @@
     .footer-bottom{text-align:center;padding:1.5rem;font-size:.82rem;border-top:1px solid rgba(255,255,255,.06);}
     .footer-bottom span{color:var(--gold2);}
 
+
+    /* Smooth hover animations for the Director's card */
+      .director-profile-card { border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.25); transition: transform 0.3s; background: var(--gold2); }
+      .director-profile-card:hover { transform: translateY(-5px); }
+      .director-img-wrapper { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--navy), var(--navy2)); }
+      .director-img-wrapper img { width: 100%; display: block; padding: 3rem; transition: transform 0.5s ease; box-sizing: border-box; }
+      .director-profile-card:hover .director-img-wrapper img { transform: scale(1.05); }
+      
+      /* The dark overlay */
+      .director-hover-overlay { position: absolute; inset: 0; background: rgba(0, 30, 70, 0.75); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 1.2rem; backdrop-filter: blur(3px); }
+      .director-profile-card:hover .director-hover-overlay { opacity: 1; }
+      
+      /* The popping icons */
+      .director-social-link { width: 50px; height: 50px; border-radius: 50%; background: var(--gold2); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; text-decoration: none; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, opacity 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transform: translateY(15px); opacity: 0; }
+      .director-profile-card:hover .director-social-link { transform: translateY(0); opacity: 1; }
+      .director-social-link:hover { background: #fff; transform: translateY(-4px) scale(1.1) !important; color: var(--navy); }
+      
+      /* Staggered animation delay */
+      .director-social-link.delay-1 { transition-delay: 0.05s; }
+      .director-social-link.delay-2 { transition-delay: 0.1s; }
+
     @media(max-width:1024px){.mvv-grid{grid-template-columns:repeat(2,1fr);}.team-grid{grid-template-columns:repeat(2,1fr);}.values-grid{grid-template-columns:repeat(2,1fr);}.director-grid{grid-template-columns:1fr;}.footer-main{grid-template-columns:1fr 1fr;gap:2rem;}}
     @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}.mvv-grid{grid-template-columns:1fr;}.footer-main{grid-template-columns:1fr;padding:3rem 1.5rem 2rem;}}
   </style>
@@ -348,16 +369,29 @@
   </div>
 
   <!-- DIRECTOR MESSAGE -->
-  <section class="section reveal up" style="background:var(--navy);padding:4rem 1.5rem;text-align:center;" class="reveal up" id="director">
+  <section class="section reveal up" style="background:var(--navy);padding:4rem 1.5rem;text-align:center;" id="director">
     <div class="container">
       <div class="director-grid">
         <div class="reveal left">
-          <img src="boss.jpg" alt="School Director" class="director-img" style="background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem;">
-          <div style="background:var(--gold2);padding:1.2rem;border-radius:0 0 14px 14px;text-align:center;">
-            <div style="font-weight:700;color:var(--navy);font-size:1rem;">The Director</div>
-            <div style="font-size:.82rem;color:rgba(0,40,85,.75);">MR. SYLVANUS DZIWORNU AVEH, PRINCIPAL</div>
+          <div class="director-profile-card">
+            <div class="director-img-wrapper">
+              <img src="boss.jpg" alt="School Director">
+              <div class="director-hover-overlay">
+                <a href="#" class="director-social-link delay-1" aria-label="LinkedIn Profile">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="mailto:director@wonderheights.com" class="director-social-link delay-2" aria-label="Email Director">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+            <div style="padding:1.4rem;text-align:center;">
+              <div style="font-weight:800;color:var(--navy);font-size:1.1rem; text-transform: uppercase;">The Director</div>
+              <div style="font-size:.82rem;color:rgba(0,40,85,.8); font-weight: 600; margin-top: 0.2rem;">MR. SYLVANUS DZIWORNU AVEH, PRINCIPAL</div>
+            </div>
           </div>
         </div>
+
         <div class="reveal right">
           <div class="section-label">Message from the Director</div>
           <h2 class="section-title">A Word from Our Leadership</h2>
@@ -372,8 +406,8 @@
           </p>
           <div class="director-sig">— The Director, Wonder Heights International School</div>
         </div>
+        </div>
       </div>
-    </div>
   </section>
 
   <!-- SCHOOL HISTORY -->
@@ -618,6 +652,7 @@
     </div>
   </footer>
 
+  
   <!-- ═══════════════════════════ FLOATING BUTTONS ═══════════════════════════ -->
   <!-- <div class="float-contact">
     <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
@@ -693,6 +728,7 @@
         }
       });
     });
+    
   </script>
 </body>
 </html>
