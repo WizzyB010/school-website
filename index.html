@@ -1496,14 +1496,31 @@ body.dark #error-popup {
 
             <div class="form-row">
               <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="0XX XXX XXXX" required>
-                <span class="form-error-msg" id="phoneErr">Please enter a valid phone number</span>
+                <label for="country">Country of Residence *</label>
+                <select id="country" name="country" required onchange="updatePhoneCode(this)">
+                  <option value="">Select Country</option>
+                  <option value="+233">🇬🇭 Ghana (+233)</option>
+                  <option value="+234">🇳🇬 Nigeria (+234)</option>
+                  <option value="+44">🇬🇧 United Kingdom (+44)</option>
+                  <option value="+1">🇺🇸 United States (+1)</option>
+                  <option value="+1">🇨🇦 Canada (+1)</option>
+                  <option value="+27">🇿🇦 South Africa (+27)</option>
+                  <option value="+254">🇰🇪 Kenya (+254)</option>
+                  <option value="+49">🇩🇪 Germany (+49)</option>
+                  <option value="other">🌍 Other Country</option>
+                </select>
+                <span class="form-error-msg" id="countryErr">Please select your country</span>
               </div>
               <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="parent@email.com">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+233 54 579 7990" required>
+                <span class="form-error-msg" id="phoneErr">Please enter a valid phone number</span>
               </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="parent@email.com">
             </div>
 
             <div class="form-group">
@@ -1513,7 +1530,7 @@ body.dark #error-popup {
 
             <div class="form-group">
               <label for="howHeard">How did you hear about us?</label>
-              <select id="howHeard" name="how_heard">
+              <select id="howHeard" name="how_heard" onchange="toggleOtherField(this)">
                 <option value="">Select</option>
                 <option value="friend">Friend / Family</option>
                 <option value="social_media">Social Media</option>
@@ -1521,6 +1538,12 @@ body.dark #error-popup {
                 <option value="flyer">Flyer / Poster</option>
                 <option value="other">Other</option>
               </select>
+            </div>
+
+            <div class="form-group" id="howHeardOtherGroup" style="display: none;">
+              <label for="howHeardOther">Please specify *</label>
+              <input type="text" id="howHeardOther" name="how_heard_other" placeholder="Please tell us...">
+              <span class="form-error-msg" id="howHeardOtherErr">Please specify how you heard about us</span>
             </div>
 
             <div class="form-group">
@@ -1743,7 +1766,7 @@ body.dark #error-popup {
         </div>
         <div class="footer-contact-item">
           <i class="fas fa-clock"></i>
-          <span>Mon–Fri: 7:30am – 4:00pm<br>Drop-off from 7:30am</span>
+          <span>24/hrs</span>
         </div>
       </div>
     </div>
@@ -1775,6 +1798,21 @@ body.dark #error-popup {
 
   <!-- ═══════════════════════════ JAVASCRIPT ═══════════════════════════ -->
   <script>
+
+
+// Function to toggle the 'Other' input field
+function toggleOtherField(selectElement) {
+  const otherGroup = document.getElementById('howHeardOtherGroup');
+  const otherInput = document.getElementById('howHeardOther');
+  if (selectElement.value === 'other') {
+    otherGroup.style.display = 'flex'; // Shows the field
+  } else {
+    otherGroup.style.display = 'none'; // Hides the field
+    otherInput.value = ''; // Clears it if they change their mind
+    otherInput.style.borderColor = '';
+  }
+}
+
     // ── MOBILE MENU ──
     function openMobileMenu() {
       const menu = document.getElementById('mobileMenu');
@@ -2061,15 +2099,13 @@ body.dark #error-popup {
       video.play();
     }
 
-    // --- UPDATED ENROLLMENT FORM SUBMISSION ---
-// Function to trigger the nice CSS popup
+// --- UPDATED ENROLLMENT FORM SUBMISSION ---
 function showError(message) {
   const popup = document.getElementById('error-popup');
   const msgSpan = document.getElementById('error-msg');
   msgSpan.textContent = message;
   popup.classList.add('show');
   
-  // Auto-hide after 4 seconds
   setTimeout(() => {
     popup.classList.remove('show');
   }, 4000);
@@ -2103,11 +2139,12 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
     return;
   }
 
-  // 3. Validate Phone (Ghanaian format)
+  // 3. Validate Phone (International & Local format allowed)
   const phoneEl = document.getElementById('phone');
-  const phoneRegex = /^(?:\+233|0)[235]\d{8}$/; 
+  // Allows optional +, numbers, spaces, and dashes (between 7 and 20 characters)
+  const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/; 
   if (!phoneRegex.test(phoneEl.value.trim())) {
-    showError("Please enter a valid Ghana phone number (e.g.  054 579 7990).");
+    showError("Please enter a valid phone number (e.g. +233 54 579 7990).");
     phoneEl.style.borderColor = '#dc2626';
     return;
   }
@@ -2118,12 +2155,21 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
   const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
   if (emailValue !== "" && !emailRegex.test(emailValue)) {
-    showError("The email address must include '@' and end with a domain like '.com'.");
+    showError("The email address must include '@' and end with a valid domain.");
     emailEl.style.borderColor = '#dc2626';
     return;
   }
 
-  // 5. SUBMIT TO GOOGLE SHEETS
+  // 5. Validate "Other" selection
+  const howHeard = document.getElementById('howHeard');
+  const howHeardOther = document.getElementById('howHeardOther');
+  if (howHeard.value === 'other' && !howHeardOther.value.trim()) {
+    showError("Please specify how you heard about us.");
+    howHeardOther.style.borderColor = '#dc2626';
+    return;
+  }
+
+  // 6. SUBMIT TO GOOGLE SHEETS
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
@@ -2133,6 +2179,7 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
     const response = await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
     if (response.ok) {
       form.reset();
+      document.getElementById('howHeardOtherGroup').style.display = 'none'; // Hide 'Other' field on success
       btn.textContent = '✓ Submitted!';
       document.getElementById('formSuccess').classList.add('visible');
     } else {
@@ -2152,7 +2199,7 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
 });
 
 // Removes red borders as user types
-document.querySelectorAll('#enrollForm input, #enrollForm select').forEach(el => {
+document.querySelectorAll('#enrollForm input, #enrollForm select, #enrollForm textarea').forEach(el => {
   el.addEventListener('input', function() {
     this.style.borderColor = '';
     const err = document.getElementById(this.id + 'Err');
