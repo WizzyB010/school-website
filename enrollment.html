@@ -275,36 +275,38 @@
   <section class="hero" id="mainContent">
     <div class="reveal hero-content-panel">
       <img src="logo_WHIS.png" alt="Logo" class="hero-logo">
-      <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; color: var(--gold2); margin-bottom: 12px;">Admissions 2026/2027</div>
-      <h1>Admission Requirements</h1>
-      <p class="conflicting-text">Everything you need to join the Wonder Heights family. We guide you through every step of the journey.</p>
+      <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; color: var(--gold2); margin-bottom: 12px;" data-key="heroSub">Admissions 2026/2027</div>
+      <h1 data-key="heroTitle">Admission Requirements</h1>
+      <p class="conflicting-text" data-key="heroText">Everything you need to join the Wonder Heights family. We guide you through every step of the journey.</p>
     </div>
   </section>
 
-  <section class="section">
+ <section class="section">
     <div class="grid">
       <div class="req-card reveal">
-        <h3><i class="fas fa-file-invoice"></i> Mandatory Documents</h3>
+        <h3><i class="fas fa-file-invoice"></i> <span data-key="docsTitle">Mandatory Documents</span></h3>
         <ul>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Completed Enrollment Application Form</li>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Child's Birth Certificate</li>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> 2 Recent Passport Photos</li>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Immunization Records</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="doc1">Completed Enrollment Application Form</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="doc2">Child's Birth Certificate</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="doc3">2 Recent Passport Photos</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="doc4">Immunization Records</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="doc5">Proof of Academic Records</span></li>
         </ul>
       </div>
       <div class="req-card reveal" style="transition-delay: 0.1s;">
-        <h3><i class="fas fa-credit-card"></i> Fees & Payments</h3>
+        <h3><i class="fas fa-credit-card"></i> <span data-key="feesTitle">Fees & Payments</span></h3>
         <ul>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Admission Processing Fee</li>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Termly Tuition</li>
-          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> Uniform & Stationery Kit</li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="fee1">Admission Processing Fee</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="fee2">Termly Tuition</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="fee3">Uniform & Stationery Kit</span></li>
+          <li><i class="fas fa-check" style="color:var(--gold2); margin-right:8px;"></i> <span data-key="fee4">Feeding & Busing (Optional)</span></li>
         </ul>
       </div>
     </div>
   </section>
 
   <script>
-    // ── SCRIPTS FROM INDEX ──
+    // ── MOBILE MENU ──
     function openMobileMenu() {
       const mobileMenu = document.getElementById('mobileMenu');
       const hamburger = document.querySelector('.hamburger');
@@ -312,7 +314,6 @@
       mobileMenu.setAttribute('aria-hidden', 'false');
       if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
-      // Move focus into mobile menu for accessibility
       const firstLink = mobileMenu.querySelector('a');
       if (firstLink) firstLink.focus();
     }
@@ -334,7 +335,7 @@
       }
     });
 
-    // Dropdown toggle behavior for keyboard + click users
+    // ── DROPDOWNS ──
     function closeAllDropdowns() {
       document.querySelectorAll('.nav-btn[aria-expanded="true"]').forEach(btn => {
         btn.setAttribute('aria-expanded', 'false');
@@ -358,11 +359,12 @@
       });
     });
 
+    // ── THEME TOGGLE ──
     const themeIcon = document.getElementById('themeIcon');
     function toggleTheme() {
       document.body.classList.toggle('dark');
       const isDark = document.body.classList.contains('dark');
-      themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      if (themeIcon) themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
       localStorage.setItem('whis-theme', isDark ? 'dark' : 'light');
     }
     if (localStorage.getItem('whis-theme') === 'dark') {
@@ -370,15 +372,96 @@
       if (themeIcon) themeIcon.className = 'fas fa-sun';
     }
 
+    // ── SCROLL REVEAL ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // ── LANGUAGE TRANSLATIONS ──
+    const translations = {
+      en: {
+        heroSub: "Admissions 2026/2027",
+        heroTitle: "Admission Requirements",
+        heroText: "Everything you need to join the Wonder Heights family. We guide you through every step of the journey.",
+        docsTitle: "Mandatory Documents",
+        doc1: "Completed Enrollment Application Form",
+        doc2: "Child's Birth Certificate",
+        doc3: "2 Recent Passport Photos",
+        doc4: "Immunization Records",
+        doc5: "Proof of Academic Records",
+        feesTitle: "Fees & Payments",
+        fee1: "Admission Processing Fee",
+        fee2: "Termly Tuition",
+        fee3: "Uniform & Stationery Kit",
+        fee4: "Feeding & Busing (Optional)"
+      },
+      fr: {
+        heroSub: "Admissions 2026/2027",
+        heroTitle: "Conditions d'admission",
+        heroText: "Tout ce dont vous avez besoin pour rejoindre la famille Wonder Heights. Nous vous guidons à chaque étape du voyage.",
+        docsTitle: "Documents Obligatoires",
+        doc1: "Formulaire d'inscription rempli",
+        doc2: "Acte de naissance de l'enfant",
+        doc3: "2 photos d'identité récentes",
+        doc4: "Carnet de vaccination",
+        doc5: "Dossier Scolaire / Relevés de Notes",
+        feesTitle: "Frais et Paiements",
+        fee1: "Frais de dossier d'admission",
+        fee2: "Frais de scolarité par trimestre",
+        fee3: "Uniforme et kit de papeterie",
+        fee4: "Restauration et Transport (Facultatif)"
+      },
+      tw: {
+        heroSub: "Sukuu Kɔgye 2026/2027",
+        heroTitle: "Nneɛma a Wɔhwehwɛ",
+        heroText: "Nea wohia biara sɛ wobɛka Wonder Heights abusua no ho. Yɛbɛkyerɛ wo kwan wɔ ɔkwan biara mu.",
+        docsTitle: "Nkrataa a Wɔhwehwɛ",
+        doc1: "Sukuu Kɔgye Krataa a Wɔahyɛ mu Ma",
+        doc2: "Abofra no Awoɔ Krataa",
+        doc3: "Mfonini Nketewa Mmienu",
+        doc4: "Ayamuyare Nkrataa",
+        doc5: "Sukuu Nkrataa a Edi Kan",
+        feesTitle: "Sika a Wɔtua",
+        fee1: "Sukuu Kɔgye Sika",
+        fee2: "Sukuu Sika a Wɔtua Daa Term",
+        fee3: "Sukuu Ntadeɛ ne Nnwoma",
+        fee4: "Aduane ne Bɔs (Sɛ wopɛ a)"
+      }
+    };
+
     function changeLanguage(lang) {
-        // Basic placeholder for language logic from index
-        console.log("Language changed to: " + lang);
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          // Smooth fade out/in effect
+          el.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(4px)';
+          
+          setTimeout(() => {
+            el.textContent = translations[lang][key];
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }, 200);
+        }
+      });
+      // Save user preference
+      localStorage.setItem('whis-lang', lang);
     }
+
+    // Load saved language on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('whis-lang') || 'en';
+      const langSelect = document.querySelector('.lang-select');
+      if (langSelect) {
+        langSelect.value = savedLang;
+      }
+      // Run translation immediately if the user previously selected French or Twi
+      if (savedLang !== 'en') {
+        changeLanguage(savedLang);
+      }
+    });
   </script>
 </body>
 </html>
