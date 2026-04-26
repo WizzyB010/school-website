@@ -9,10 +9,13 @@
   <!-- Google Fonts -->
      <link rel="icon" type="image/png" href="logo_WHIS.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"></noscript>
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <style>
     :root {
@@ -174,7 +177,34 @@
       text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer;
     }
     .mobile-menu a:hover { color: var(--gold2); }
-    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 1.5rem; }
+   /* Mobile Menu Close Button */
+    .mobile-close { 
+      position: absolute; 
+      top: 1.5rem; 
+      right: 1.5rem; 
+      background: rgba(255, 255, 255, 0.1); /* Adds a subtle circular background */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      cursor: pointer; 
+      color: #fff; 
+      font-size: 1.5rem;
+      /* Flexbox perfectly centres the X inside the 44x44 box */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; 
+      height: 44px; 
+      z-index: 2010; /* Ensures it stays absolutely on top of everything */
+      transition: all 0.3s ease;
+    }
+
+    .mobile-close:hover, .mobile-close:focus {
+      background: var(--gold2);
+      color: var(--navy);
+      border-color: var(--gold2);
+      transform: rotate(90deg); /* Adds a smooth rotation effect when tapped/hovered */
+      outline: none;
+    }
     .mobile-enroll { margin-top: 1rem; background: var(--gold2); color: var(--navy) !important; padding: 0.8rem 2.5rem; border-radius: 50px; font-weight: 700; font-size: 1rem !important; }
 
     /* ── HERO ── */
@@ -761,14 +791,41 @@
       .why-img-col { display: none; }
       .enroll-grid { grid-template-columns: 1fr; }
       .programs-grid { grid-template-columns: repeat(2,1fr); }
+      .mvv-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .director-grid { grid-template-columns: 1fr; }
       .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .cal-events-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
+      /* Unified Nav Bar */
       .nav-links { display: none; }
       .hamburger { display: block; }
       .nav-logo-text .main { font-size: 0.95rem; }
       .nav-logo-text .sub { font-size: 0.55rem; }
+
+      /* Unified Top Bar */
+      .topbar {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.6rem 1rem;
+        gap: 0.6rem;
+      }
+      .topbar .top-left { 
+        gap: 0.7rem; 
+        justify-content: center; 
+      }
+      .topbar .top-right { 
+        display: flex !important; /* Overrides previous display: none */
+        justify-content: center; 
+        gap: 1.5rem; 
+        width: 100%; 
+      }
+      /* Hide location and hours text on mobile to save space */
+      .topbar .top-right span { display: none; }
+
+      /* Index page specific adjustments */
       .hero { height: 70vh; }
       .hero-content h1 { font-size: 2rem; }
       .hero-content p { font-size: 0.95rem; }
@@ -781,16 +838,22 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item:first-child { grid-column: span 1; }
       .testi-slide { flex: 0 0 100%; margin-right: 0; }
-      .footer-main { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
       .contact-strip-grid { grid-template-columns: 1fr; }
-      .topbar .top-left { gap: 0.7rem; }
-      .topbar .top-right { display: none; }
       .scroll-hint { display: none; }
       .program-card, .calendar-card, .events-card, .testi-card { min-height: auto; }
       .section { padding: 2rem 1rem; }
       .hero-dots { bottom: 1rem; }
+
+      /* About page specific adjustments */
+      .mvv-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; gap: 2rem; }
     }
+
     @media (max-width: 480px) {
+      /* Optimise top bar for very small screens */
+      .topbar .top-left { flex-direction: column; gap: 0.4rem; text-align: center; }
+      
+      /* General mobile adjustments */
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .stat-item { border-right: none !important; }
       .newsletter-form { flex-direction: column; }
@@ -826,7 +889,7 @@
 
   .loader-logo {
     width: 100px; height: 100px; object-fit: contain;
-    animation: logoPulse 1.8s ease-in-out infinite;
+    animation: logoPulse 1.9s ease-in-out infinite;
   }
   @keyframes logoPulse {
     0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0px rgba(240,180,41,0)); }
@@ -1036,16 +1099,16 @@ body.dark #error-popup {
     <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
     <a href="index.html" onclick="closeMobileMenu()">Home</a>
     <a href="about.html" onclick="closeMobileMenu()">About Us</a>
-    <a href="index.html#programs" onclick="closeMobileMenu()">Programs</a>
+    <a href="index.html#programs" onclick="closeMobileMenu()">Programmes</a>
     <a href="early-sprouts.html" onclick="closeMobileMenu()">Early Sprouts</a>
     <a href="primary.html" onclick="closeMobileMenu()">Primary</a>
     <a href="secondary.html" onclick="closeMobileMenu()">Secondary (JHS/SHS)</a>
     <a href="college.html" onclick="closeMobileMenu()">College</a>
     <a href="therapy-special-needs.html" onclick="closeMobileMenu()">Therapy & Special Needs</a>
-    <a href="enrollment.html" onclick="closeMobileMenu()">Admission Requirements</a>
+    <a href="index.html#enroll" onclick="closeMobileMenu()">Admission Requirements</a>
     <a href="index.html#calendar" onclick="closeMobileMenu()">Academic Calendar</a>
     <a href="index.html#calendar" onclick="closeMobileMenu()">Events</a>
-    <a href="index.html#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
     <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
     <a href="index.html#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enroll Now</a>
     <a href="game.html" onclick="closeMobileMenu()">Game</a>
@@ -2102,100 +2165,131 @@ function toggleOtherField(selectElement) {
     }, { threshold: 0.5 });
     document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
-    // ── EVENTS DATA ──
-    // ── UPDATED EVENTS DATA 2025/2026 ──
+        // ── EVENTS DATA — synced with events.html ──
     const events = [
+      // GHANA PUBLIC HOLIDAYS 2026
+      { date:'2026-01-01', title:"New Year's Day",                     detail:'Public Holiday',              icon:'glass-cheers',     tag:'holiday' },
+      { date:'2026-01-07', title:'Christmas Day (Observed)',            detail:'Public Holiday',              icon:'star',             tag:'holiday' },
+      { date:'2026-01-09', title:'Constitution Day',                    detail:'Public Holiday',              icon:'landmark',         tag:'holiday' },
+      { date:'2026-03-06', title:'Independence Day',                    detail:'National Holiday',            icon:'flag',             tag:'holiday' },
+      { date:'2026-03-20', title:'Eid ul-Fitr',                        detail:'Public Holiday',              icon:'moon',             tag:'holiday' },
+      { date:'2026-04-03', title:'Good Friday',                        detail:'Public Holiday',              icon:'cross',            tag:'holiday' },
+      { date:'2026-04-06', title:'Easter Monday',                      detail:'Public Holiday',              icon:'sun',              tag:'holiday' },
+      { date:'2026-05-01', title:'May Day',                            detail:'Public Holiday',              icon:'flag',             tag:'holiday' },
+      { date:'2026-05-25', title:'AU Day',                             detail:'Africa Union Day',            icon:'globe-africa',     tag:'holiday' },
+      { date:'2026-07-03', title:'Republic Day',                       detail:'Public Holiday',              icon:'flag',             tag:'holiday' },
+      { date:'2026-09-21', title:'Kwame Nkrumah Memorial Day',         detail:'Public Holiday',              icon:'user-tie',         tag:'holiday' },
+      { date:'2026-12-04', title:"Farmer's Day",                       detail:'Public Holiday',              icon:'tractor',          tag:'holiday' },
+      { date:'2026-12-25', title:'Christmas Day',                      detail:'Public Holiday',              icon:'star',             tag:'holiday' },
+      { date:'2026-12-26', title:'Boxing Day',                         detail:'Public Holiday',              icon:'gift',             tag:'holiday' },
       // TERM 1 — FIRST TRIMESTER (2025)
-      { date: '2025-09-09', title: 'School Re-opens', detail: 'Term 1 Begins', icon: 'clock', tag: 'academic' },
-      { date: '2025-09-19', title: 'World Cleanup Day', detail: 'School Activity', icon: 'leaf', tag: 'event' },
-      { date: '2025-09-22', title: 'Kwame Nkrumah Memorial Day', detail: 'Public Holiday', icon: 'calendar', tag: 'holiday' },
-      { date: '2025-10-24', title: 'Mid-Term Break Begins', detail: 'School Closed', icon: 'calendar-minus', tag: 'holiday' },
-      { date: '2025-10-28', title: 'School Resumes', detail: 'Resumption from Mid-Term', icon: 'clock', tag: 'academic' },
-      { date: '2025-11-05', title: 'School-Wide Spelling Bee', detail: '9:00am School Hall', icon: 'spell-check', tag: 'event' },
-      { date: '2025-12-05', title: 'Farmer\'s Day', detail: 'Public Holiday', icon: 'tractor', tag: 'holiday' },
-      { date: '2025-12-11', title: 'Vacation Day', detail: 'Term 1 Closes', icon: 'door-open', tag: 'academic' },
-      { date: '2025-12-14', title: 'Carols Service', detail: 'Festive Celebration', icon: 'music', tag: 'event' },
-
+      { date:'2025-09-09', title:'School Re-opens',                    detail:'Term 1 begins',               icon:'clock',            tag:'academic' },
+      { date:'2025-09-19', title:'World Cleanup Day',                  detail:'Observed at school',          icon:'leaf',             tag:'event'    },
+      { date:'2025-09-22', title:'Kwame Nkrumah Memorial Day',         detail:'Public Holiday (School Closed)', icon:'user-tie',      tag:'holiday'  },
+      { date:'2025-09-23', title:'Club Activities Begin',              detail:'International Day of Sign Language', icon:'hands',     tag:'academic' },
+      { date:'2025-10-03', title:"World Teachers' Day",                detail:'Celebrated at school',        icon:'apple-alt',        tag:'event'    },
+      { date:'2025-10-24', title:'Mid-Term Break Begins',              detail:'School closed until Oct 27',  icon:'calendar-minus',   tag:'holiday'  },
+      { date:'2025-10-28', title:'School Resumes',                     detail:'Resumption from Mid-Term',    icon:'clock',            tag:'academic' },
+      { date:'2025-11-05', title:'School-Wide Spelling Bee',           detail:'9:00am — School Hall',        icon:'spell-check',      tag:'event'    },
+      { date:'2025-12-01', title:'Examination Week Begins',            detail:'End of Term 1 Exams',         icon:'file-signature',   tag:'academic' },
+      { date:'2025-12-05', title:"Farmer's Day",                       detail:'Public Holiday',              icon:'tractor',          tag:'holiday'  },
+      { date:'2025-12-11', title:'Vacation Day',                       detail:'Term 1 Closes',               icon:'door-open',        tag:'academic' },
+      { date:'2025-12-14', title:'Carols Service',                     detail:'Festive celebration',         icon:'music',            tag:'event'    },
       // TERM 2 — SECOND TRIMESTER (2026)
-      { date: '2026-01-01', title: 'New Year\'s Day', detail: 'Public Holiday', icon: 'glass-cheers', tag: 'holiday' },
-      { date: '2026-01-06', title: 'Term 2 Begins', detail: 'School Re-opens', icon: 'clock', tag: 'academic' },
-      { date: '2026-01-09', title: 'Constitution Day', detail: 'Public Holiday', icon: 'landmark', tag: 'holiday' },
-      { date: '2026-01-23', title: 'Int. Day of Education', detail: 'Club Activities Begin', icon: 'book', tag: 'academic' },
-      { date: '2026-02-11', title: 'Women & Girls in Science', detail: 'Special Presentation', icon: 'microscope', tag: 'event' },
-      { date: '2026-02-13', title: 'Chocolate/Valentine\'s Day', detail: 'School Celebration', icon: 'heart', tag: 'event' },
-      { date: '2026-02-19', title: 'Maths and Science Quiz', detail: 'Inter-class Competition', icon: 'lightbulb', tag: 'academic' },
-      { date: '2026-02-20', title: 'Mid-Term Break Begins', detail: 'Feb 20 – Feb 23', icon: 'calendar-minus', tag: 'holiday' },
-      { date: '2026-02-24', title: 'School Resumes', detail: '7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-03-05', title: 'Traditional Day', detail: 'Cultural Celebration', icon: 'tshirt', tag: 'event' },
-      { date: '2026-03-06', title: 'Independence Day', detail: 'National Holiday', icon: 'flag', tag: 'holiday' },
-      { date: '2026-03-20', title: 'Eid ul-Fitr', detail: 'Public Holiday', icon: 'moon', tag: 'holiday' },
-      { date: '2026-03-23', title: 'Revision Week Begins', detail: 'Term 2 Exams', icon: 'book-reader', tag: 'academic' },
-      { date: '2026-03-26', title: 'Exams Week Begins', detail: 'Term 2 Exams', icon: 'book-reader', tag: 'academic' },
-      { date: '2026-04-02', title: 'Vacation Day / Spellathon', detail: 'Term 2 Closes', icon: 'award', tag: 'academic' },
-
-      // TERM 3 — THIRD TRIMESTER (PRELIMINARY)
-      { date: '2026-04-27', title: 'Term 3 Begins', detail: 'School Resumes 7:30am', icon: 'clock', tag: 'academic' },
-      { date: '2026-05-10', title: 'Inter-House Sports Day', detail: 'Sports Ground', icon: 'running', tag: 'sports' },
-      { date: '2026-07-31', title: 'Graduation Ceremony', detail: 'End of Academic Year', icon: 'graduation-cap', tag: 'event' }
+      { date:'2026-01-06', title:'Term 2 Begins',                      detail:'School re-opens',             icon:'clock',            tag:'academic' },
+      { date:'2026-01-23', title:'Int. Day of Education',              detail:'Club activities take off',    icon:'book',             tag:'academic' },
+      { date:'2026-01-28', title:'Day of Peaceful Coexistence',        detail:'Special school activity',     icon:'dove',             tag:'event'    },
+      { date:'2026-02-11', title:'Women & Girls in Science',           detail:'Science department event',    icon:'microscope',       tag:'event'    },
+      { date:'2026-02-13', title:"Chocolate / Valentine's Day",        detail:'World Radio Day observed',    icon:'heart',            tag:'event'    },
+      { date:'2026-02-19', title:'Maths and Science Quiz',             detail:'Inter-class competition',     icon:'lightbulb',        tag:'academic' },
+      { date:'2026-02-20', title:'Mid-Term Break Begins',              detail:'Feb 20 – Feb 23',             icon:'calendar-minus',   tag:'holiday'  },
+      { date:'2026-02-24', title:'School Resumes',                     detail:'7:30am',                      icon:'clock',            tag:'academic' },
+      { date:'2026-03-05', title:'Traditional Day',                    detail:'Cultural celebration',        icon:'tshirt',           tag:'event'    },
+      { date:'2026-03-19', title:'Happiness & French Day',             detail:'Language and wellbeing event', icon:'smile',           tag:'event'    },
+      { date:'2026-03-23', title:'Revision Week Begins',               detail:'Term 2 Revision',             icon:'book-reader',      tag:'academic' },
+      { date:'2026-03-26', title:'Exams Week Begins',                  detail:'Term 2 Exams',                icon:'book-reader',      tag:'academic' },
+      { date:'2026-04-02', title:'Vacation Day / Spellathon',          detail:'Term 2 Closes',               icon:'award',            tag:'academic' },
+      // TERM 3 — THIRD TRIMESTER (2026)
+      { date:'2026-04-27', title:'Term 3 Begins',                      detail:'School re-opens — Review of T2 Exams', icon:'clock',  tag:'academic' },
+      { date:'2026-05-04', title:'Active Lessons Begin',               detail:'Week 2 — Third Trimester',    icon:'book-open',        tag:'academic' },
+      { date:'2026-05-11', title:'Club Activities Take Off',           detail:'Week 3 — Active Lessons Continue', icon:'users',     tag:'academic' },
+      { date:'2026-05-22', title:'Mid-Term Exams Deadline',            detail:'Deadline for Submission of Mid-Term Exams', icon:'file-alt', tag:'academic' },
+      { date:'2026-06-11', title:'Maths and Science Quiz',             detail:'Inter-class Competition',     icon:'lightbulb',        tag:'academic' },
+      { date:'2026-06-12', title:'Mid-Term Break Begins',              detail:'School Closed — Jun 12 to Jun 15', icon:'calendar-minus', tag:'holiday' },
+      { date:'2026-06-12', title:'Excursion Day / Field Trip',         detail:'School Outing',               icon:'bus',              tag:'event'    },
+      { date:'2026-06-14', title:'PTC / Open Day',                     detail:'Parent-Teacher Conference',   icon:'handshake',        tag:'event'    },
+      { date:'2026-06-16', title:'School Resumes',                     detail:'Resumption from Mid-Term Break', icon:'clock',        tag:'academic' },
+      { date:'2026-06-26', title:'Exam Questions Deadline',            detail:'Deadline for Submission of Exam Questions', icon:'file-signature', tag:'academic' },
+      { date:'2026-07-13', title:'Revision Week Begins',               detail:'Week 12 — Revision & Examination Week', icon:'book-reader', tag:'academic' },
+      { date:'2026-07-20', title:'Examination Week',                   detail:'Week 13 — Final Exams',       icon:'file-signature',   tag:'academic' },
+      { date:'2026-07-23', title:'Spellathon',                         detail:'Annual Spelling Competition', icon:'spell-check',      tag:'event'    },
+      { date:'2026-07-24', title:'Vacation Day',                       detail:'Term 3 Closes',               icon:'door-open',        tag:'academic' },
+      { date:'2026-07-24', title:'Graduation Day / End of Year Awards', detail:'Graduation Ceremony & Awards', icon:'graduation-cap', tag:'event'  },
+      { date:'2026-07-25', title:'Family Sports Carnival',             detail:'Saturday — All Families Welcome', icon:'running',     tag:'sports'   },
+      { date:'2026-08-03', title:'Summer School Begins',               detail:'Summer School: Aug 3 – Aug 28', icon:'sun',          tag:'academic' },
+      { date:'2026-08-28', title:'Summer School Ends',                 detail:'Last Day of Summer School',   icon:'sun',              tag:'academic' },
+      { date:'2026-09-07', title:"New Term Begins (2026/27)",          detail:'School Resumes — Term 1 of New Year', icon:'clock',  tag:'academic' }
     ];
 
-    // Generate calEventDates and eventNames from events
-    const calEventDates = {};
-    const eventNames = {};
-    events.forEach(event => {
-      const [year, month, day] = event.date.split('-');
-      const key = `${year}-${String(parseInt(month)).padStart(2, '0')}`;
-      if (!calEventDates[key]) calEventDates[key] = [];
-      calEventDates[key].push(parseInt(day));
-      eventNames[event.date] = event.title;
-    });
+        // Build calendar dot-map from events (same engine as events.html)
+    function buildMap(){
+      const m={};
+      events.forEach(ev=>{
+        const [y,mo]=ev.date.split('-').map(Number);
+        const k=y+'-'+String(mo).padStart(2,'0');
+        if(!m[k])m[k]=[];
+        m[k].push(parseInt(ev.date.split('-')[2]));
+      });
+      return m;
+    }
+    const CAL_MAP = buildMap();
+    let calDate = new Date(), selectedCalDate = null;
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-    // ── CALENDAR ──
-    let calDate = new Date();
-    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    function renderCalendar() {
-      const year = calDate.getFullYear();
-      const month = calDate.getMonth();
-      const key = `${year}-${String(month + 1).padStart(2, '0')}`;
-      const eventDays = calEventDates[key] || [];
-      document.getElementById('calMonthYear').textContent = `${monthNames[month]} ${year}`;
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const today = new Date();
-      let html = '';
-      for (let i = 0; i < firstDay; i++) html += '<div class="cal-day other-month"></div>';
-      for (let d = 1; d <= daysInMonth; d++) {
-        let cls = 'cal-day';
-        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) cls += ' today';
-        if (eventDays.includes(d)) {
-          cls += ' has-event';
-          const eventDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-          html += `<div class="${cls}" onclick="showEvent('${eventDate}')">${d}</div>`;
+    function renderCalendar(){
+      const y=calDate.getFullYear(), mo=calDate.getMonth();
+      const key=y+'-'+String(mo+1).padStart(2,'0');
+      const dots=CAL_MAP[key]||[];
+      document.getElementById('calMonthYear').textContent=MONTHS[mo]+' '+y;
+      const first=new Date(y,mo,1).getDay(), total=new Date(y,mo+1,0).getDate(), today=new Date();
+      let html='';
+      for(let i=0;i<first;i++) html+='<div class="cal-day other-month"></div>';
+      for(let d=1;d<=total;d++){
+        const ds=y+'-'+String(mo+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        let cls='cal-day';
+        if(d===today.getDate()&&mo===today.getMonth()&&y===today.getFullYear()) cls+=' today';
+        if(dots.includes(d)) cls+=' has-event';
+        if(selectedCalDate===ds) cls+=' selected';
+        if(dots.includes(d)){
+          html+=`<div class="${cls}" onclick="showEvent('${ds}')">${d}</div>`;
         } else {
-          html += `<div class="${cls}">${d}</div>`;
+          html+=`<div class="${cls}">${d}</div>`;
         }
       }
-      document.getElementById('calDays').innerHTML = html;
+      document.getElementById('calDays').innerHTML=html;
     }
-    document.getElementById('prevMonth').onclick = () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); };
+    document.getElementById('prevMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar();};
+    document.getElementById('nextMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar();};
+    renderCalendar(); ;
     document.getElementById('nextMonth').onclick = () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); };
     renderCalendar();
 
     function showEvent(date) {
+      selectedCalDate = date;
+      renderCalendar();
       const eventsForDate = events.filter(e => e.date === date);
       if (eventsForDate.length > 0) {
+        const SHORT_M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         const detailsHtml = eventsForDate.map(event => {
-          const tagClass = `tag-${event.tag}`;
-          return `
-            <div class="modal-event ${tagClass}">
-              <h4>${event.title}</h4>
-              <p><strong>Date:</strong> ${date}</p>
-              <p><i class="fas fa-${event.icon}" style="margin-right:0.4rem;"></i>${event.detail}</p>
-              <p class="event-tag ${tagClass}">${event.tag.charAt(0).toUpperCase() + event.tag.slice(1)}</p>
-            </div>
-          `;
+          const tagClass = 'tag-'+event.tag;
+          const [y,mo,d] = event.date.split('-').map(Number);
+          return '<div class="modal-event '+tagClass+'">'
+            +'<h4>'+event.title+'</h4>'
+            +'<p><strong>Date:</strong> '+String(d).padStart(2,'0')+' '+SHORT_M[mo-1]+' '+y+'</p>'
+            +'<p><i class="fas fa-'+event.icon+'" style="margin-right:0.4rem;"></i>'+event.detail+'</p>'
+            +'<p class="event-tag '+tagClass+'">'+event.tag.charAt(0).toUpperCase()+event.tag.slice(1)+'</p>'
+            +'</div>';
         }).join('');
-
         document.getElementById('eventDetails').innerHTML = detailsHtml;
         document.getElementById('eventModal').style.display = 'block';
       }
@@ -2492,21 +2586,22 @@ document.querySelectorAll('#enrollForm input, #enrollForm select, #enrollForm te
       requestAnimationFrame(animate);
     })();
 
-     (function () {
-    const hide = () => {
-      const loader = document.getElementById('whis-loader');
-      if (loader) {
+    (function () {
+  const hide = () => {
+    const loader = document.getElementById('whis-loader');
+    if (loader) {
+      setTimeout(() => {
         loader.classList.add('hidden');
         setTimeout(() => loader.remove(), 700);
-      }
-    };
-    const minWait = new Promise(r => setTimeout(r, 2000));
-    const pageLoad = new Promise(r => {
-      if (document.readyState === 'complete') r();
-      else window.addEventListener('load', r);
-    });
-    Promise.all([minWait, pageLoad]).then(hide);
-  })();
+      }, 2000); // 👈 change this value — how long loader stays visible after page loads
+    }
+  };
+  if (document.readyState === 'complete') {
+    hide();
+  } else {
+    window.addEventListener('load', hide);
+  }
+})();
 
   // ── THEME TOGGLE ──
 const themeIcon = document.getElementById('themeIcon');
@@ -2574,8 +2669,8 @@ if (localStorage.getItem('whis-theme') === 'dark') {
       }
     }
 
-    // Run the function when the page loads
-    loadHomeGallery();
+    // Load gallery after page is interactive (non-blocking)
+    setTimeout(loadHomeGallery, 100);
 
 // Function to auto-fill the correct country dial code
 function updatePhoneCode(selectElement) {
