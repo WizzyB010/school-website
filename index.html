@@ -1667,8 +1667,8 @@ function toggleTheme() {
   localStorage.setItem('whis-theme', isDark ? 'dark' : 'light');
 }
 
-// Apply saved preference on page load
-if (localStorage.getItem('whis-theme') === 'dark') {
+// Apply saved preference on page load (default to dark mode)
+if (localStorage.getItem('whis-theme') !== 'light') {
   document.body.classList.add('dark');
   if (themeIcon) themeIcon.className = 'fas fa-sun';
 }
