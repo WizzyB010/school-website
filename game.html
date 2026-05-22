@@ -98,11 +98,7 @@
     /* ── Game Cards ── */
     .game-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; width: 100%; max-width: 760px; }
     .game-card { position: relative; background: rgba(255,255,255,0.06); border: 2px solid rgba(240,180,41,0.3); border-radius: 24px; padding: 36px 28px; cursor: pointer; transition: transform .3s, border-color .3s, background .3s; text-align: center; overflow: hidden; }
-    .game-card::before { content: ''; position: absolute; inset: -3px; border-radius: 27px; background: conic-gradient(from var(--angle, 0deg), transparent 60%, var(--gold) 80%, transparent 100%); animation: rotateBorder 3s linear infinite; opacity: 0; transition: opacity .4s; z-index: -1; }
     .game-card::after { content: ''; position: absolute; inset: 2px; border-radius: 22px; background: rgba(0,28,75,0.92); z-index: -1; }
-    @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-    @keyframes rotateBorder { to { --angle: 360deg; } }
-    .game-card:hover::before { opacity: 1; }
     .game-card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--gold); box-shadow: var(--glow-gold); background: rgba(255,255,255,0.1); }
     .game-card-pulse { animation: cardPulseGlow 2.5s ease-in-out infinite; }
     @keyframes cardPulseGlow { 0%, 100% { box-shadow: 0 0 12px rgba(240,180,41,0.25), 0 0 30px rgba(240,180,41,0.1); } 50% { box-shadow: 0 0 24px rgba(240,180,41,0.55), 0 0 60px rgba(240,180,41,0.25); } }
@@ -774,12 +770,21 @@
       ctx.fillStyle='rgba(255,255,255,0.25)';
       drawRoundRect(bx+6,by+4,state.basket.w-12,6,3); ctx.fill();
 
-      ctx.font='22px serif';
+      ctx.font='26px serif';
       ctx.textAlign='center';
       for(let i=state.stars.length-1;i>=0;i--){
         const s = state.stars[i];
         s.y += s.speed;
+        ctx.shadowColor='rgba(240,180,41,1)';
+        ctx.shadowBlur=40;
+        ctx.shadowOffsetX=0;
+        ctx.shadowOffsetY=0;
+        ctx.fillStyle='rgba(255,255,255,1)';
         ctx.fillText(s.emoji, s.x, s.y);
+        ctx.shadowBlur=20;
+        ctx.shadowColor='rgba(255,255,100,0.9)';
+        ctx.fillText(s.emoji, s.x, s.y);
+        ctx.shadowColor='transparent';
 
         if(s.y+s.size/2 >= by && s.y-s.size/2 <= by+state.basket.h
            && s.x >= bx && s.x <= bx+state.basket.w){
@@ -800,8 +805,12 @@
         const p=state.particles[i];
         p.life-=0.07;
         ctx.globalAlpha=p.life;
-        ctx.font=`${20*p.life+10}px serif`;
+        ctx.font=`${22*p.life+12}px serif`;
+        ctx.shadowColor='rgba(255,255,100,1)';
+        ctx.shadowBlur=28;
+        ctx.fillStyle='rgba(255,255,255,1)';
         ctx.fillText(p.emoji,p.x,p.y-30*(1-p.life));
+        ctx.shadowColor='transparent';
         ctx.globalAlpha=1;
         if(p.life<=0) state.particles.splice(i,1);
       }

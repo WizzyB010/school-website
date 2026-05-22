@@ -65,8 +65,9 @@
     .mobile-menu.open{display:flex;}
     .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;}
     .mobile-menu a:hover{color:var(--gold2);}
-    .mob-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
-    .mob-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
+    .mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50%;cursor:pointer;color:#fff;font-size:1.5rem;display:flex;align-items:center;justify-content:center;width:44px;height:44px;z-index:2010;transition:all 0.3s ease;touch-action:manipulation;}
+    .mobile-close:hover,.mobile-close:focus{background:var(--gold2);color:var(--navy);border-color:var(--gold2);transform:rotate(90deg);outline:none;}
+    .mobile-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
 
     /* .skip-link{position:absolute;top: -40px;left:0;right:auto;background:var(--gold2);color:var(--navy);padding:.6rem 1rem;border-radius:0 0 6px 0;z-index:9999;transition:top .25s ease,out 0.3s;}
     .skip-link:focus{top:0;text-decoration:none;outline:3px solid #ffffff;} */
@@ -239,12 +240,17 @@
 
   <div class="topbar">
     <div class="top-left">
-      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
-      <a href="mailto:admin@wonderheights.edu.gh"><i class="fas fa-envelope gold"></i>admin@wonderheights.edu.gh
+      <span><i class="fas fa-phone-alt gold"></i> 020 101 6051 / 054 579 7990</span>
+      <a href="mailto:admin@wonderheights.edu.gh"><i class="fas fa-envelope gold"></i> admin@wonderheights.edu.gh</a>
     </div>
     <div class="top-right">
-      <span><i class="fas fa-map-marker-alt gold"></i>Afienya, Greater Accra</span>
-      <span><i class="fas fa-clock gold"></i>Mon–Fri: 7:30am – 4:00pm</span>
+      <span><i class="fas fa-map-marker-alt gold"></i> Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i> Mon–Fri: 7:30am – 4:00pm</span>
+      <select class="lang-select" onchange="changeLanguage(this.value)" style="background-color: #002855;">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="tw">🇬🇭 Twi</option>
+      </select>
       <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
     </div>
   </div>
@@ -303,7 +309,7 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true">
-    <button class="mob-close" aria-label="Close mobile menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <button class="mobile-close" aria-label="Close mobile menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="early-sprouts.html">Early Sprouts</a>
@@ -315,7 +321,7 @@
     <a href="gallery.html">Gallery</a>
     <a href="index.html#contact">Contact</a>
     <a href="game.html">Game</a>
-    <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
+    <a href="index.html#enroll" class="mobile-enroll">Enroll Now</a>
   </div>
 
   <!-- PAGE HERO -->
@@ -671,6 +677,26 @@
     if(closeMenuBtn){
       closeMenuBtn.addEventListener('click', closeMobileMenu);
     }
+
+    // EMAIL LINK FALLBACK WITH COPY OPTION
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link=>{
+      link.addEventListener('click', function(e){
+        const email=this.getAttribute('href').replace('mailto:','');
+        setTimeout(()=>{
+          if(!document.activeElement.closest('a[href^="mailto:"]')){
+            if(navigator.clipboard){
+              navigator.clipboard.writeText(email).then(()=>{
+                alert('Email copied: '+email+'\n\nIf an email client didn\'t open, you can paste this email address into your email provider.');
+              }).catch(()=>{
+                alert('Email: '+email+'\n\nCopy this address and paste it into your email to contact us.');
+              });
+            }else{
+              alert('Email: '+email+'\n\nCopy this address and paste it into your email to contact us.');
+            }
+          }
+        }, 500);
+      });
+    });
 
   </script>
 </body>
