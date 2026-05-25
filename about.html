@@ -403,8 +403,8 @@
           </div>
         </div>
         <a href="events.html" class="nav-btn">Events</a>
-        <a href="#gallery" class="nav-btn">Gallery</a>
-        <a href="#contact" class="nav-btn">Contact</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
+        <a href="index.html#contact" class="nav-btn">Contact</a>
         <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enroll Now
         </a>
@@ -595,9 +595,9 @@ Ultimately, WHITS stands as a complex of educational excellence—a place where 
         <div class="team-card reveal up">
           <div class="team-img-wrap">
             <img src="mama.jpg" alt="Team Member">
-            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="mailto:codirector@wonderheights.edu.gh"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Mrs.Sefakor Aveh</h4><p><a href="mailto:codirector@wonderheights.edu.gh" style="color:var(--gold);text-decoration:none;">Co-Director</a></p></div>
+          <div class="team-body"><h4>Mrs.Sefakor Aveh</h4><p><a href="" style="color:var(--gold);text-decoration:none;">Co-Director</a></p></div>
           <div class="team-qualifications" style="display:none;padding:1rem;border-top:1px solid #e5e7eb;background:#f8fafc;font-size:0.85rem;color:var(--text);"><strong>Qualifications:</strong> <span class="qual-text" contenteditable="true" style="display:block;margin-top:0.5rem;min-height:30px;padding:0.5rem;background:#fff;border-radius:4px;border:1px solid #e5e7eb;cursor:text;">Lorem <br> lorem</span></div>
           <button class="team-toggle-btn" onclick="toggleQualifications(this)" style="width:100%;padding:0.5rem;background:var(--gold2);color:var(--navy);border:none;border-radius:0 0 14px 14px;cursor:pointer;font-size:0.8rem;font-weight:600;">Show Qualifications</button>
         </div>
@@ -605,9 +605,9 @@ Ultimately, WHITS stands as a complex of educational excellence—a place where 
         <div class="team-card reveal up" style="transition-delay:.1s;">
           <div class="team-img-wrap">
             <img src="hos.jpg" alt="Team Member">
-            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="mailto:hos@wonderheights.edu.gh"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Mr. Dela Kaiser</h4><p><a href="mailto:hos@wonderheights.edu.gh" style="color:var(--gold);text-decoration:none;">Head of School</a></p></div>
+          <div class="team-body"><h4>Mr. Dela Kaiser</h4><p><a href="" style="color:var(--gold);text-decoration:none;">Head of School</a></p></div>
           <div class="team-qualifications" style="display:none;padding:1rem;border-top:1px solid #e5e7eb;background:#f8fafc;font-size:0.85rem;color:var(--text);"><strong>Qualifications:</strong> <span class="qual-text" contenteditable="true" style="display:block;margin-top:0.5rem;min-height:30px;padding:0.5rem;background:#fff;border-radius:4px;border:1px solid #e5e7eb;cursor:text;">Click to add qualifications</span></div>
           <button class="team-toggle-btn" onclick="toggleQualifications(this)" style="width:100%;padding:0.5rem;background:var(--gold2);color:var(--navy);border:none;border-radius:0 0 14px 14px;cursor:pointer;font-size:0.8rem;font-weight:600;">Show Qualifications</button>
         </div>
@@ -625,12 +625,13 @@ Ultimately, WHITS stands as a complex of educational excellence—a place where 
         <div class="team-card reveal up" style="transition-delay:.15s;">
           <div class="team-img-wrap">
             <img src="admin.jpg" alt="Team Member">
-            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+            <div class="team-overlay"><div class="team-socials"><a href="#"><i class="fab fa-linkedin"></i></a><a href="mailto:admin@wonderheights.edu.gh"><i class="fas fa-envelope"></i></a></div></div>
           </div>
-          <div class="team-body"><h4>Mr. Emmanuel Taylor</h4><p><a href="mailto:admin@wonderheights.edu.gh" style="color:var(--gold);text-decoration:none;">Administrator</a></p></div>
+          <div class="team-body"><h4>Mr. Emmanuel Taylor</h4><p><a href="" style="color:var(--gold);text-decoration:none;">Administrator</a></p></div>
           <div class="team-qualifications" style="display:none;padding:1rem;border-top:1px solid #e5e7eb;background:#f8fafc;font-size:0.85rem;color:var(--text);"><strong>Qualifications:</strong> <span class="qual-text" contenteditable="true" style="display:block;margin-top:0.5rem;min-height:30px;padding:0.5rem;background:#fff;border-radius:4px;border:1px solid #e5e7eb;cursor:text;">Click to add qualifications</span></div>
           <button class="team-toggle-btn" onclick="toggleQualifications(this)" style="width:100%;padding:0.5rem;background:var(--gold2);color:var(--navy);border:none;border-radius:0 0 14px 14px;cursor:pointer;font-size:0.8rem;font-weight:600;">Show Qualifications</button>
         </div>
+        
          <div class="team-card reveal up" style="transition-delay:.15s;">
           <div class="team-img-wrap">
             <img src="hosp.jpg" alt="Team Member">
@@ -937,6 +938,36 @@ Ultimately, WHITS stands as a complex of educational excellence—a place where 
           event.preventDefault();
           this.click();
         }
+      });
+    });
+
+    // EMAIL LINK FALLBACK WITH COPY OPTION
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link=>{
+      link.addEventListener('click', function(e){
+        const email = this.getAttribute('href').replace('mailto:','');
+        const mailtoLink = this.getAttribute('href');
+        
+        // Try to open email client
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        iframe.src = mailtoLink;
+        
+        // After a delay, check if email client opened and provide fallback
+        setTimeout(()=>{
+          document.body.removeChild(iframe);
+          if(navigator.clipboard){
+            navigator.clipboard.writeText(email).then(()=>{
+              alert('Email copied: '+email+'\n\nIf an email client didn\'t open, you can paste this email address into your email provider.');
+            }).catch(()=>{
+              alert('Email: '+email+'\n\nCopy this address and paste it into your email to contact us.');
+            });
+          }else{
+            alert('Email: '+email+'\n\nCopy this address and paste it into your email to contact us.');
+          }
+        }, 1000);
+        
+        return false;
       });
     });
     
