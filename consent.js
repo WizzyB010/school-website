@@ -45,8 +45,10 @@
     banner.innerHTML =
       '<span style="max-width:640px;line-height:1.5;">' +
         'We only collect the personal information you choose to submit through our forms ' +
-        '(e.g. Admissions, Newsletter). We do not use tracking, profiling, or advertising cookies. ' +
-        'A small amount of local storage remembers your light/dark display preference only. ' +
+        '(e.g. Admissions, Newsletter), and we do not use tracking, profiling, or advertising ' +
+        'cookies of our own. Some pages let you optionally load a Facebook reviews widget, which ' +
+        'sets Facebook\'s own cookies once you choose to view it. A small amount of local storage ' +
+        'remembers your light/dark display preference only. ' +
         'Read our <a href="' + rootPath('privacy-policy.html') + '" style="color:#f0b429;text-decoration:underline;">Privacy Policy</a> ' +
         'and <a href="' + rootPath('terms-of-service.html') + '" style="color:#f0b429;text-decoration:underline;">Terms of Service</a>.' +
       '</span>' +
@@ -59,6 +61,7 @@
       setConsent('accepted');
       banner.remove();
       gateForms(false);
+      document.dispatchEvent(new CustomEvent('whis-consent-accepted'));
     });
   }
 

@@ -38,6 +38,10 @@
     body.dark nav { background: #0f172a; }
     .hero { position: relative; height: 92vh; min-height: 580px; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
     .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; }
+    .fb-reviews-wrap { display: flex; flex-direction: column; align-items: center; }
+    .fb-reviews-placeholder { display: flex; flex-direction: column; align-items: center; text-align: center; background: #fff; border: 1px dashed var(--border); border-radius: 16px; padding: 3rem 2rem; max-width: 560px; width: 100%; }
+    body.dark .fb-reviews-placeholder { background: #1e293b; border-color: #334155; }
+    #fbReviewsFrame:not(:empty) { width: 100%; max-width: 500px; display: flex; justify-content: center; }
     .hero-slide.active { opacity: 1; }
 
     /* FLOATING CONTACT BUTTONS */
@@ -909,86 +913,16 @@
       <div style="text-align:center; margin-bottom:3rem;" class="reveal up">
         <div class="section-label" style="justify-content:center;">Parent Testimonials</div>
         <h2 class="section-title">What Families Are Saying</h2>
+        <p class="section-sub" style="max-width:560px;margin:.6rem auto 0;">Real reviews pulled live from our official Facebook page — nothing written by us.</p>
       </div>
 
-      <div class="testi-carousel" id="testiCarousel">
-        <div class="testi-track" id="testiTrack">
-          <!-- Testimonial 1 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Wonder Heights has been absolutely transformative for our daughter. The teachers are attentive, caring, and genuinely invested in every child's growth. Highly recommend!"</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">AA</div>
-                <div>
-                  <div class="testi-name">Abena Acheampong</div>
-                  <div class="testi-role">Parent of Primary 4 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 2 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"The holistic approach to education at Wonder Heights is remarkable. Our son has grown academically AND in character. The facilities and dedicated staff are second to none!"</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">KA</div>
-                <div>
-                  <div class="testi-name">Kofi Amponsah</div>
-                  <div class="testi-role">Parent of Primary 2 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 3 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Communication with the school is top-notch. We always feel informed and involved. Our children are thriving here, and we couldn't be happier."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">JO</div>
-                <div>
-                  <div class="testi-name">Joshua & Olivia Asante</div>
-                  <div class="testi-role">Parents of JHS Students</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 4 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"The sense of community at Wonder Heights is amazing. Our children feel safe, encouraged, and excited to learn every single day."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">BA</div>
-                <div>
-                  <div class="testi-name">Ben & Adwoa Ackah</div>
-                  <div class="testi-role">Parents of KG & Primary Students</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 5 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Excellent facilities and resources. My son has access to everything he needs to succeed, from the computer lab to a well-stocked library. Wonder Heights truly stands out."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">EM</div>
-                <div>
-                  <div class="testi-name">Enagol Mensah</div>
-                  <div class="testi-role">Parent of Primary 6 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="fb-reviews-wrap reveal up" id="fbReviewsWrap">
+        <div class="fb-reviews-placeholder" id="fbReviewsPlaceholder">
+          <i class="fab fa-facebook" style="font-size:2rem;color:var(--navy);margin-bottom:.8rem;"></i>
+          <p style="color:var(--muted);margin-bottom:1.2rem;max-width:420px;">Showing this loads a widget hosted by Facebook, which sets its own cookies (see our <a href="privacy-policy.html" style="text-decoration:underline;">Privacy Policy</a>).</p>
+          <button type="button" id="fbReviewsLoadBtn" class="btn-navy"><i class="fab fa-facebook" style="margin-right:.5rem;"></i>Show Facebook Reviews</button>
         </div>
-      </div>
-
-      <div class="testi-controls">
-        <button class="testi-btn" id="testiPrev"><i class="fas fa-chevron-left"></i></button>
-        <button class="testi-btn" id="testiNext"><i class="fas fa-chevron-right"></i></button>
+        <div id="fbReviewsFrame"></div>
       </div>
 
       <div style="text-align:center; margin-top:2.5rem;" class="reveal up">
@@ -1450,27 +1384,31 @@ function toggleOtherField(selectElement) {
     }
     populateEventsList();
 
-    // ── TESTIMONIALS CAROUSEL ──
-    let testiIndex = 0;
-    const testiTrack = document.getElementById('testiTrack');
-    const testiSlides = document.querySelectorAll('.testi-slide');
-    let slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-    function setTesti(n) {
-      if (!testiTrack || !testiSlides.length) return;
-      slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-      const max = Math.max(0, testiSlides.length - slidesVisible);
-      testiIndex = Math.max(0, Math.min(n, max));
-      const firstSlide = testiSlides[0];
-      if (!firstSlide) return;
-      const slideW = firstSlide.getBoundingClientRect().width + 24;
-      testiTrack.style.transform = `translateX(-${testiIndex * slideW}px)`;
+    // ── FACEBOOK REVIEWS WIDGET (loaded only on click, or once privacy consent is accepted) ──
+    function loadFacebookReviews() {
+      const frame = document.getElementById('fbReviewsFrame');
+      const placeholder = document.getElementById('fbReviewsPlaceholder');
+      if (!frame || frame.dataset.loaded) return;
+      frame.dataset.loaded = 'true';
+      const pageUrl = 'https://www.facebook.com/profile.php?id=61559737448958';
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(pageUrl) + '&tabs=reviews&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false';
+      iframe.width = '500';
+      iframe.height = '700';
+      iframe.style.cssText = 'border:none;overflow:hidden;max-width:100%;';
+      iframe.scrolling = 'no';
+      iframe.loading = 'lazy';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+      frame.appendChild(iframe);
+      if (placeholder) placeholder.style.display = 'none';
     }
-    window.addEventListener('resize', () => setTesti(testiIndex));
-    const testiPrevBtn = document.getElementById('testiPrev');
-    const testiNextBtn = document.getElementById('testiNext');
-    if (testiPrevBtn) testiPrevBtn.onclick = () => setTesti(testiIndex - 1);
-    if (testiNextBtn) testiNextBtn.onclick = () => setTesti(testiIndex + 1);
-    setTesti(0);
+    const fbReviewsLoadBtn = document.getElementById('fbReviewsLoadBtn');
+    if (fbReviewsLoadBtn) fbReviewsLoadBtn.addEventListener('click', loadFacebookReviews);
+    let whisHasConsent = false;
+    try { whisHasConsent = localStorage.getItem('whis-consent') === 'accepted'; } catch (e) {}
+    if (whisHasConsent) loadFacebookReviews();
+    document.addEventListener('whis-consent-accepted', loadFacebookReviews);
 
     // ── VIDEO PLACEHOLDER ──
     function playVideo() {
