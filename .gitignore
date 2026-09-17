@@ -1,0 +1,9 @@
+# Secrets / environment
+.env
+.env.*
+*.pem
+*.key
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

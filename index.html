@@ -38,6 +38,10 @@
     body.dark nav { background: #0f172a; }
     .hero { position: relative; height: 92vh; min-height: 580px; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
     .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; }
+    .fb-reviews-wrap { display: flex; flex-direction: column; align-items: center; }
+    .fb-reviews-placeholder { display: flex; flex-direction: column; align-items: center; text-align: center; background: #fff; border: 1px dashed var(--border); border-radius: 16px; padding: 3rem 2rem; max-width: 560px; width: 100%; }
+    body.dark .fb-reviews-placeholder { background: #1e293b; border-color: #334155; }
+    #fbReviewsFrame:not(:empty) { width: 100%; max-width: 500px; display: flex; justify-content: center; }
     .hero-slide.active { opacity: 1; }
 
     /* FLOATING CONTACT BUTTONS */
@@ -283,8 +287,8 @@
       <div class="about-grid">
         <!-- Images -->
         <div class="about-img-stack reveal left">
-          <img src="2.jpg" alt="Students in library" class="about-img-main">
-          <img src="4.jpg" alt="Student writing" class="about-img-secondary">
+          <img loading="lazy" src="2.jpg" alt="Students in library" class="about-img-main">
+          <img loading="lazy" src="4.jpg" alt="Student writing" class="about-img-secondary">
           <div class="about-badge-float">
             <div class="num">10+</div>
             <div class="lbl">Years of Excellence</div>
@@ -357,7 +361,7 @@
           </div>
 
           <!-- Actual video element — replace src with your video file or YouTube embed -->
-          <video id="schoolVideo" poster="1.jpg" style="display:none; position:absolute; inset:0; width:100%; height:100%;" controls>
+          <video id="schoolVideo" poster="1.jpg" preload="none" style="display:none; position:absolute; inset:0; width:100%; height:100%;" controls>
             <source src="video5926788619162361744.mp4" type="video/mp4">
             <!-- Or use YouTube iframe instead -->
           </video>
@@ -388,7 +392,7 @@
         
         <!-- Card 2 -->
         <div class="program-card reveal up" style="transition-delay:0.1s;">
-          <img src="9.jpg" alt="Preschool" class="program-img">
+          <img loading="lazy" src="9.jpg" alt="Preschool" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-shapes"></i></div>
             <h3>Early Sprouts School</h3>
@@ -398,7 +402,7 @@
         </div>
         <!-- Card 3 -->
         <div class="program-card reveal up" style="transition-delay:0.2s;">
-          <img src="3.jpg" alt="Primary" class="program-img">
+          <img loading="lazy" src="3.jpg" alt="Primary" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-book-open"></i></div>
             <h3>Primary School</h3>
@@ -408,7 +412,7 @@
         </div>
         <!-- Card 4 -->
        <div class="program-card reveal up" style="transition-delay:0.15s;">
-          <img src="2222.jpg" alt="Secondary School" class="program-img">
+          <img loading="lazy" src="2222.jpg" alt="Secondary School" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
             <h3>Secondary School</h3>
@@ -418,7 +422,7 @@
         </div>
         <!-- Card 5-->
         <div class="program-card reveal up" style="transition-delay:0.15s;">
-          <img src="cg.jpg" alt="College and SAT Prep" class="program-img">
+          <img loading="lazy" src="cg.jpg" alt="College and SAT Prep" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-university"></i></div>
             <h3>College</h3>
@@ -428,7 +432,7 @@
         </div>
         <!-- Card 6 -->
         <div class="program-card reveal up" style="transition-delay:0.25s;">
-          <img src="sp.jpg" alt="Therapy" class="program-img">
+          <img loading="lazy" src="sp.jpg" alt="Therapy" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-heart"></i></div>
             <h3>Therapy & Special Needs School</h3>
@@ -438,7 +442,7 @@
         </div>
         <!-- Card 7 — Practical Lessons -->
         <div class="program-card reveal up" style="transition-delay:0.3s;">
-          <img src="6.jfif" alt="Extracurricular" class="program-img">
+          <img loading="lazy" src="6.jfif" alt="Extracurricular" class="program-img">
           <div class="program-body">
             <div class="program-icon"><i class="fas fa-palette"></i></div>
             <h3>Extracurricular Activities</h3>
@@ -495,7 +499,7 @@
         </div>
 
         <div class="why-img-col reveal right" style="animation-delay:0.2s;">
-          <img src="222.jpg" alt="Happy students" class="why-img-main">
+          <img loading="lazy" src="222.jpg" alt="Happy students" class="why-img-main">
           <div class="why-overlay-card">
             <p>🏆 Award-winning school culture</p>
             <span>Recognised for academic & character excellence</span>
@@ -600,7 +604,12 @@
           <h3>Student Enrollment Application</h3>
           <p>Please complete all fields accurately. Fields marked * are required.</p>
 
-          <form id="enrollForm" novalidate>
+          <form id="enrollForm" novalidate data-requires-consent="true">
+            <!-- Honeypot: legitimate users never fill this hidden field; server-side (Apps Script) should reject any submission where it is non-empty -->
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name *</label>
@@ -904,86 +913,16 @@
       <div style="text-align:center; margin-bottom:3rem;" class="reveal up">
         <div class="section-label" style="justify-content:center;">Parent Testimonials</div>
         <h2 class="section-title">What Families Are Saying</h2>
+        <p class="section-sub" style="max-width:560px;margin:.6rem auto 0;">Real reviews pulled live from our official Facebook page — nothing written by us.</p>
       </div>
 
-      <div class="testi-carousel" id="testiCarousel">
-        <div class="testi-track" id="testiTrack">
-          <!-- Testimonial 1 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Wonder Heights has been absolutely transformative for our daughter. The teachers are attentive, caring, and genuinely invested in every child's growth. Highly recommend!"</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">AA</div>
-                <div>
-                  <div class="testi-name">Abena Acheampong</div>
-                  <div class="testi-role">Parent of Primary 4 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 2 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"The holistic approach to education at Wonder Heights is remarkable. Our son has grown academically AND in character. The facilities and dedicated staff are second to none!"</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">KA</div>
-                <div>
-                  <div class="testi-name">Kofi Amponsah</div>
-                  <div class="testi-role">Parent of Primary 2 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 3 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Communication with the school is top-notch. We always feel informed and involved. Our children are thriving here, and we couldn't be happier."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">JO</div>
-                <div>
-                  <div class="testi-name">Joshua & Olivia Asante</div>
-                  <div class="testi-role">Parents of JHS Students</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 4 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"The sense of community at Wonder Heights is amazing. Our children feel safe, encouraged, and excited to learn every single day."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">BA</div>
-                <div>
-                  <div class="testi-name">Ben & Adwoa Ackah</div>
-                  <div class="testi-role">Parents of KG & Primary Students</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Testimonial 5 -->
-          <div class="testi-slide">
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <blockquote>"Excellent facilities and resources. My son has access to everything he needs to succeed, from the computer lab to a well-stocked library. Wonder Heights truly stands out."</blockquote>
-              <div class="testi-author">
-                <div class="testi-avatar">EM</div>
-                <div>
-                  <div class="testi-name">Enagol Mensah</div>
-                  <div class="testi-role">Parent of Primary 6 Student</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="fb-reviews-wrap reveal up" id="fbReviewsWrap">
+        <div class="fb-reviews-placeholder" id="fbReviewsPlaceholder">
+          <i class="fab fa-facebook" style="font-size:2rem;color:var(--navy);margin-bottom:.8rem;"></i>
+          <p style="color:var(--muted);margin-bottom:1.2rem;max-width:420px;">Showing this loads a widget hosted by Facebook, which sets its own cookies (see our <a href="privacy-policy.html" style="text-decoration:underline;">Privacy Policy</a>).</p>
+          <button type="button" id="fbReviewsLoadBtn" class="btn-navy"><i class="fab fa-facebook" style="margin-right:.5rem;"></i>Show Facebook Reviews</button>
         </div>
-      </div>
-
-      <div class="testi-controls">
-        <button class="testi-btn" id="testiPrev"><i class="fas fa-chevron-left"></i></button>
-        <button class="testi-btn" id="testiNext"><i class="fas fa-chevron-right"></i></button>
+        <div id="fbReviewsFrame"></div>
       </div>
 
       <div style="text-align:center; margin-top:2.5rem;" class="reveal up">
@@ -1003,7 +942,12 @@
           <h2>Stay Connected</h2>
           <p>Subscribe for school updates, events, and news.</p>
         </div>
-        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
+        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)" data-requires-consent="true">
+          <!-- Honeypot: legitimate users never fill this hidden field; server-side (Apps Script) should reject any submission where it is non-empty -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <label for="nl_website">Leave this field empty</label>
+            <input type="text" id="nl_website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <input type="email" class="newsletter-input" name="newsletter_email" placeholder="Enter your email address" required>
           <button type="submit" class="newsletter-btn">Subscribe <i class="fas fa-arrow-right" style="margin-left:0.3rem;"></i></button>
         </form>
@@ -1068,7 +1012,8 @@
           <li><a href="index.html#calendar">Events</a></li>
           <li><a href="index.html#gallery">Gallery</a></li>
           <li><a href="index.html#contact">Contact Us</a></li>
-          <li><a href="about.html#policies">Privacy Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
         </ul>
       </div>
       <!-- Academics -->
@@ -1439,27 +1384,31 @@ function toggleOtherField(selectElement) {
     }
     populateEventsList();
 
-    // ── TESTIMONIALS CAROUSEL ──
-    let testiIndex = 0;
-    const testiTrack = document.getElementById('testiTrack');
-    const testiSlides = document.querySelectorAll('.testi-slide');
-    let slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-    function setTesti(n) {
-      if (!testiTrack || !testiSlides.length) return;
-      slidesVisible = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-      const max = Math.max(0, testiSlides.length - slidesVisible);
-      testiIndex = Math.max(0, Math.min(n, max));
-      const firstSlide = testiSlides[0];
-      if (!firstSlide) return;
-      const slideW = firstSlide.getBoundingClientRect().width + 24;
-      testiTrack.style.transform = `translateX(-${testiIndex * slideW}px)`;
+    // ── FACEBOOK REVIEWS WIDGET (loaded only on click, or once privacy consent is accepted) ──
+    function loadFacebookReviews() {
+      const frame = document.getElementById('fbReviewsFrame');
+      const placeholder = document.getElementById('fbReviewsPlaceholder');
+      if (!frame || frame.dataset.loaded) return;
+      frame.dataset.loaded = 'true';
+      const pageUrl = 'https://www.facebook.com/profile.php?id=61559737448958';
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(pageUrl) + '&tabs=reviews&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false';
+      iframe.width = '500';
+      iframe.height = '700';
+      iframe.style.cssText = 'border:none;overflow:hidden;max-width:100%;';
+      iframe.scrolling = 'no';
+      iframe.loading = 'lazy';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+      frame.appendChild(iframe);
+      if (placeholder) placeholder.style.display = 'none';
     }
-    window.addEventListener('resize', () => setTesti(testiIndex));
-    const testiPrevBtn = document.getElementById('testiPrev');
-    const testiNextBtn = document.getElementById('testiNext');
-    if (testiPrevBtn) testiPrevBtn.onclick = () => setTesti(testiIndex - 1);
-    if (testiNextBtn) testiNextBtn.onclick = () => setTesti(testiIndex + 1);
-    setTesti(0);
+    const fbReviewsLoadBtn = document.getElementById('fbReviewsLoadBtn');
+    if (fbReviewsLoadBtn) fbReviewsLoadBtn.addEventListener('click', loadFacebookReviews);
+    let whisHasConsent = false;
+    try { whisHasConsent = localStorage.getItem('whis-consent') === 'accepted'; } catch (e) {}
+    if (whisHasConsent) loadFacebookReviews();
+    document.addEventListener('whis-consent-accepted', loadFacebookReviews);
 
     // ── VIDEO PLACEHOLDER ──
     function playVideo() {
@@ -1540,11 +1489,21 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
     return;
   }
 
+  // 5b. Honeypot check — bots fill every field, real users never see this one.
+  // NOTE: this only deters unsophisticated bots. The Apps Script endpoint below
+  // is a public URL visible in this file, so it MUST also validate/rate-limit
+  // submissions server-side — client checks can always be bypassed.
+  if (document.getElementById('website') && document.getElementById('website').value.trim() !== '') {
+    form.reset();
+    btn.textContent = '✓ Submitted!';
+    return;
+  }
+
   // 6. SUBMIT TO GOOGLE SHEETS
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; 
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec';
   
   // Create the form data package
   const formData = new FormData(form);
@@ -1601,6 +1560,14 @@ document.querySelectorAll('#enrollForm input, #enrollForm select, #enrollForm te
   const btn = form.querySelector('button');
   const emailInput = form.querySelector('input[name="newsletter_email"]');
   const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; // Use your Google Script URL here
+
+  // Honeypot check — see note on the enrollment form handler above.
+  const nlHoneypot = form.querySelector('input[name="website"]');
+  if (nlHoneypot && nlHoneypot.value.trim() !== '') {
+    form.reset();
+    btn.textContent = '✓ Subscribed!';
+    return;
+  }
 
   // Basic validation to ensure it's a real email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
@@ -1793,5 +1760,6 @@ function updatePhoneCode(selectElement) {
   phoneInput.focus();
 }
   </script>
+  <script src="consent.js" defer></script>
 </body>
 </html>
