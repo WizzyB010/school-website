@@ -600,7 +600,12 @@
           <h3>Student Enrollment Application</h3>
           <p>Please complete all fields accurately. Fields marked * are required.</p>
 
-          <form id="enrollForm" novalidate>
+          <form id="enrollForm" novalidate data-requires-consent="true">
+            <!-- Honeypot: legitimate users never fill this hidden field; server-side (Apps Script) should reject any submission where it is non-empty -->
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name *</label>
@@ -1003,7 +1008,12 @@
           <h2>Stay Connected</h2>
           <p>Subscribe for school updates, events, and news.</p>
         </div>
-        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
+        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)" data-requires-consent="true">
+          <!-- Honeypot: legitimate users never fill this hidden field; server-side (Apps Script) should reject any submission where it is non-empty -->
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <label for="nl_website">Leave this field empty</label>
+            <input type="text" id="nl_website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <input type="email" class="newsletter-input" name="newsletter_email" placeholder="Enter your email address" required>
           <button type="submit" class="newsletter-btn">Subscribe <i class="fas fa-arrow-right" style="margin-left:0.3rem;"></i></button>
         </form>
@@ -1068,7 +1078,8 @@
           <li><a href="index.html#calendar">Events</a></li>
           <li><a href="index.html#gallery">Gallery</a></li>
           <li><a href="index.html#contact">Contact Us</a></li>
-          <li><a href="about.html#policies">Privacy Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
         </ul>
       </div>
       <!-- Academics -->
@@ -1540,11 +1551,21 @@ document.getElementById('enrollForm').addEventListener('submit', async function(
     return;
   }
 
+  // 5b. Honeypot check — bots fill every field, real users never see this one.
+  // NOTE: this only deters unsophisticated bots. The Apps Script endpoint below
+  // is a public URL visible in this file, so it MUST also validate/rate-limit
+  // submissions server-side — client checks can always be bypassed.
+  if (document.getElementById('website') && document.getElementById('website').value.trim() !== '') {
+    form.reset();
+    btn.textContent = '✓ Submitted!';
+    return;
+  }
+
   // 6. SUBMIT TO GOOGLE SHEETS
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; 
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec';
   
   // Create the form data package
   const formData = new FormData(form);
@@ -1601,6 +1622,14 @@ document.querySelectorAll('#enrollForm input, #enrollForm select, #enrollForm te
   const btn = form.querySelector('button');
   const emailInput = form.querySelector('input[name="newsletter_email"]');
   const scriptURL = 'https://script.google.com/macros/s/AKfycby-mX845T27nW3x5uWx7GvaarMPLQ647tvQDatktxy-6BHB7HJkCW8yiGye3ydssIMNJg/exec'; // Use your Google Script URL here
+
+  // Honeypot check — see note on the enrollment form handler above.
+  const nlHoneypot = form.querySelector('input[name="website"]');
+  if (nlHoneypot && nlHoneypot.value.trim() !== '') {
+    form.reset();
+    btn.textContent = '✓ Subscribed!';
+    return;
+  }
 
   // Basic validation to ensure it's a real email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
@@ -1793,5 +1822,6 @@ function updatePhoneCode(selectElement) {
   phoneInput.focus();
 }
   </script>
+  <script src="consent.js" defer></script>
 </body>
 </html>
