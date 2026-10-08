@@ -2,12 +2,14 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com mailto:; form-action 'self' https://script.google.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery — Wonder Heights International School</title>
   <link rel="icon" type="image/png" href="logo_WHIS.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     :root{--navy:#002855;--navy2:#003a7a;--gold:#c9920a;--gold2:#f0b429;--cream:#fdf8f0;--dark:#0a0f1e;--text:#1a1a2e;--muted:#64748b;--border:#e5e7eb;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -159,6 +161,24 @@
     .gallery-grid{columns:4;column-gap:1rem;transition:opacity .3s;}
     .gallery-grid.loading{opacity:.4;}
 
+    .gal-item{position:relative;break-inside:avoid;margin-bottom:1rem;border-radius:14px;overflow:hidden;cursor:pointer;background:#e2e8f0;box-shadow:0 6px 24px rgba(0,40,85,.08);animation:galIn .5s ease both;}
+    body.dark .gal-item{background:#1e293b;}
+    .gal-item img{width:100%;height:auto;object-fit:cover;transition:transform .5s;}
+    .gal-item:hover img{transform:scale(1.05);}
+    .img-placeholder{position:absolute;inset:0;background:linear-gradient(90deg,#e2e8f0 0%,#f1f5f9 50%,#e2e8f0 100%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+    body.dark .img-placeholder{background:linear-gradient(90deg,#1e293b 0%,#334155 50%,#1e293b 100%);background-size:200% 100%;}
+    .gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,20,50,.88) 0%,rgba(0,20,50,.15) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;opacity:0;transition:opacity .3s;}
+    .gal-item:hover .gal-overlay{opacity:1;}
+    .gal-tag{display:inline-flex;align-items:center;gap:.35rem;align-self:flex-start;background:var(--gold2);color:var(--navy);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .6rem;border-radius:50px;margin-bottom:.4rem;}
+    .gal-caption{color:#fff;font-weight:600;font-size:.92rem;line-height:1.35;}
+    .gal-year{color:rgba(255,255,255,.65);font-size:.75rem;margin-top:.2rem;}
+    .gal-zoom{position:absolute;top:.7rem;right:.7rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.8rem;opacity:0;transform:scale(.8);transition:all .3s;}
+    .gal-item:hover .gal-zoom{opacity:1;transform:scale(1);}
+    .empty-state{display:none;text-align:center;padding:4rem 1rem;color:var(--muted);}
+    .empty-state i{font-size:2.5rem;color:var(--gold);margin-bottom:1rem;display:block;}
+    @keyframes galIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+    @keyframes shimmer{to{background-position:-200% 0;}}
+
     @media(max-width:1024px){.gallery-grid{columns:3;}}
     @media(max-width:768px){.gallery-grid{columns:1;}.filter-group{min-width:140px;}.nav-links{display:none;}.hamburger{display:block;}.footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.stats-bar{gap:1.5rem;}.filter-wrapper{padding:1.2rem;}}
 
@@ -300,6 +320,7 @@
         <a href="events.html" class="nav-btn">Events</a>
         <a href="gallery.html" class="nav-btn active">Gallery</a>
         <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="staff.html" class="nav-btn"><i class="fas fa-id-badge" style="margin-right:.4rem;"></i>Staff</a>
         <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:.4rem;"></i>Enroll Now
         </a>
@@ -324,6 +345,8 @@
     <a href="college.html">College</a>
     <a href="therapy-special-needs.html">Therapy &amp; Special Needs</a>
     <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="staff.html">Staff</a>
     <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
   </div>
 
@@ -450,9 +473,9 @@
         </div>
         <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="index.html#video-tour" class="social-btn" aria-label="YouTube" id="video-tour"><i class="fab fa-youtube"></i></a>
           <!-- <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a> -->
         </div>
@@ -513,13 +536,13 @@
 
   <!-- ═══════════════════════════ FLOATING BUTTONS ═══════════════════════════ -->
   <div class="float-contact">
-    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
+    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" aria-label="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
       <i class="fab fa-facebook-f"></i>
     </a>
-    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" aria-label="Instagram">
+    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
     <a href="tel:+233201016051" class="float-btn phone" aria-label="Call us">
@@ -627,16 +650,59 @@
   let GALLERY_DATA = [];
 
   // ⚠️ PASTE YOUR NEW APPS SCRIPT URL HERE:
-  const API_URL = "https://script.google.com/macros/s/AKfycbwRagKfAUqOSn4wFHRec-CtdSBg4brQR0XtaX_VRN2Ud4KDIO1GmZu-LFfQi1UTJj0k/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbymZPnVLHnQ2SHDQYopOC7jA7f9_4NjQDP4-ZATrwnORkZ9-n6_Fl7dcoFPqsNM-_H2ng/exec";
+
+  // Shown when the Drive feed is unreachable so the gallery is never empty.
+  const LOCAL_IMAGES = [
+    { src: '9.jpg',    caption: 'Early Sprouts learning time', folder: 'Early Sprouts' },
+    { src: '3.jpg',    caption: 'Primary School classroom', folder: 'Primary' },
+    { src: '2222.jpg', caption: 'Secondary School students', folder: 'JHS Lower Secondary' },
+    { src: 'cg.jpg',   caption: 'College and SAT prep', folder: 'College' },
+    { src: 'sp.jpg',   caption: 'Therapy & Special Needs support', folder: 'Therapy & Special Needs' },
+    { src: '6.jfif',   caption: 'Extracurricular activities', folder: 'Extracurricular' },
+    { src: '2.jpg',    caption: 'Students in the library', folder: 'School Life' },
+    { src: '4.jpg',    caption: 'Focused learners', folder: 'School Life' },
+    { src: '222.jpg',  caption: 'Happy students', folder: 'School Life' },
+    { src: '1.jpg',    caption: 'Life at Wonder Heights', folder: 'School Life' },
+    { src: '5.jpg',    caption: 'Life at Wonder Heights', folder: 'School Life' },
+    { src: '8.jpg',    caption: 'Life at Wonder Heights', folder: 'School Life' },
+    { src: '10.jpg',   caption: 'Life at Wonder Heights', folder: 'School Life' },
+    { src: '22.jpg',   caption: 'Life at Wonder Heights', folder: 'School Life' },
+    { src: '99.jpg',   caption: 'Life at Wonder Heights', folder: 'School Life' }
+  ];
+
+  // Google blocks hot-linking via drive.google.com/uc?id=… — the thumbnail endpoint still embeds.
+  function toEmbeddableSrc(src) {
+    const m = String(src || '').match(/(?:drive\.google\.com|docs\.google\.com).*?(?:[?&]id=|\/d\/)([\w-]{20,})/);
+    return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1600` : src;
+  }
+
+  // Drive file/folder names are inserted as HTML, so neutralise any markup in them.
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  async function fetchDriveImages() {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Gallery feed returned ' + response.status);
+    const data = await response.json();
+    if (!Array.isArray(data) || !data.length) throw new Error('Gallery feed is empty');
+    return data;
+  }
 
   async function loadDriveImages() {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = '<div style="text-align:center; padding: 3rem; grid-column: 1 / -1;"><i class="fas fa-circle-notch fa-spin fa-2x" style="color:var(--gold2);margin-bottom:1rem;"></i><p>Loading school memories instantly...</p></div>';
 
     try {
-      const response = await fetch(API_URL);
-      const rawData = await response.json();
-      
+      let rawData;
+      try {
+        rawData = await fetchDriveImages();
+      } catch (err) {
+        console.warn('Drive gallery unavailable, showing local photos.', err);
+        rawData = LOCAL_IMAGES;
+      }
+
       // SMART AUTO-TAGGER: Analyzes file names and folder names
       GALLERY_DATA = rawData.map(item => {
         let searchText = (item.caption + " " + item.folder).toLowerCase();
@@ -669,7 +735,7 @@
 
         // Return the perfectly formatted item for the gallery
         return {
-          src: item.src,
+          src: toEmbeddableSrc(item.src),
           caption: item.caption,
           year: year,
           tags: tags,
@@ -729,14 +795,14 @@
           el.style.animationDelay = `${idx * 0.04}s`;
           el.innerHTML = `
             <div class="img-placeholder"></div>
-            <img src="${item.src}" alt="${item.caption}" loading="lazy"
+            <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.caption)}" loading="lazy"
               onload="this.previousElementSibling && this.previousElementSibling.remove();"
               onerror="this.style.display='none';this.previousElementSibling && this.previousElementSibling.remove();"
               style="min-height:180px;display:block;">
             <div class="gal-overlay">
-              <div class="gal-tag"><i class="fas fa-tag"></i>${item.category}</div>
-              <div class="gal-caption">${item.caption}</div>
-              <div class="gal-year">${item.year}</div>
+              <div class="gal-tag"><i class="fas fa-tag"></i>${escapeHtml(item.category)}</div>
+              <div class="gal-caption">${escapeHtml(item.caption)}</div>
+              <div class="gal-year">${escapeHtml(item.year)}</div>
             </div>
             <div class="gal-zoom"><i class="fas fa-expand"></i></div>
           `;

@@ -1,0 +1,43 @@
+# Security settings for Apache / LiteSpeed (cPanel) hosting. Other hosts ignore this file.
+
+# Don't list folder contents when there's no index page.
+Options -Indexes
+ServerSignature Off
+
+# Force HTTPS. Only keep this once https://yourdomain loads correctly (SSL certificate active).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Browsers remember to always use HTTPS for a year.
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # Stop other sites from showing these pages inside a frame (clickjacking).
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+  # Don't let browsers guess file types (blocks disguised script uploads).
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+</IfModule>
+
+# Block hidden files (.htaccess, .gitignore, .env …) and files that aren't part of the public site.
+<FilesMatch "(^\.|\.(gs|md|bak|old|orig|sql|log|ini|sh|env|pem|key)$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+<IfModule mod_alias.c>
+  RedirectMatch 404 /\.(git|vscode)(/|$)
+  RedirectMatch 404 /apps-script(/|$)
+</IfModule>

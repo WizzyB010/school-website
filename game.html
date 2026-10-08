@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com mailto:; form-action 'self' https://script.google.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wonder Arcade — Wonder Heights International School</title>
   <link rel="icon" type="image/png" href="logo_WHIS.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     :root {
       --navy: #002855;
@@ -96,7 +98,8 @@
     .subtitle { font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin-bottom: 48px; line-height: 1.6; }
 
     /* ── Game Cards ── */
-    .game-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; width: 100%; max-width: 760px; }
+    .game-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; width: 100%; max-width: 1100px; }
+    a.game-card { display: block; color: inherit; text-decoration: none; }
     .game-card { position: relative; background: rgba(255,255,255,0.06); border: 2px solid rgba(240,180,41,0.3); border-radius: 24px; padding: 36px 28px; cursor: pointer; transition: transform .3s, border-color .3s, background .3s; text-align: center; overflow: hidden; }
     .game-card::after { content: ''; position: absolute; inset: 2px; border-radius: 22px; background: rgba(0,28,75,0.92); z-index: -1; }
     .game-card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--gold); box-shadow: var(--glow-gold); background: rgba(255,255,255,0.1); }
@@ -286,6 +289,7 @@
         <a href="events.html" class="nav-btn">Events</a>
         <a href="index.html#gallery" class="nav-btn">Gallery</a>
         <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="staff.html" class="nav-btn"><i class="fas fa-id-badge" style="margin-right:.4rem;"></i>Staff</a>
         <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:0.4rem;"></i> Enrol Now
         </a>
@@ -315,6 +319,7 @@
     <a href="events.html" onclick="closeMobileMenu()">Events</a>
     <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
     <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="staff.html" onclick="closeMobileMenu()">Staff</a>
     <a href="index.html#enroll" class="mobile-enroll" onclick="closeMobileMenu()">Enrol Now</a>
     <a href="game.html" onclick="closeMobileMenu()">Game</a>
   </div>
@@ -338,6 +343,14 @@
         <p>10 lightning-fast questions. 8 seconds each. How many can you answer correctly?</p>
         <span class="badge" style="background:#3b82f6;color:#fff;">🧠 Brain</span>
       </div>
+
+      <a href="games/route-88/index.html" class="game-card game-card-pulse" aria-label="Play Route 88 Night Rally 3D" style="animation-delay:1.2s">
+        <div class="card-icon" style="background: linear-gradient(135deg,#ff2e88,#7b3ff2);box-shadow:0 4px 20px rgba(255,46,136,0.4);color:#fff"><i class="fas fa-flag-checkered"></i></div>
+        <h2>Route 88</h2>
+        <p>A 3D night rally built by our students at summer camp. Race, drift, and upgrade your car across three circuits.</p>
+        <span class="badge" style="background:#ff2e88;color:#fff;">🏎️ Made by students</span>
+        <p style="margin-top:10px;font-size:.78rem;opacity:.55;">Best on a computer · keyboard or gamepad</p>
+      </a>
     </div>
 
     <p style="margin-top:40px;opacity:0.4;font-size:.8rem;">← Use arrow keys or mouse to play →</p>
@@ -422,9 +435,9 @@
         </div>
         <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="index.html#video-tour" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
@@ -480,13 +493,13 @@
 
   <!-- ═══════════════════════════ FLOATING BUTTONS ═══════════════════════════ -->
   <div class="float-contact">
-    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
+    <a href="https://wa.me/233201016051" class="float-btn whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" aria-label="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
       <i class="fab fa-facebook-f"></i>
     </a>
-    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" aria-label="Instagram">
+    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
     <a href="tel:+233201016051" class="float-btn phone" aria-label="Call us">

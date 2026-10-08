@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com mailto:; form-action 'self' https://script.google.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Staff Portal — Wonder Heights International School</title>
+  <meta name="description" content="Staff portal for Wonder Heights International School: access your school email and staff resources.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="logo_WHIS.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    :root{--navy:#002855;--navy2:#003a7a;--gold:#c9920a;--gold2:#f0b429;--cream:#fdf8f0;--dark:#0a0f1e;--text:#1a1a2e;--muted:#64748b;--border:#e5e7eb;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f8fafc;overflow-x:hidden;transition:background .3s,color .3s;}
+    body.dark{background:var(--dark);color:#e2e8f0;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    a{text-decoration:none;}
+    img{max-width:100%;}
+
+    /* TOPBAR */
+    .topbar{background:var(--navy);color:#cbd5e1;font-size:.78rem;padding:.45rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+    .topbar a{color:#cbd5e1;}.topbar a:hover{color:var(--gold2);}
+    .top-left,.top-right{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+    .gold{color:var(--gold2);margin-right:.3rem;}
+    .theme-btn{background:none;border:none;cursor:pointer;color:var(--gold2);font-size:1rem;padding:.2rem;transition:transform .3s;}
+    .theme-btn:hover{transform:rotate(20deg);}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 20px rgba(0,40,85,.08);transition:background .3s;}
+    body.dark nav{background:#0f172a;}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:72px;}
+    .nav-logo{display:flex;align-items:center;gap:.7rem;}
+    .nav-logo img{height:44px;width:44px;object-fit:contain;}
+    .logo-main{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:block;}
+    body.dark .logo-main{color:var(--gold2);}
+    .logo-sub{font-size:.62rem;font-weight:500;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-btn{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--text);padding:.5rem .8rem;border-radius:6px;display:flex;align-items:center;gap:.3rem;transition:color .2s,background .2s;}
+    body.dark .nav-btn{color:#e2e8f0;}
+    .nav-btn:hover,.nav-btn.active{color:var(--navy);background:#f0f4ff;}
+    body.dark .nav-btn:hover,body.dark .nav-btn.active{color:var(--gold2);background:rgba(255,255,255,.05);}
+    .chevron{font-size:.65rem;transition:transform .2s;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .dropdown{position:absolute;top:calc(100% + 4px);left:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--gold2);border-radius:0 0 10px 10px;min-width:240px;box-shadow:0 12px 40px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .22s;z-index:200;}
+    body.dark .dropdown{background:#1e293b;border-color:#334155;}
+    .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+    .dropdown a{display:flex;align-items:center;gap:.6rem;padding:.6rem 1.1rem;font-size:.85rem;color:var(--text);transition:background .15s;}
+    body.dark .dropdown a{color:#e2e8f0;}
+    .dropdown a:hover{background:#f0f4ff;color:var(--navy);}
+    body.dark .dropdown a:hover{background:rgba(255,255,255,.06);color:var(--gold2);}
+    .dropdown a i{width:16px;color:var(--gold);font-size:.8rem;}
+    .enroll-cta{background:var(--navy);color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600;font-size:.85rem;box-shadow:0 4px 14px rgba(0,40,85,.3);white-space:nowrap;}
+    .enroll-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.3rem;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:all .3s;}
+    body.dark .hamburger span{background:#e2e8f0;}
+    .mobile-menu{display:none;position:fixed;inset:0;background:rgba(0,40,85,.97);z-index:2000;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;overflow-y:auto;padding:2rem 1rem;}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;}
+    .mobile-menu a:hover{color:var(--gold2);}
+    .mob-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
+    .mob-enroll{background:var(--gold2);color:var(--navy)!important;padding:.8rem 2.5rem;border-radius:50px;font-weight:700;}
+
+    /* HERO */
+    .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,rgba(201,146,10,.35) 100%);padding:5.5rem 1.5rem 7rem;text-align:center;position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background:url('logo_WHIS.png') center/270px no-repeat;opacity:.04;pointer-events:none;}
+    .ph-inner{position:relative;z-index:2;}
+    .breadcrumb{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:1rem;}
+    .breadcrumb a{color:var(--gold2);}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:var(--gold2);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;}
+    .page-hero h1{font-size:clamp(2rem,5vw,3.4rem);color:#fff;margin-bottom:.9rem;}
+    .page-hero p{color:rgba(255,255,255,.8);max-width:580px;margin:0 auto;font-size:1.02rem;line-height:1.7;}
+
+    /* QUOTE */
+    .quote-wrap{max-width:860px;margin:-4.5rem auto 0;padding:0 1.5rem;position:relative;z-index:3;}
+    .quote-card{background:#fff;border-radius:20px;padding:2.4rem 2.2rem 2rem;box-shadow:0 18px 50px rgba(0,40,85,.14);border-top:4px solid var(--gold2);text-align:center;position:relative;}
+    body.dark .quote-card{background:#0f172a;box-shadow:0 18px 50px rgba(0,0,0,.4);}
+    .quote-mark{position:absolute;top:-1.4rem;left:50%;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:var(--gold2);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 6px 18px rgba(240,180,41,.45);}
+    .quote-text{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.6vw,1.6rem);font-style:italic;line-height:1.5;color:var(--navy);}
+    body.dark .quote-text{color:#fff;}
+    .quote-author{margin-top:1rem;font-size:.85rem;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;}
+
+    /* PORTAL CARDS */
+    .portal{max-width:1100px;margin:0 auto;padding:4rem 1.5rem 5rem;display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;align-items:start;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:2.2rem;box-shadow:0 8px 40px rgba(0,40,85,.06);}
+    body.dark .card{background:#0f172a;border-color:#1e293b;}
+    .card-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem;}
+    .card h2{font-size:1.6rem;color:var(--navy);margin-bottom:.6rem;}
+    body.dark .card h2{color:#fff;}
+    .card > p{color:var(--muted);line-height:1.7;margin-bottom:1.4rem;}
+    body.dark .card > p{color:#94a3b8;}
+    .steps{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.6rem;}
+    .steps li{counter-increment:step;display:flex;gap:.9rem;align-items:flex-start;line-height:1.6;font-size:.95rem;}
+    .steps li::before{content:counter(step);flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f0f4ff;color:var(--navy);font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+    body.dark .steps li::before{background:rgba(240,180,41,.15);color:var(--gold2);}
+    .email-example{display:inline-block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88rem;background:#fdf8f0;border:1px dashed var(--gold);color:var(--navy);padding:.15rem .55rem;border-radius:6px;word-break:break-all;}
+    body.dark .email-example{background:rgba(240,180,41,.08);color:var(--gold2);}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.9rem 1.8rem;border-radius:50px;font-weight:700;font-size:.95rem;transition:all .25s;}
+    .btn-primary{background:var(--navy);color:#fff;box-shadow:0 8px 22px rgba(0,40,85,.3);}
+    .btn-primary:hover{background:var(--gold2);color:var(--navy);transform:translateY(-2px);}
+    body.dark .btn-primary{background:var(--gold2);color:var(--navy);}
+    body.dark .btn-primary:hover{background:#fff;}
+    .btn-gold{background:var(--gold2);color:var(--navy);box-shadow:0 8px 22px rgba(240,180,41,.35);}
+    .btn-gold:hover{background:var(--navy);color:#fff;transform:translateY(-2px);}
+    .note{margin-top:1.4rem;display:flex;gap:.7rem;align-items:flex-start;font-size:.85rem;color:var(--muted);line-height:1.6;background:#f8fafc;border-radius:12px;padding:.9rem 1rem;}
+    body.dark .note{background:#111c33;color:#94a3b8;}
+    .note i{color:var(--gold);margin-top:.2rem;}
+    .note a{color:var(--navy);font-weight:600;}
+    body.dark .note a{color:var(--gold2);}
+
+    .hos-card{border-top:4px solid var(--gold2);}
+    .restricted{display:inline-flex;align-items:center;gap:.4rem;background:#fef3c7;color:#92400e;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .8rem;border-radius:50px;margin-bottom:1rem;}
+    body.dark .restricted{background:rgba(240,180,41,.15);color:var(--gold2);}
+
+    /* FOOTER */
+    footer{background:#050f22;color:#94a3b8;}
+    .footer-main{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;padding:4rem 1.5rem 3rem;max-width:1280px;margin:0 auto;}
+    .footer-logo{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+    .footer-logo img{height:48px;}
+    .footer-logo span{font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:700;}
+    footer p{font-size:.88rem;line-height:1.7;max-width:280px;}
+    .footer-socials{display:flex;gap:.8rem;margin-top:1.4rem;}
+    .social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.9rem;transition:all .2s;}
+    .social-btn:hover{background:var(--gold2);border-color:var(--gold2);color:var(--navy);transform:translateY(-2px);}
+    .footer-col h4{color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.2rem;}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .footer-col li a{color:#94a3b8;font-size:.88rem;transition:color .2s;}
+    .footer-col li a:hover{color:var(--gold2);}
+    .footer-contact-item{display:flex;gap:.7rem;margin-bottom:.8rem;font-size:.88rem;}
+    .footer-contact-item i{color:var(--gold2);margin-top:.15rem;flex-shrink:0;}
+    .footer-bottom{text-align:center;padding:1.5rem;font-size:.82rem;border-top:1px solid rgba(255,255,255,.06);}
+    .footer-bottom span{color:var(--gold2);}
+
+    @media(max-width:900px){.portal{grid-template-columns:1fr;}}
+    @media(max-width:768px){
+      .nav-links{display:none;}.hamburger{display:block;}
+      .footer-main{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}
+      .card{padding:1.6rem;}
+      .quote-card{padding:2.2rem 1.3rem 1.6rem;}
+      .btn{width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="top-left">
+      <span><i class="fas fa-phone-alt gold"></i>020 101 6051 / 054 579 7990</span>
+      <a href="mailto:info@wonderheightsschool.com"><i class="fas fa-envelope gold"></i>info@wonderheightsschool.com</a>
+    </div>
+    <div class="top-right">
+      <span><i class="fas fa-map-marker-alt gold"></i>Afienya, Greater Accra</span>
+      <span><i class="fas fa-clock gold"></i>Mon–Fri: 7:30am – 4:00pm</span>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo_WHIS.png" alt="WHIS Logo">
+        <div><span class="logo-main">Wonder Heights</span><span class="logo-sub">International School</span></div>
+      </a>
+      <div class="nav-links">
+        <div class="nav-item">
+          <button class="nav-btn">About Us <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html#director"><i class="fas fa-star"></i> Message from Director</a>
+            <a href="about.html#history"><i class="fas fa-landmark"></i> School History</a>
+            <a href="about.html#policies"><i class="fas fa-file-alt"></i> Policies</a>
+            <a href="about.html#programs"><i class="fas fa-th-large"></i> Our Programs</a>
+            <a href="about.html#team"><i class="fas fa-users"></i> Our Team</a>
+            <a href="about.html#ethics"><i class="fas fa-shield-alt"></i> School Ethics</a>
+            <a href="about.html#conduct"><i class="fas fa-gavel"></i> Code of Conduct</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn">Academics <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="early-sprouts.html"><i class="fas fa-shapes"></i>Early Sprouts</a>
+            <a href="primary.html"><i class="fas fa-book-open"></i>Primary</a>
+            <a href="secondary.html"><i class="fas fa-graduation-cap"></i>Secondary (JHS & SHS)</a>
+            <a href="college.html"><i class="fas fa-graduation-cap"></i>College</a>
+            <a href="therapy-special-needs.html"><i class="fas fa-heart"></i>Therapy &amp; Special Needs</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-btn">Admission <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="dropdown">
+            <a href="enrollment.html"><i class="fas fa-clipboard-list"></i> Enrollment Requirements</a>
+            <a href="index.html#enroll"><i class="fas fa-pen-to-square"></i> Online Application</a>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> Academic Calendar</a>
+          </div>
+        </div>
+        <a href="events.html" class="nav-btn">Events</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
+        <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="staff.html" class="nav-btn active"><i class="fas fa-id-badge" style="margin-right:.4rem;"></i>Staff</a>
+        <a href="index.html#enroll" class="nav-btn enroll-cta">
+          <i class="fas fa-user-graduate" style="margin-right:.4rem;"></i>Enroll Now
+        </a>
+        <a href="game.html" class="nav-btn">
+          <i class="fas fa-sign-in-alt" style="margin-right:0.4rem;"></i>Game
+        </a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mob-close" aria-label="Close menu" onclick="document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';"><i class="fas fa-times"></i></button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="early-sprouts.html">Early Sprouts</a>
+    <a href="primary.html">Primary</a>
+    <a href="secondary.html">Secondary (JHS & SHS)</a>
+    <a href="college.html">College</a>
+    <a href="therapy-special-needs.html">Therapy &amp; Special Needs</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="staff.html">Staff</a>
+    <a href="game.html">Game</a>
+    <a href="index.html#enroll" class="mob-enroll">Enroll Now</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="ph-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Staff</div>
+      <div class="page-badge"><i class="fas fa-id-badge"></i>&nbsp; Staff Portal</div>
+      <h1>Welcome, Wonder Heights Staff</h1>
+      <p>Your hub for school email and staff resources. Thank you for everything you do for our students.</p>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-wrap">
+    <figure class="quote-card">
+      <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
+      <blockquote class="quote-text" id="quoteText">“The influence of a good teacher can never be erased.”</blockquote>
+      <figcaption class="quote-author" id="quoteAuthor">— Unknown</figcaption>
+    </figure>
+  </div>
+
+  <!-- PORTAL -->
+  <section class="portal">
+
+    <!-- Webmail -->
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-envelope-open-text"></i></div>
+      <h2>Staff Email Login</h2>
+      <p>All staff should log in to the school webmail to read and send official Wonder Heights emails. Use the email address and password given to you by the admin.</p>
+      <ol class="steps">
+        <li><span>Click the <strong>Login to Staff Email</strong> button below to open the webmail page.</span></li>
+        <li><span>Enter your school email address, e.g. <span class="email-example">name.name@wonderheights.edu.gh</span></span></li>
+        <li><span>Enter the password provided by the admin, then click <strong>Login</strong>.</span></li>
+      </ol>
+      <a href="https://usnyc.aveshost.net/roundcube/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-right-to-bracket"></i> Login to Staff Email
+      </a>
+      <div class="note">
+        <i class="fas fa-circle-info"></i>
+        <span>Forgot your password or haven't received your login details? Contact the admin at <a href="mailto:admin@wonderheights.edu.gh">admin@wonderheights.edu.gh</a>. Never share your password with anyone.</span>
+      </div>
+    </div>
+
+    <!-- HOS -->
+    <div class="card hos-card">
+      <div class="restricted"><i class="fas fa-lock"></i> Head of School only</div>
+      <div class="card-icon"><i class="fas fa-table"></i></div>
+      <h2>Staff Records Sheet</h2>
+      <p>This spreadsheet is restricted to the Head of School. Other staff who open it will see an "access denied" page.</p>
+      <a href="https://docs.google.com/spreadsheets/d/18C-7U08OSQoQmwEO1M-DesO_Y8ujxVYpRyeJmvt1Kls/edit?gid=1890176320#gid=1890176320" class="btn btn-gold" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-file-excel"></i> Open Records Sheet
+      </a>
+      <div class="note">
+        <i class="fas fa-shield-halved"></i>
+        <span>When Google asks you to sign in, use the Google account linked to <strong>hos@wonderheights.edu.gh</strong>.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo">
+          <img src="logo_WHIS.png" alt="WHIS Logo">
+          <span>Wonder Heights<br>International School</span>
+        </div>
+        <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="index.html#video-tour" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="enrollment.html">Admissions</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="staff.html">Staff Portal</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="early-sprouts.html">Early Sprouts</a></li>
+          <li><a href="primary.html">Primary School</a></li>
+          <li><a href="secondary.html">Secondary</a></li>
+          <li><a href="college.html">College</a></li>
+          <li><a href="therapy-special-needs.html">Therapy &amp; Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Afienya, Greater Accra, Ghana</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span>020 101 6051<br>054 579 7990</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>admin@wonderheights.edu.gh</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026–2027 Wonder Heights International School. All rights reserved.
+      Built with <span>♥</span> for exceptional education.
+    </div>
+  </footer>
+
+  <script>
+  const themeIcon = document.getElementById('themeIcon');
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const d = document.body.classList.contains('dark');
+    if (themeIcon) themeIcon.className = d ? 'fas fa-sun' : 'fas fa-moon';
+    try { localStorage.setItem('whis-theme', d ? 'dark' : 'light'); } catch (e) {}
+  }
+  try {
+    if (localStorage.getItem('whis-theme') === 'dark') {
+      document.body.classList.add('dark');
+      if (themeIcon) themeIcon.className = 'fas fa-sun';
+    }
+  } catch (e) {}
+
+  // A different quote each day of the year.
+  (function () {
+    const quotes = [
+      ['The influence of a good teacher can never be erased.', 'Unknown'],
+      ['Teaching is the one profession that creates all other professions.', 'Unknown'],
+      ['Education is the most powerful weapon which you can use to change the world.', 'Nelson Mandela'],
+      ['What we learn with pleasure we never forget.', 'Alfred Mercier'],
+      ['A good teacher can inspire hope, ignite the imagination, and instill a love of learning.', 'Brad Henry'],
+      ['The art of teaching is the art of assisting discovery.', 'Mark Van Doren'],
+      ['Every child deserves a champion — an adult who will never give up on them.', 'Rita Pierson'],
+      ['Let us not be weary in well doing: for in due season we shall reap, if we faint not.', 'Galatians 6:9']
+    ];
+    const day = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+    const [text, author] = quotes[day % quotes.length];
+    document.getElementById('quoteText').textContent = '“' + text + '”';
+    document.getElementById('quoteAuthor').textContent = '— ' + author;
+  })();
+  </script>
+  <script src="consent.js" defer></script>
+</body>
+</html>

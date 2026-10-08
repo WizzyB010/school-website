@@ -48,7 +48,7 @@
         '(e.g. Admissions, Newsletter), and we do not use tracking, profiling, or advertising ' +
         'cookies of our own. Some pages let you optionally load a Facebook reviews widget, which ' +
         'sets Facebook\'s own cookies once you choose to view it. A small amount of local storage ' +
-        'remembers your light/dark display preference only. ' +
+        'remembers your light/dark display preference and, if you play Route 88, your game progress. ' +
         'Read our <a href="' + rootPath('privacy-policy.html') + '" style="color:#f0b429;text-decoration:underline;">Privacy Policy</a> ' +
         'and <a href="' + rootPath('terms-of-service.html') + '" style="color:#f0b429;text-decoration:underline;">Terms of Service</a>.' +
       '</span>' +

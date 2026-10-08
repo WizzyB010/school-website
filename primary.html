@@ -2,12 +2,14 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com mailto:; form-action 'self' https://script.google.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Primary School — Wonder Heights International School</title>
   <link rel="icon" type="image/png" href="logo_WHIS.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     :root{--navy:#002855;--navy2:#003a7a;--gold:#c9920a;--gold2:#f0b429;--cream:#fdf8f0;--dark:#0a0f1e;--text:#1a1a2e;--muted:#64748b;--border:#e5e7eb;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -288,6 +290,7 @@
         <a href="events.html" class="nav-btn">Events</a>
         <a href="gallery.html" class="nav-btn">Gallery</a>
         <a href="index.html#contact" class="nav-btn">Contact</a>
+        <a href="staff.html" class="nav-btn"><i class="fas fa-id-badge" style="margin-right:.4rem;"></i>Staff</a>
         <a href="index.html#enroll" class="nav-btn enroll-cta" style="text-decoration:none;">
           <i class="fas fa-user-graduate" style="margin-right:.4rem;"></i>Enroll Now
         </a>
@@ -312,6 +315,7 @@
     <a href="events.html" onclick="closeMobileMenu()">Events</a>
     <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
     <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="staff.html" onclick="closeMobileMenu()">Staff</a>
     <a href="index.html#enroll" class="mob-enroll" onclick="closeMobileMenu()">Enroll Now</a>
     <a href="game.html" onclick="closeMobileMenu()">Game</a>
   </div>
@@ -399,9 +403,9 @@
         <div class="footer-logo"><img src="logo_WHIS.png" alt="Logo"><span>Wonder Heights<br>International School</span></div>
         <p>Educating and empowering each child to thrive in a rapidly evolving global society — grounded in Christian values.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/233201016051?text=Hello" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61559737448958" class="social-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/wonderheightsschool" class="social-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/233201016051?text=Hello" class="social-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
           <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
@@ -433,13 +437,13 @@
   </footer>
 
   <div class="float-contact">
-    <a href="https://wa.me/233201016051?text=Hello%2C%20I%27m%20interested%20in%20Wonder%20Heights%20International%20School" class="float-btn whatsapp" target="_blank" aria-label="WhatsApp">
+    <a href="https://wa.me/233201016051?text=Hello%2C%20I%27m%20interested%20in%20Wonder%20Heights%20International%20School" class="float-btn whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" aria-label="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=61559737448958" class="float-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
       <i class="fab fa-facebook-f"></i>
     </a>
-    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" aria-label="Instagram">
+    <a href="https://www.instagram.com/wonderheightsschool" class="float-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
     <a href="tel:+233201016051" class="float-btn phone" aria-label="Call us">
